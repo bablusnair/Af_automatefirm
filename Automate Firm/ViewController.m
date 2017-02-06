@@ -19,6 +19,7 @@
     [super viewDidLoad];
     self.myconnection=[[connectionclass alloc]init];
     self.myconnection.mydelegate=self;
+    
     NSMutableDictionary *dict=[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"vipin",@"Name",@"9400108486",@"Contact",@"vipin@leonine.in",@"Email", nil];
    // [self.myconnection testService:dict];
     //[self.myconnection officeListingService];
@@ -114,7 +115,7 @@
             
         
             //[[NSUserDefaults standardUserDefaults]setObject:@"Black" forKey:@"color"];
-            
+            [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"selectedofficeId"];
             
                 [self performSegueWithIdentifier:@"loggedUser" sender:nil];
             });
