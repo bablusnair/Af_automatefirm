@@ -73,8 +73,8 @@
                   symbolName = "__50-[borrowingSettingsViewClass viewAllLoanResponse:]_block_invoke"
                   moduleName = "Automate Firm"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/work/AF/ios/AF_iPad/Automate%20Firm/Automate%20Firm/borrowingSettingsViewClass.m"
-                  timestampString = "501071417.564391"
+                  urlString = "file:///Users/ambuvamadevan/Desktop/Af_automatefirmBablus/Automate%20Firm/borrowingSettingsViewClass.m"
+                  timestampString = "508071962.976874"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "515"
@@ -88,8 +88,8 @@
                   symbolName = "__copy_helper_block_.375"
                   moduleName = "Automate Firm"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/work/AF/ios/AF_iPad/Automate%20Firm/Automate%20Firm/borrowingSettingsViewClass.m"
-                  timestampString = "501071417.567605"
+                  urlString = "file:///Users/ambuvamadevan/Desktop/Af_automatefirmBablus/Automate%20Firm/borrowingSettingsViewClass.m"
+                  timestampString = "508071962.980312"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "515"
@@ -103,8 +103,8 @@
                   symbolName = "__destroy_helper_block_.376"
                   moduleName = "Automate Firm"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/work/AF/ios/AF_iPad/Automate%20Firm/Automate%20Firm/borrowingSettingsViewClass.m"
-                  timestampString = "501071417.571261"
+                  urlString = "file:///Users/ambuvamadevan/Desktop/Af_automatefirmBablus/Automate%20Firm/borrowingSettingsViewClass.m"
+                  timestampString = "508071962.98293"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "515"
@@ -416,53 +416,6 @@
             endingLineNumber = "3136"
             landmarkName = "-addNewEmployeeSave:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__38-[connectionclass addNewEmployeeSave:]_block_invoke"
-                  moduleName = "Automate Firm"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/work/AF/ios/AF_iPad/Automate%20Firm/Automate%20Firm/connectionclass.m"
-                  timestampString = "501071417.647478"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "3136"
-                  endingLineNumber = "3136"
-                  offsetFromSymbolStart = "755">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_.801"
-                  moduleName = "Automate Firm"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/work/AF/ios/AF_iPad/Automate%20Firm/Automate%20Firm/connectionclass.m"
-                  timestampString = "501071417.649557"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "3136"
-                  endingLineNumber = "3136"
-                  offsetFromSymbolStart = "51">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.802"
-                  moduleName = "Automate Firm"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/work/AF/ios/AF_iPad/Automate%20Firm/Automate%20Firm/connectionclass.m"
-                  timestampString = "501071417.651728"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "3136"
-                  endingLineNumber = "3136"
-                  offsetFromSymbolStart = "29">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -527,53 +480,6 @@
             endingLineNumber = "2761"
             landmarkName = "-uploadNewImage::"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__35-[connectionclass uploadNewImage::]_block_invoke"
-                  moduleName = "Automate Firm"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/work/AF/ios/AF_iPad/Automate%20Firm/Automate%20Firm/connectionclass.m"
-                  timestampString = "501071417.669201"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "2761"
-                  endingLineNumber = "2761"
-                  offsetFromSymbolStart = "1373">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_.691"
-                  moduleName = "Automate Firm"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/work/AF/ios/AF_iPad/Automate%20Firm/Automate%20Firm/connectionclass.m"
-                  timestampString = "501071417.671432"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "2761"
-                  endingLineNumber = "2761"
-                  offsetFromSymbolStart = "147">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.692"
-                  moduleName = "Automate Firm"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/work/AF/ios/AF_iPad/Automate%20Firm/Automate%20Firm/connectionclass.m"
-                  timestampString = "501071417.674166"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "2761"
-                  endingLineNumber = "2761"
-                  offsetFromSymbolStart = "79">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -846,6 +752,38 @@
             endingLineNumber = "9867"
             landmarkName = "-customfolderAddnewdocuments:documentsdict:"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__45-[connectionclass viewAdvanceRuleConditions:]_block_invoke"
+                  moduleName = "Automate Firm"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ambuvamadevan/Desktop/Af_automatefirmBablus/Automate%20Firm/connectionclass.m"
+                  timestampString = "508071963.147603"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "9868"
+                  endingLineNumber = "9868"
+                  offsetFromSymbolStart = "649">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__45-[connectionclass viewAdvanceRuleConditions:]_block_invoke"
+                  moduleName = "Automate Firm"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ambuvamadevan/Desktop/Af_automatefirmBablus/Automate%20Firm/connectionclass.m"
+                  timestampString = "508071963.150441"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "9868"
+                  endingLineNumber = "9868"
+                  offsetFromSymbolStart = "654">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
