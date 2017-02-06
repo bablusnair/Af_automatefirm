@@ -74,7 +74,7 @@
                   moduleName = "Automate Firm"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ambuvamadevan/Desktop/Af_automatefirmBablus/Automate%20Firm/borrowingSettingsViewClass.m"
-                  timestampString = "508071962.976874"
+                  timestampString = "508075570.515245"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "515"
@@ -89,7 +89,7 @@
                   moduleName = "Automate Firm"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ambuvamadevan/Desktop/Af_automatefirmBablus/Automate%20Firm/borrowingSettingsViewClass.m"
-                  timestampString = "508071962.980312"
+                  timestampString = "508075570.518546"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "515"
@@ -104,7 +104,7 @@
                   moduleName = "Automate Firm"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ambuvamadevan/Desktop/Af_automatefirmBablus/Automate%20Firm/borrowingSettingsViewClass.m"
-                  timestampString = "508071962.98293"
+                  timestampString = "508075570.521967"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "515"
@@ -752,38 +752,6 @@
             endingLineNumber = "9867"
             landmarkName = "-viewAdvanceRuleConditions:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__45-[connectionclass viewAdvanceRuleConditions:]_block_invoke"
-                  moduleName = "Automate Firm"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ambuvamadevan/Desktop/Af_automatefirmBablus/Automate%20Firm/connectionclass.m"
-                  timestampString = "508071963.147603"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "9868"
-                  endingLineNumber = "9868"
-                  offsetFromSymbolStart = "649">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__45-[connectionclass viewAdvanceRuleConditions:]_block_invoke"
-                  moduleName = "Automate Firm"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ambuvamadevan/Desktop/Af_automatefirmBablus/Automate%20Firm/connectionclass.m"
-                  timestampString = "508071963.150441"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "9868"
-                  endingLineNumber = "9868"
-                  offsetFromSymbolStart = "654">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -798,8 +766,55 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "9887"
             endingLineNumber = "9887"
-            landmarkName = "@implementation connectionclass"
-            landmarkType = "3">
+            landmarkName = "-viewAdvanceRuleConditions:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__45-[connectionclass viewAdvanceRuleConditions:]_block_invoke"
+                  moduleName = "Automate Firm"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ambuvamadevan/Desktop/Af_automatefirmBablus/Automate%20Firm/connectionclass.m"
+                  timestampString = "508075570.700278"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "9888"
+                  endingLineNumber = "9888"
+                  offsetFromSymbolStart = "1281">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__copy_helper_block_.1397"
+                  moduleName = "Automate Firm"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ambuvamadevan/Desktop/Af_automatefirmBablus/Automate%20Firm/connectionclass.m"
+                  timestampString = "508075570.702642"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "9888"
+                  endingLineNumber = "9888"
+                  offsetFromSymbolStart = "51">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.1398"
+                  moduleName = "Automate Firm"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ambuvamadevan/Desktop/Af_automatefirmBablus/Automate%20Firm/connectionclass.m"
+                  timestampString = "508075570.704787"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "9888"
+                  endingLineNumber = "9888"
+                  offsetFromSymbolStart = "29">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -847,6 +862,22 @@
             startingLineNumber = "149"
             endingLineNumber = "149"
             landmarkName = "-textField:shouldChangeCharactersInRange:replacementString:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Automate Firm/connectionclass.m"
+            timestampString = "508074811.904537"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "725"
+            endingLineNumber = "725"
+            landmarkName = "-LoginService:paswrd:officeid:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
