@@ -712,7 +712,7 @@ NSString *const subdomainURL = @"http://192.168.1.35/af1.1/";
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setHTTPMethod:@"POST"];
     
-    NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys:@"administrator",@"identity",@"password",@"password",@"E6E5C534-5D2D-4F3F-AE31-8E0B5EH-8C38A",@"deviceid",nil];
+    NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys:@"administrator",@"kp",@"password",@"password",@"E6E5C534-5D2D-4F3F-AE31-8E0B5EH-8C38A",@"deviceid",nil];
     NSData *postData = [NSJSONSerialization dataWithJSONObject:mapData options:0 error:&error];
     [request setHTTPBody:postData];
     
