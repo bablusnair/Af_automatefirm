@@ -86,6 +86,17 @@
    // NSLog(@"%@",appBuildString);
 
   //  NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"Autoincrementedalue"])
+    
+    
+//    NSString *uniqueIdentifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+//    UIDevice *device = [UIDevice currentDevice];
+//    NSString *uniqueIdentifier = [device uniqueIdentifier];
+   
+    NSString* Identifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString]; // IOS 6+
+    NSLog(@"output is : %@", Identifier);
+    [[NSUserDefaults standardUserDefaults]setObject:Identifier forKey:@"device_id"];
+    
+    
     return YES;
 }
 

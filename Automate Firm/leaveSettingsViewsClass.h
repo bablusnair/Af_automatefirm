@@ -161,5 +161,9 @@
 @property(nonatomic,retain)NSString *carryForwardDropFlag;
 
 @property(nonatomic,retain)NSString *conditionString2;
-
+@property(nonatomic,retain)NSString *maxConsecutiveDayString;
+@property(nonatomic,retain)NSString *paymentString1;
+@property(nonatomic,retain)NSString *paymentString2;
+@property(nonatomic,retain)NSString *paymentString3;
+@property(nonatomic,retain)NSString *conditionString4;
 @end

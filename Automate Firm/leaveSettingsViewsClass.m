@@ -26,7 +26,7 @@
     self.myconnection=[[connectionclass alloc]init];
     self.myconnection.mydelegate=self;
     
-    [self.myconnection leaveabbrivationservice:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"]];
+    
     
     [self.mycollectionview registerNib:[UINib nibWithNibName:@"Groupcollectioncell" bundle:nil] forCellWithReuseIdentifier:@"simplecell"];
     self.mycollectionview.hidden=TRUE;
@@ -55,7 +55,7 @@
     self.switchValue7=@"0";
     self.switchValue8=@"1";
     
-    self.conditionString2=@"";
+    self.conditionString2=self.maxConsecutiveDayString=self.paymentString1=self.paymentString2=self.paymentString3=self.conditionString4=@"";
     
     self.carryForwardDropFlag=@"0";
     
@@ -252,7 +252,7 @@
 
 -(void)viewLoad
 {
-    
+    [self.myconnection leaveabbrivationservice:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"]];
     if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"leaveAction"]isEqualToString:@"update"]) {
         
         NSString *tileID;
@@ -1164,9 +1164,13 @@ replacementString:(NSString *)string
     {
         if (![self.maxConsecutivedaysText.text isEqualToString:@""]) {
             if (!(self.maxConsecutivedaysText.text.length > 3)) {
-                NSString *text=self.maxConsecutivedaysText.text;
-                NSString *finalText=[NSString stringWithFormat:@"%@ Day(s)",text];
-                self.maxConsecutivedaysText.text=finalText;
+                if ([_maxConsecutivedaysText.text rangeOfCharacterFromSet:[NSCharacterSet letterCharacterSet]].location == NSNotFound) {
+                    self.maxConsecutiveDayString=self.maxConsecutivedaysText.text;
+                    NSString *text=self.maxConsecutivedaysText.text;
+                    NSString *finalText=[NSString stringWithFormat:@"%@ Day(s)",text];
+                    self.maxConsecutivedaysText.text=finalText;
+                }
+                
             }
         }
     }
@@ -1174,11 +1178,17 @@ replacementString:(NSString *)string
     {
         if (![self.paymentText1.text isEqualToString:@""]) {
             if (!(self.paymentText1.text.length > 3)) {
-                NSString *text=self.paymentText1.text;
-                NSString *finalText=[NSString stringWithFormat:@"%@ Day(s)",text];
-                self.paymentText1.text=finalText;
-                self.paymentText2.backgroundColor=[UIColor clearColor];
-                self.paymentText2.userInteractionEnabled=YES;
+                if ([_paymentText1.text rangeOfCharacterFromSet:[NSCharacterSet letterCharacterSet]].location == NSNotFound)
+                {
+                    self.paymentString1=self.paymentText1.text;
+                    NSString *text=self.paymentText1.text;
+                    NSString *finalText=[NSString stringWithFormat:@"%@ Day(s)",text];
+                    self.paymentText1.text=finalText;
+                    self.paymentText2.backgroundColor=[UIColor clearColor];
+                    self.paymentText2.userInteractionEnabled=YES;
+                }
+                
+                
             }
         }
     }
@@ -1186,11 +1196,14 @@ replacementString:(NSString *)string
     {
         if (![self.paymentText2.text isEqualToString:@""]) {
             if (!(self.paymentText2.text.length > 3)) {
-                NSString *text=self.paymentText2.text;
-                NSString *finalText=[NSString stringWithFormat:@"%@ Day(s)",text];
-                self.paymentText2.text=finalText;
-                self.paymentText3.backgroundColor=[UIColor clearColor];
-                self.paymentText3.userInteractionEnabled=YES;
+                if ([_paymentText2.text rangeOfCharacterFromSet:[NSCharacterSet letterCharacterSet]].location == NSNotFound)
+                {
+                    NSString *text=self.paymentString2=self.paymentText2.text;
+                    NSString *finalText=[NSString stringWithFormat:@"%@ Day(s)",text];
+                    self.paymentText2.text=finalText;
+                    self.paymentText3.backgroundColor=[UIColor clearColor];
+                    self.paymentText3.userInteractionEnabled=YES;
+                }
             }
         }
     }
@@ -1209,10 +1222,12 @@ replacementString:(NSString *)string
             }
             
             if (!(self.paymentText3.text.length > 3)) {
-            
-                NSString *text=self.paymentText3.text;
-                NSString *finalText=[NSString stringWithFormat:@"%@ Day(s)",text];
-                self.paymentText3.text=finalText;
+                if ([_paymentText3.text rangeOfCharacterFromSet:[NSCharacterSet letterCharacterSet]].location == NSNotFound)
+                {
+                    NSString *text=self.paymentString3=self.paymentText3.text;
+                    NSString *finalText=[NSString stringWithFormat:@"%@ Day(s)",text];
+                    self.paymentText3.text=finalText;
+                }
             }
         }
     }
@@ -1229,9 +1244,12 @@ replacementString:(NSString *)string
                 self.saveButton.enabled=YES;
             }
             if (!(self.conditionText4.text.length > 3)) {
-                NSString *text=self.conditionText4.text;
-                NSString *finalText=[NSString stringWithFormat:@"%@ Day(s)",text];
-                self.conditionText4.text=finalText;
+                if ([_paymentText3.text rangeOfCharacterFromSet:[NSCharacterSet letterCharacterSet]].location == NSNotFound)
+                {
+                    NSString *text=self.conditionString4=self.conditionText4.text;
+                    NSString *finalText=[NSString stringWithFormat:@"%@ Day(s)",text];
+                    self.conditionText4.text=finalText;
+                }
             }
         }
         
@@ -1367,7 +1385,7 @@ replacementString:(NSString *)string
         tileID=[myappde.conditionIDArray objectAtIndex:row];
        
 
-        NSMutableDictionary *conditionDetailsDict=[[NSMutableDictionary alloc]initWithObjectsAndKeys:self.conditionText1.text,@"leave_attendance_based_paid_leaves",self.conditionString2,@"leave_attendance_based_since_present",self.conditionText3.text,@"leave_attendance_based_drop_value",self.conditionText4.text,@"leave_max_per_month",self.conditionText5.text,@"leave_appl_month_of_join_date",self.self.paymentText1.text,@"leave_fully_paid_days",self.paymentText2.text,@"leave_half_paid_days",self.paymentText3.text,@"leave_max_quota_of_year",self.firstCheckValue,@"leave_allow_emp_req_online",self.secondCheckValue,@"leave_allow_emp_req",self.thirdCheckValue,@"leave_allow_deleg_req",self.dropText.text,@"leave_carry_fwd_perc",self.carryForwardDropTextView.text,@"leave_carry_fwd_option",self.maleCheckValue,@"leave_app_to_male",self.femaleCheckValue,@"leave_app_to_female",self.maxConsecutivedaysText.text,@"leave_max_consecutive",self.switchValue1,@"leave_pro_rate_leave",self.switchValue2,@"leave_holiday_interference",self.switchValue3,@"leave_off_day_interference",self.switchValue4,@"leave_permit_half_day_req",self.switchValue5,@"leave_appl_for_prev_days",self.switchValue6,@"leave_paid_redemption_delegate",self.switchValue7,@"leave_paid_redemption_emp",self.clubCheckValue,@"leave_club_with",selected,@"leave_club_with_value",self.switchValue8,@"leave_condition_status",[[NSUserDefaults standardUserDefaults]objectForKey:@"fullyPaidleaves"],@"leave_then_fully_paid_days",[[NSUserDefaults standardUserDefaults]objectForKey:@"halfPaidleaves"],@"leave_then_half_paid_days",[[NSUserDefaults standardUserDefaults]objectForKey:@"totalLeaves"],@"leave_then_max_quota_of_year",[[NSUserDefaults standardUserDefaults]objectForKey:@"expYear"],@"leave_exp_year",designationList,@"selected_designations",tileID,@"condition_id", nil];
+        NSMutableDictionary *conditionDetailsDict=[[NSMutableDictionary alloc]initWithObjectsAndKeys:self.conditionText1.text,@"leave_attendance_based_paid_leaves",self.conditionString2,@"leave_attendance_based_since_present",self.conditionText3.text,@"leave_attendance_based_drop_value",self.conditionString4,@"leave_max_per_month",self.conditionText5.text,@"leave_appl_month_of_join_date",self.paymentString1,@"leave_fully_paid_days",self.paymentString2,@"leave_half_paid_days",self.paymentString3,@"leave_max_quota_of_year",self.firstCheckValue,@"leave_allow_emp_req_online",self.secondCheckValue,@"leave_allow_emp_req",self.thirdCheckValue,@"leave_allow_deleg_req",self.dropText.text,@"leave_carry_fwd_perc",self.carryForwardDropTextView.text,@"leave_carry_fwd_option",self.maleCheckValue,@"leave_app_to_male",self.femaleCheckValue,@"leave_app_to_female",self.maxConsecutiveDayString,@"leave_max_consecutive",self.switchValue1,@"leave_pro_rate_leave",self.switchValue2,@"leave_holiday_interference",self.switchValue3,@"leave_off_day_interference",self.switchValue4,@"leave_permit_half_day_req",self.switchValue5,@"leave_appl_for_prev_days",self.switchValue6,@"leave_paid_redemption_delegate",self.switchValue7,@"leave_paid_redemption_emp",self.clubCheckValue,@"leave_club_with",selected,@"leave_club_with_value",self.switchValue8,@"leave_condition_status",[[NSUserDefaults standardUserDefaults]objectForKey:@"fullyPaidleaves"],@"leave_then_fully_paid_days",[[NSUserDefaults standardUserDefaults]objectForKey:@"halfPaidleaves"],@"leave_then_half_paid_days",[[NSUserDefaults standardUserDefaults]objectForKey:@"totalLeaves"],@"leave_then_max_quota_of_year",[[NSUserDefaults standardUserDefaults]objectForKey:@"expYear"],@"leave_exp_year",designationList,@"selected_designations",tileID,@"condition_id", nil];
         
         [self.leaveDict setObject:conditionDetailsDict forKey:@"conditional_details"];
         
@@ -1420,7 +1438,7 @@ replacementString:(NSString *)string
         tileID=[myappde.conditionIDArray objectAtIndex:row];
         
         
-        NSMutableDictionary *conditionDetailsDict=[[NSMutableDictionary alloc]initWithObjectsAndKeys:self.conditionText1.text,@"leave_attendance_based_paid_leaves",self.conditionString2,@"leave_attendance_based_since_present",self.conditionText3.text,@"leave_attendance_based_drop_value",self.conditionText4.text,@"leave_max_per_month",self.conditionText5.text,@"leave_appl_month_of_join_date",self.self.paymentText1.text,@"leave_fully_paid_days",self.paymentText2.text,@"leave_half_paid_days",self.paymentText3.text,@"leave_max_quota_of_year",self.firstCheckValue,@"leave_allow_emp_req_online",self.secondCheckValue,@"leave_allow_emp_req",self.thirdCheckValue,@"leave_allow_deleg_req",self.dropText.text,@"leave_carry_fwd_perc",self.carryForwardDropTextView.text,@"leave_carry_fwd_option",self.maleCheckValue,@"leave_app_to_male",self.femaleCheckValue,@"leave_app_to_female",self.maxConsecutivedaysText.text,@"leave_max_consecutive",self.switchValue1,@"leave_pro_rate_leave",self.switchValue2,@"leave_holiday_interference",self.switchValue3,@"leave_off_day_interference",self.switchValue4,@"leave_permit_half_day_req",self.switchValue5,@"leave_appl_for_prev_days",self.switchValue6,@"leave_paid_redemption_delegate",self.switchValue7,@"leave_paid_redemption_emp",self.clubCheckValue,@"leave_club_with",selected,@"leave_club_with_value",self.switchValue8,@"leave_condition_status",[[NSUserDefaults standardUserDefaults]objectForKey:@"fullyPaidleaves"],@"leave_then_fully_paid_days",[[NSUserDefaults standardUserDefaults]objectForKey:@"halfPaidleaves"],@"leave_then_half_paid_days",[[NSUserDefaults standardUserDefaults]objectForKey:@"totalLeaves"],@"leave_then_max_quota_of_year",[[NSUserDefaults standardUserDefaults]objectForKey:@"expYear"],@"leave_exp_year",designationList,@"selected_designations",tileID,@"condition_id", nil];
+        NSMutableDictionary *conditionDetailsDict=[[NSMutableDictionary alloc]initWithObjectsAndKeys:self.conditionText1.text,@"leave_attendance_based_paid_leaves",self.conditionString2,@"leave_attendance_based_since_present",self.conditionText3.text,@"leave_attendance_based_drop_value",self.conditionString4,@"leave_max_per_month",self.conditionText5.text,@"leave_appl_month_of_join_date",self.paymentString1,@"leave_fully_paid_days",self.paymentString2,@"leave_half_paid_days",self.paymentString3,@"leave_max_quota_of_year",self.firstCheckValue,@"leave_allow_emp_req_online",self.secondCheckValue,@"leave_allow_emp_req",self.thirdCheckValue,@"leave_allow_deleg_req",self.dropText.text,@"leave_carry_fwd_perc",self.carryForwardDropTextView.text,@"leave_carry_fwd_option",self.maleCheckValue,@"leave_app_to_male",self.femaleCheckValue,@"leave_app_to_female",self.maxConsecutiveDayString,@"leave_max_consecutive",self.switchValue1,@"leave_pro_rate_leave",self.switchValue2,@"leave_holiday_interference",self.switchValue3,@"leave_off_day_interference",self.switchValue4,@"leave_permit_half_day_req",self.switchValue5,@"leave_appl_for_prev_days",self.switchValue6,@"leave_paid_redemption_delegate",self.switchValue7,@"leave_paid_redemption_emp",self.clubCheckValue,@"leave_club_with",selected,@"leave_club_with_value",self.switchValue8,@"leave_condition_status",[[NSUserDefaults standardUserDefaults]objectForKey:@"fullyPaidleaves"],@"leave_then_fully_paid_days",[[NSUserDefaults standardUserDefaults]objectForKey:@"halfPaidleaves"],@"leave_then_half_paid_days",[[NSUserDefaults standardUserDefaults]objectForKey:@"totalLeaves"],@"leave_then_max_quota_of_year",[[NSUserDefaults standardUserDefaults]objectForKey:@"expYear"],@"leave_exp_year",designationList,@"selected_designations",tileID,@"condition_id", nil];
         
         [self.leaveDict setObject:conditionDetailsDict forKey:@"conditional_details"];
         
@@ -1462,7 +1480,7 @@ replacementString:(NSString *)string
             designationList=@"";
         }
         
-        NSMutableDictionary *conditionDetailsDict=[[NSMutableDictionary alloc]initWithObjectsAndKeys:self.conditionText1.text,@"leave_attendance_based_paid_leaves",self.conditionString2,@"leave_attendance_based_since_present",self.conditionText3.text,@"leave_attendance_based_drop_value",self.conditionText4.text,@"leave_max_per_month",self.conditionText5.text,@"leave_appl_month_of_join_date",self.self.paymentText1.text,@"leave_fully_paid_days",self.paymentText2.text,@"leave_half_paid_days",self.paymentText3.text,@"leave_max_quota_of_year",self.firstCheckValue,@"leave_allow_emp_req_online",self.secondCheckValue,@"leave_allow_emp_req",self.thirdCheckValue,@"leave_allow_deleg_req",self.dropText.text,@"leave_carry_fwd_perc",self.carryForwardDropTextView.text,@"leave_carry_fwd_option",self.maleCheckValue,@"leave_app_to_male",self.femaleCheckValue,@"leave_app_to_female",self.maxConsecutivedaysText.text,@"leave_max_consecutive",self.switchValue1,@"leave_pro_rate_leave",self.switchValue2,@"leave_holiday_interference",self.switchValue3,@"leave_off_day_interference",self.switchValue4,@"leave_permit_half_day_req",self.switchValue5,@"leave_appl_for_prev_days",self.switchValue6,@"leave_paid_redemption_delegate",self.switchValue7,@"leave_paid_redemption_emp",self.clubCheckValue,@"leave_club_with",selected,@"leave_club_with_value",self.switchValue8,@"leave_condition_status",[[NSUserDefaults standardUserDefaults]objectForKey:@"fullyPaidleaves"],@"leave_then_fully_paid_days",[[NSUserDefaults standardUserDefaults]objectForKey:@"halfPaidleaves"],@"leave_then_half_paid_days",[[NSUserDefaults standardUserDefaults]objectForKey:@"totalLeaves"],@"leave_then_max_quota_of_year",[[NSUserDefaults standardUserDefaults]objectForKey:@"expYear"],@"leave_exp_year",designationList,@"selected_designations", nil];
+        NSMutableDictionary *conditionDetailsDict=[[NSMutableDictionary alloc]initWithObjectsAndKeys:self.conditionText1.text,@"leave_attendance_based_paid_leaves",self.conditionString2,@"leave_attendance_based_since_present",self.conditionText3.text,@"leave_attendance_based_drop_value",self.conditionString4,@"leave_max_per_month",self.conditionText5.text,@"leave_appl_month_of_join_date",self.paymentString1,@"leave_fully_paid_days",self.paymentString2,@"leave_half_paid_days",self.paymentString3,@"leave_max_quota_of_year",self.firstCheckValue,@"leave_allow_emp_req_online",self.secondCheckValue,@"leave_allow_emp_req",self.thirdCheckValue,@"leave_allow_deleg_req",self.dropText.text,@"leave_carry_fwd_perc",self.carryForwardDropTextView.text,@"leave_carry_fwd_option",self.maleCheckValue,@"leave_app_to_male",self.femaleCheckValue,@"leave_app_to_female",self.maxConsecutiveDayString,@"leave_max_consecutive",self.switchValue1,@"leave_pro_rate_leave",self.switchValue2,@"leave_holiday_interference",self.switchValue3,@"leave_off_day_interference",self.switchValue4,@"leave_permit_half_day_req",self.switchValue5,@"leave_appl_for_prev_days",self.switchValue6,@"leave_paid_redemption_delegate",self.switchValue7,@"leave_paid_redemption_emp",self.clubCheckValue,@"leave_club_with",selected,@"leave_club_with_value",self.switchValue8,@"leave_condition_status",[[NSUserDefaults standardUserDefaults]objectForKey:@"fullyPaidleaves"],@"leave_then_fully_paid_days",[[NSUserDefaults standardUserDefaults]objectForKey:@"halfPaidleaves"],@"leave_then_half_paid_days",[[NSUserDefaults standardUserDefaults]objectForKey:@"totalLeaves"],@"leave_then_max_quota_of_year",[[NSUserDefaults standardUserDefaults]objectForKey:@"expYear"],@"leave_exp_year",designationList,@"selected_designations", nil];
         
         [self.leaveDict setObject:conditionDetailsDict forKey:@"conditional_details"];
         
@@ -1516,7 +1534,7 @@ replacementString:(NSString *)string
         
         
         
-        NSMutableDictionary *conditionDetailsDict=[[NSMutableDictionary alloc]initWithObjectsAndKeys:self.conditionText1.text,@"leave_attendance_based_paid_leaves",self.conditionString2,@"leave_attendance_based_since_present",self.conditionText3.text,@"leave_attendance_based_drop_value",self.conditionText4.text,@"leave_max_per_month",self.conditionText5.text,@"leave_appl_month_of_join_date",self.self.paymentText1.text,@"leave_fully_paid_days",self.paymentText2.text,@"leave_half_paid_days",self.paymentText3.text,@"leave_max_quota_of_year",self.firstCheckValue,@"leave_allow_emp_req_online",self.secondCheckValue,@"leave_allow_emp_req",self.thirdCheckValue,@"leave_allow_deleg_req",self.dropText.text,@"leave_carry_fwd_perc",self.carryForwardDropTextView.text,@"leave_carry_fwd_option",self.maleCheckValue,@"leave_app_to_male",self.femaleCheckValue,@"leave_app_to_female",self.maxConsecutivedaysText.text,@"leave_max_consecutive",self.switchValue1,@"leave_pro_rate_leave",self.switchValue2,@"leave_holiday_interference",self.switchValue3,@"leave_off_day_interference",self.switchValue4,@"leave_permit_half_day_req",self.switchValue5,@"leave_appl_for_prev_days",self.switchValue6,@"leave_paid_redemption_delegate",self.switchValue7,@"leave_paid_redemption_emp",self.clubCheckValue,@"leave_club_with",selected,@"leave_club_with_value",self.switchValue8,@"leave_condition_status",[[NSUserDefaults standardUserDefaults]objectForKey:@"fullyPaidleaves"],@"leave_then_fully_paid_days",[[NSUserDefaults standardUserDefaults]objectForKey:@"halfPaidleaves"],@"leave_then_half_paid_days",[[NSUserDefaults standardUserDefaults]objectForKey:@"totalLeaves"],@"leave_then_max_quota_of_year",[[NSUserDefaults standardUserDefaults]objectForKey:@"expYear"],@"leave_exp_year",tileID,@"condition_id",designationList,@"selected_designations", nil];
+        NSMutableDictionary *conditionDetailsDict=[[NSMutableDictionary alloc]initWithObjectsAndKeys:self.conditionText1.text,@"leave_attendance_based_paid_leaves",self.conditionString2,@"leave_attendance_based_since_present",self.conditionText3.text,@"leave_attendance_based_drop_value",self.conditionString4,@"leave_max_per_month",self.conditionText5.text,@"leave_appl_month_of_join_date",self.paymentString1,@"leave_fully_paid_days",self.paymentString2,@"leave_half_paid_days",self.paymentString3,@"leave_max_quota_of_year",self.firstCheckValue,@"leave_allow_emp_req_online",self.secondCheckValue,@"leave_allow_emp_req",self.thirdCheckValue,@"leave_allow_deleg_req",self.dropText.text,@"leave_carry_fwd_perc",self.carryForwardDropTextView.text,@"leave_carry_fwd_option",self.maleCheckValue,@"leave_app_to_male",self.femaleCheckValue,@"leave_app_to_female",self.maxConsecutiveDayString,@"leave_max_consecutive",self.switchValue1,@"leave_pro_rate_leave",self.switchValue2,@"leave_holiday_interference",self.switchValue3,@"leave_off_day_interference",self.switchValue4,@"leave_permit_half_day_req",self.switchValue5,@"leave_appl_for_prev_days",self.switchValue6,@"leave_paid_redemption_delegate",self.switchValue7,@"leave_paid_redemption_emp",self.clubCheckValue,@"leave_club_with",selected,@"leave_club_with_value",self.switchValue8,@"leave_condition_status",[[NSUserDefaults standardUserDefaults]objectForKey:@"fullyPaidleaves"],@"leave_then_fully_paid_days",[[NSUserDefaults standardUserDefaults]objectForKey:@"halfPaidleaves"],@"leave_then_half_paid_days",[[NSUserDefaults standardUserDefaults]objectForKey:@"totalLeaves"],@"leave_then_max_quota_of_year",[[NSUserDefaults standardUserDefaults]objectForKey:@"expYear"],@"leave_exp_year",tileID,@"condition_id",designationList,@"selected_designations", nil];
         
         [self.leaveDict setObject:conditionDetailsDict forKey:@"conditional_details"];
         
@@ -1886,10 +1904,14 @@ replacementString:(NSString *)string
             }
             if ([leaveDict objectForKey:@"leave_attendance_based_since_present"]!=(id)[NSNull null])
             {
-                 self.conditionText2.text=[leaveDict objectForKey:@"leave_attendance_based_since_present"];
-                self.conditionText2.backgroundColor=[UIColor clearColor];
-                self.conditionText2.userInteractionEnabled=YES;
-                self.saveButton.enabled=YES;
+                 self.conditionString2=[leaveDict objectForKey:@"leave_attendance_based_since_present"];
+                if (self.conditionString2.length > 0) {
+                    self.conditionText2.text=[NSString stringWithFormat:@"%@ Day(s)",self.conditionString2];
+                    self.conditionText2.backgroundColor=[UIColor clearColor];
+                    self.conditionText2.userInteractionEnabled=YES;
+                    self.saveButton.enabled=YES;
+                }
+                
             }
             if ([leaveDict objectForKey:@"leave_attendance_based_drop_value"]!=(id)[NSNull null])
             {
@@ -1899,7 +1921,10 @@ replacementString:(NSString *)string
             }
             if ([leaveDict objectForKey:@"leave_max_per_month"]!=(id)[NSNull null])
             {
-                self.conditionText4.text=[leaveDict objectForKey:@"leave_max_per_month"];
+                self.conditionString4=[leaveDict objectForKey:@"leave_max_per_month"];
+                if (self.conditionString4.length > 0) {
+                    self.conditionText4.text=[NSString stringWithFormat:@"%@ Day(s)",self.conditionString4];
+                }
             }
             if ([leaveDict objectForKey:@"leave_appl_month_of_join_date"]!=(id)[NSNull null])
             {
@@ -1907,15 +1932,25 @@ replacementString:(NSString *)string
             }
             if ([leaveDict objectForKey:@"leave_fully_paid_days"]!=(id)[NSNull null])
             {
-                self.paymentText1.text=[leaveDict objectForKey:@"leave_fully_paid_days"];
+                self.paymentString1=[leaveDict objectForKey:@"leave_fully_paid_days"];
+                if (self.paymentString1.length > 0) {
+                    self.paymentText1.text=[NSString stringWithFormat:@"%@ Day(s)",self.paymentString1];
+                }
+                
             }
             if ([leaveDict objectForKey:@"leave_half_paid_days"]!=(id)[NSNull null])
             {
-                self.paymentText2.text=[leaveDict objectForKey:@"leave_half_paid_days"];
+                self.paymentString2=[leaveDict objectForKey:@"leave_half_paid_days"];
+                if (self.paymentString2 > 0) {
+                    self.paymentText2.text=[NSString stringWithFormat:@"%@ Day(s)",self.paymentString2];
+                }
             }
             if ([leaveDict objectForKey:@"leave_max_quota_of_year"]!=(id)[NSNull null])
             {
-                self.paymentText3.text=[leaveDict objectForKey:@"leave_max_quota_of_year"];
+                self.paymentString3=[leaveDict objectForKey:@"leave_max_quota_of_year"];
+                if (self.paymentString3.length > 0) {
+                    self.paymentText3.text=[NSString stringWithFormat:@"%@ Day(s)",self.paymentString3];
+                }
             }
             self.paymentText2.userInteractionEnabled=YES;
             self.paymentText2.backgroundColor=[UIColor clearColor];
@@ -2003,7 +2038,14 @@ replacementString:(NSString *)string
                 self.femaleCheckValue=@"0";
                 self.z=1;
             }
-            self.maxConsecutivedaysText.text=[leaveDict objectForKey:@"leave_max_consecutive"];
+            if ([leaveDict objectForKey:@"leave_max_consecutive"]!=(id)[NSNull null])
+            {
+                self.maxConsecutiveDayString=[leaveDict objectForKey:@"leave_max_consecutive"];
+                if (self.maxConsecutiveDayString.length > 0) {
+                    self.maxConsecutivedaysText.text=[NSString stringWithFormat:@"%@ Day(s)",self.maxConsecutiveDayString];
+                }
+                
+            }
             if ([[leaveDict objectForKey:@"leave_pro_rate_leave"]isEqualToString:@"1"]) {
                 [self.switchButton1 setImage:[UIImage imageNamed:@"button_2 (1).png"] forState:UIControlStateNormal];
                 self.s1=1;
@@ -2190,6 +2232,8 @@ replacementString:(NSString *)string
     AccordionView *ob = (AccordionView *)self.superview.superview;
     
     [ob closeTile];
+    
+    
     
 }
 -(void)alertShow:(NSString *)alertMessage
