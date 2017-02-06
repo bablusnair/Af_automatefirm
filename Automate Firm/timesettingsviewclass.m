@@ -1067,6 +1067,7 @@ replacementString:(NSString *)string
         }
         
         
+        
 //        if (!([self.graceTimeValue isEqualToString:@""])) {
 //            NSArray *graceArray=[self.graceTimeValue componentsSeparatedByString:@":"];
 //            =[NSString stringWithFormat:@"%@Hrs %@Mins",[graceArray objectAtIndex:0],[graceArray objectAtIndex:1]];
@@ -1105,6 +1106,7 @@ replacementString:(NSString *)string
         if ([selectedRuleDict objectForKey:@"grace_time_status"]!=(id)[NSNull null]) {
             if ([[selectedRuleDict objectForKey:@"grace_time_status"] isEqualToString:@"0"]) {
                 [self.timeallowedButton setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
+                self.gracetimecheckbuttonvalue=@"0";
                 self.x=0;
                 
             }
@@ -1113,8 +1115,15 @@ replacementString:(NSString *)string
                 [self.timeallowedButton setImage:[UIImage imageNamed:@"check_box.png32.png"] forState:UIControlStateNormal];
                 self.graceTimeText.backgroundColor=[UIColor clearColor];
                 self.graceTimeText.tag=2;
+                self.gracetimecheckbuttonvalue=@"1";
                 self.x=1;
             }
+        }
+        else
+        {
+            [self.timeallowedButton setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
+            self.gracetimecheckbuttonvalue=@"0";
+            self.x=0;
         }
         
         if ([selectedRuleDict objectForKey:@"calculate_absent_status"]!=(id)[NSNull null]) {
@@ -1122,6 +1131,7 @@ replacementString:(NSString *)string
             if ([[selectedRuleDict objectForKey:@"calculate_absent_status"] isEqualToString:@"0"]) {
                 [self.workingCheckBox1Button setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
                 self.y=0;
+                self.workingdetailsfirstcheckbuttonvalue=@"0";
                 
             }
             else
@@ -1130,7 +1140,14 @@ replacementString:(NSString *)string
                 self.workingText1.tag=2;
                 self.workingText1.backgroundColor=[UIColor clearColor];
                 self.y=1;
+                self.workingdetailsfirstcheckbuttonvalue=@"1";
             }
+        }
+        else
+        {
+            self.workingdetailsfirstcheckbuttonvalue=@"0";
+            [self.workingCheckBox1Button setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
+            self.y=0;
         }
         
         if ([selectedRuleDict objectForKey:@"ignore_checkout_status"]!=(id)[NSNull null]) {
@@ -1139,12 +1156,20 @@ replacementString:(NSString *)string
             if ([[selectedRuleDict objectForKey:@"ignore_checkout_status"] isEqualToString:@"0"]) {
                 [self.workingCheckBox2Button setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
                 self.z=0;
+                self.workingdetailsfirstcheckbuttonvalue=@"0";
             }
             else
             {
                 [self.workingCheckBox2Button setImage:[UIImage imageNamed:@"check_box.png32.png"] forState:UIControlStateNormal];
                 self.z=1;
+                self.workingdetailsfirstcheckbuttonvalue=@"1";
             }
+        }
+        else
+        {
+            self.workingdetailssecondcheckbuttonvalue=@"0";
+            [self.workingCheckBox2Button setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
+            self.z=0;
         }
         
         if ([selectedRuleDict objectForKey:@"adjust_late_overtime"]!=(id)[NSNull null]) {
@@ -1153,12 +1178,21 @@ replacementString:(NSString *)string
             if ([[selectedRuleDict objectForKey:@"adjust_late_overtime"] isEqualToString:@"0"]) {
                 [self.workingCheckBox3Button setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
                 self.f=0;
+                self.workingdetailsthirdcheckbuttonvalue=@"0";
             }
             else
             {
+                self.workingdetailsthirdcheckbuttonvalue=@"0";
                 [self.workingCheckBox3Button setImage:[UIImage imageNamed:@"check_box.png32.png"] forState:UIControlStateNormal];
                 self.f=1;
+                self.workingdetailsthirdcheckbuttonvalue=@"1";
             }
+        }
+        else
+        {
+            self.workingdetailsthirdcheckbuttonvalue=@"0";
+            [self.workingCheckBox3Button setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
+            self.f=0;
         }
         
         if ([selectedRuleDict objectForKey:@"late_arrival_option"]!=(id)[NSNull null]) {
@@ -1203,13 +1237,21 @@ replacementString:(NSString *)string
             if ([[selectedRuleDict objectForKey:@"penalties_late_duration"] isEqualToString:@"0"]) {
                 [self.penalityCheckButton1 setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
                 self.p=1;
+                self.penaltyfirstcheckbuttonvalue=@"0";
                 
             }
             else
             {
                 [self.penalityCheckButton1 setImage:[UIImage imageNamed:@"check_box.png32.png"] forState:UIControlStateNormal];
                 self.p=0;
+                self.penaltyfirstcheckbuttonvalue=@"1";
             }
+        }
+        else
+        {
+            [self.penalityCheckButton1 setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
+            self.p=1;
+            self.penaltyfirstcheckbuttonvalue=@"0";
         }
         
         if ([selectedRuleDict objectForKey:@"penalties_break_duration"]!=(id)[NSNull null]) {
@@ -1218,13 +1260,20 @@ replacementString:(NSString *)string
             if ([[selectedRuleDict objectForKey:@"penalties_break_duration"] isEqualToString:@"0"]) {
                 [self.penalityCheckButton2 setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
                 self.q=1;
-                
+                self.penaltysecondcheckbuttonvalue=@"0";
             }
             else
             {
                 [self.penalityCheckButton2 setImage:[UIImage imageNamed:@"check_box.png32.png"] forState:UIControlStateNormal];
                 self.q=0;
+                self.penaltysecondcheckbuttonvalue=@"1";
             }
+        }
+        else
+        {
+            [self.penalityCheckButton2 setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
+            self.q=1;
+            self.penaltysecondcheckbuttonvalue=@"0";
         }
         
         
@@ -1234,13 +1283,21 @@ replacementString:(NSString *)string
             if ([[selectedRuleDict objectForKey:@"penalties_exit_duration"] isEqualToString:@"0"]) {
                 [self.penalityCheckButton3 setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
                 self.r=1;
+                self.penaltythirdcheckbuttonvalue=@"0";
                 
             }
             else
             {
                 [self.penalityCheckButton3 setImage:[UIImage imageNamed:@"check_box.png32.png"] forState:UIControlStateNormal];
                 self.r=0;
+                self.penaltythirdcheckbuttonvalue=@"1";
             }
+        }
+        else
+        {
+            [self.penalityCheckButton3 setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
+            self.r=1;
+            self.penaltythirdcheckbuttonvalue=@"0";
         }
         
         if ([selectedRuleDict objectForKey:@"deduct_late_working_hours"]!=(id)[NSNull null]) {
@@ -1249,13 +1306,20 @@ replacementString:(NSString *)string
             if ([[selectedRuleDict objectForKey:@"deduct_late_working_hours"] isEqualToString:@"0"]) {
                 [self.workingHourCheckButton1 setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
                 self.a=1;
-                
+                self.workhoursfirstcheckbuttonvalue=@"0";
             }
             else
             {
                 [self.workingHourCheckButton1 setImage:[UIImage imageNamed:@"check_box.png32.png"] forState:UIControlStateNormal];
                 self.a=0;
+                self.workhoursfirstcheckbuttonvalue=@"1";
             }
+        }
+        else
+        {
+            [self.workingHourCheckButton1 setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
+            self.a=1;
+            self.workhoursfirstcheckbuttonvalue=@"0";
         }
         
         if ([selectedRuleDict objectForKey:@"include_break_working"]!=(id)[NSNull null]) {
@@ -1264,13 +1328,21 @@ replacementString:(NSString *)string
             if ([[selectedRuleDict objectForKey:@"include_break_working"] isEqualToString:@"0"]) {
                 [self.workingHourCheckButton2 setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
                 self.b=1;
+                self.workhoursecondcheckbuttonvalue=@"0";
                 
             }
             else
             {
                 [self.workingHourCheckButton2 setImage:[UIImage imageNamed:@"check_box.png32.png"] forState:UIControlStateNormal];
                 self.b=0;
+                self.workhoursecondcheckbuttonvalue=@"1";
             }
+        }
+        else
+        {
+            [self.workingHourCheckButton2 setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
+            self.b=1;
+            self.workhoursecondcheckbuttonvalue=@"0";
         }
         
         if ([selectedRuleDict objectForKey:@"deduct_prolonged_working"]!=(id)[NSNull null]) {
@@ -1279,13 +1351,20 @@ replacementString:(NSString *)string
             if ([[selectedRuleDict objectForKey:@"deduct_prolonged_working"] isEqualToString:@"0"]) {
                 [self.workingHourCheckButton3 setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
                 self.c=1;
-                
+                self.workhoursthirdcheckbuttonvalue=@"0";
             }
             else
             {
                 [self.workingHourCheckButton3 setImage:[UIImage imageNamed:@"check_box.png32.png"] forState:UIControlStateNormal];
                 self.c=0;
+                self.workhoursthirdcheckbuttonvalue=@"1";
             }
+        }
+        else
+        {
+            [self.workingHourCheckButton3 setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
+            self.c=1;
+            self.workhoursthirdcheckbuttonvalue=@"0";
         }
         
         if ([selectedRuleDict objectForKey:@"deduct_early_exit_working"]!=(id)[NSNull null]) {
@@ -1294,12 +1373,20 @@ replacementString:(NSString *)string
             if ([[selectedRuleDict objectForKey:@"deduct_early_exit_working"] isEqualToString:@"0"]) {
                 [self.workingHourCheckButton4 setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
                 self.d=1;
+                self.workhoursfourthcheckbuttonvalue=@"0";
             }
             else
             {
                 [self.workingHourCheckButton4 setImage:[UIImage imageNamed:@"check_box.png32.png"] forState:UIControlStateNormal];
                 self.d=0;
+                self.workhoursfourthcheckbuttonvalue=@"1";
             }
+        }
+        else
+        {
+            [self.workingHourCheckButton4 setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
+            self.d=1;
+            self.workhoursfourthcheckbuttonvalue=@"0";
         }
         
         if ([selectedRuleDict objectForKey:@"on_duty_working_hours"]!=(id)[NSNull null]) {
@@ -1308,18 +1395,22 @@ replacementString:(NSString *)string
             if ([[selectedRuleDict objectForKey:@"on_duty_working_hours"] isEqualToString:@"0"]) {
                 [self.workingHourCheckButton5 setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
                 self.e=0;
+                self.workhoursfifthcheckbuttonvalue=@"0";
                 
             }
             else
             {
                 [self.workingHourCheckButton5 setImage:[UIImage imageNamed:@"check_box.png32.png"] forState:UIControlStateNormal];
                 self.e=1;
+                self.workhoursfifthcheckbuttonvalue=@"1";
             }
         }
-        
-        
-        
-        
+        else
+        {
+            [self.workingHourCheckButton5 setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
+            self.e=0;
+            self.workhoursfifthcheckbuttonvalue=@"0";
+        }
         
         
         [self.grouparray removeAllObjects];

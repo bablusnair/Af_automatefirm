@@ -58,7 +58,7 @@
 -(void)response:(NSMutableArray *)responseList;
 
 
--(void)created_loanresponse:(NSString *)loanresponsestring;
+-(void)created_loanresponse:(id)loanresponsestring;
 
 -(void)donesavedGotresponse:(NSString *)responsestring;
 
@@ -119,4 +119,10 @@
 -(void)signupmodulesectorResponse:(id)details;
 -(void)signupmoduleagentResponse:(id)details;
 -(void)signupAdminmoduleResponse:(id)details;
+
+//resetpasswordservice
+
+-(void)resetpasswordserviceResponse:(id)details;
+-(void)resendmail:(id)details;
+
 @end

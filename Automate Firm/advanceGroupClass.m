@@ -898,12 +898,15 @@
 {
     advanceTileClass *ob = (advanceTileClass *)self.superview.superview;
 
-    if ([Response containsString:@"###"]) {
+    
         
     
-    [myappde.advanceTileIdDict setObject:[[Response componentsSeparatedByString:@"###"] objectAtIndex:2] forKey:self.strId];
+    //[myappde.advanceTileIdDict setObject:[[Response componentsSeparatedByString:@"###"] objectAtIndex:2] forKey:self.strId];
+    
+    [myappde.advanceTileIdDict setObject:[NSString stringWithFormat:@"%@",[Response objectForKey:@"condition_id"]] forKey:self.strId];
+    
     NSLog(@"%@",myappde.advanceTileIdDict);
-    }
+    
     advancesettingsviewclass *objj = (advancesettingsviewclass *)self.superview.superview.superview;
     objj.plusButton.userInteractionEnabled=TRUE;
     [ob closeTile];

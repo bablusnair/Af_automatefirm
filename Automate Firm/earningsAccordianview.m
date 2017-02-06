@@ -644,7 +644,7 @@ selectedIndexValue=[sender tag];
 {
     AppDelegate *app=(AppDelegate *)[[UIApplication sharedApplication ]delegate];
 
-    if ([[response objectForKey:@"status"] isEqualToString:@"200"]&& [delFlag isEqualToString:@"1"]) {
+    if ([delFlag isEqualToString:@"1"]) {
         dispatch_async(dispatch_get_main_queue(), ^{
                earningsview *ob = (earningsview *)self.superview;
         [ob enableDropDown];

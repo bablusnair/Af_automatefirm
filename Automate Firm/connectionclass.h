@@ -425,4 +425,11 @@
 -(void)signupsectorlistingservice;
 
 -(void)signupserviceForAdminModule:(NSString *)urlstringdata username:(NSString *)username firmname:(NSString *)firmname sector:(NSString *)sector estdate:(NSString *)estdate sub:(NSString *)sub agent:(NSString *)agent firstname:(NSString *)firstname lastname:(NSString *)lastname dob:(NSString *)dob regcontact:(NSString *)regcontact regemail:(NSString *)regemail recoverymail:(NSString *)recoverymail livingin:(NSString *)livingin state:(NSString *)state city:(NSString *)city imagedata:(NSString *)imagedata status:(NSString *)status;
+
+
+//resetpasswordscreen
+
+-(void)ResetpasswordSubmissionscreenUsername:(NSString *)username oldpassword:(NSString *)oldpassword  newpassword:(NSString *)newpassword userid:(NSString *)userId;
+
+-(void)resendmailinsignUpScreen:(NSString *)userId;
 @end

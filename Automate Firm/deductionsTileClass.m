@@ -598,7 +598,7 @@
 {
     AppDelegate *app=(AppDelegate *)[[UIApplication sharedApplication ]delegate];
     
-    if ([[response objectForKey:@"status"] isEqualToString:@"200"])
+    if ([[response objectForKey:@"status"] isEqualToString:@"deleted"])
         dispatch_async(dispatch_get_main_queue(), ^{
             deductionsViewClass *ob = (deductionsViewClass *)self.superview;
             [ob enableDropDown];

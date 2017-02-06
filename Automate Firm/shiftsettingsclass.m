@@ -2319,7 +2319,7 @@ replacementString:(NSString *)string
 
         self.swingtimeText5.text=[selectedDict objectForKey:@"swing_break_end"];
         self.swingbreakDuration.text=[selectedDict objectForKey:@"swing_break_duration"];
-        if ([[selectedDict objectForKey:@"swing_inttime_checkbox"]isEqualToString:@"1"]) {
+        if ([[selectedDict objectForKey:@"swing_intime_checkbox"]isEqualToString:@"1"]) {
             [self.swingsecondcheck setImage:[UIImage imageNamed:@"check_box_tick.png"] forState:UIControlStateNormal];
             self.swinginTimeText.backgroundColor=[UIColor clearColor];
             self.q=1;

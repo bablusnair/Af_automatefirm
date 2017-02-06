@@ -2696,7 +2696,7 @@
 -(void)createdIncometax:(NSString *)dictreponse
 {
     
-    if ([dictreponse isEqualToString:@"1"]) {
+    //if ([dictreponse isEqualToString:@"1"]) {
         
        
         
@@ -2734,62 +2734,53 @@
     
     
      
-    }
-    else
-    {
-        
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        
-        UIAlertController *alert= [UIAlertController
-                                   alertControllerWithTitle:@"Error"
-                                   message:@"Updation Unsuccessful"
-                                   preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                   handler:^(UIAlertAction * action){
-                                                       
-
-        
-                                                     
-      
-                                                  }];
-        
-        [alert addAction:ok];
-       
-        
-        //    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        [(settingsViewController *)[self.superview.superview.superview.superview nextResponder] presentViewController:alert animated:YES completion:nil];
-        
-
-    
-   
-    });
-    
-  }
+//    }
+//    else
+//    {
+//        
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        
+//        
+//        UIAlertController *alert= [UIAlertController
+//                                   alertControllerWithTitle:@"Error"
+//                                   message:@"Updation Unsuccessful"
+//                                   preferredStyle:UIAlertControllerStyleAlert];
+//        
+//        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+//                                                   handler:^(UIAlertAction * action){
+//                                                       
+//
+//        
+//                                                     
+//      
+//                                                  }];
+//        
+//        [alert addAction:ok];
+//       
+//        
+//        //    dispatch_async(dispatch_get_main_queue(), ^{
+//        
+//        [(settingsViewController *)[self.superview.superview.superview.superview nextResponder] presentViewController:alert animated:YES completion:nil];
+//        
+//
+//    
+//   
+//    });
+//    
+//  }
     
 }
 
 -(void)displayincometaxResponse:(NSMutableDictionary *)displayresponsedict
 {
     
-    
     dispatch_async(dispatch_get_main_queue(), ^{
-    
-    
-    
 
     NSMutableArray *checkarray = [displayresponsedict objectForKey:@"income_data"];
     
     if ([checkarray count]>0) {
         
-        
-        
         NSMutableArray *taxdetailsmainarray = [displayresponsedict objectForKey:@"tax_details"];
-        
-        
-        
         
         [self.taxarray1 removeAllObjects];
         [self.zeroarray removeAllObjects];
@@ -2799,25 +2790,18 @@
         [self.amountfieldSelectedarray removeAllObjects];
         [self.taxrangeRedarray removeAllObjects];
         
+        NSMutableArray *checkarray1 = [displayresponsedict objectForKey:@"income_data"];
         
-        
-        
-        
-        
-        
-         NSMutableArray *checkarray1 = [displayresponsedict objectForKey:@"income_data"];
-        
-         NSMutableDictionary *dictioanry = [checkarray1 objectAtIndex:0];
-         NSString *string=@"%";
-         self.aboveTaxtextfield.text=[NSString stringWithFormat:@"%@%@",[dictioanry objectForKey:@"above_tax"],string];
-         self.aboveTaxtextfield.userInteractionEnabled=TRUE;
-         self.abovebackgdView.backgroundColor=[UIColor whiteColor];
-         self.abovelabel.hidden=FALSE;
-         self.aboveNumberlabel.hidden=FALSE;
-         self.aboveResultvalue.hidden=FALSE;
+        NSMutableDictionary *dictioanry = [checkarray1 objectAtIndex:0];
+        NSString *string=@"%";
+        self.aboveTaxtextfield.text=[NSString stringWithFormat:@"%@%@",[dictioanry objectForKey:@"above_tax"],string];
+        self.aboveTaxtextfield.userInteractionEnabled=TRUE;
+        self.abovebackgdView.backgroundColor=[UIColor whiteColor];
+        self.abovelabel.hidden=FALSE;
+        self.aboveNumberlabel.hidden=FALSE;
+        self.aboveResultvalue.hidden=FALSE;
         
         if ([[dictioanry objectForKey:@"deduct_salary"]isEqualToString:@"1"]) {
-            
             
             [self.radiobuttonfirst setImage:[UIImage imageNamed:@"radio button on11.png"] forState:UIControlStateNormal];
             [self.radiobuttonsecond setImage:[UIImage imageNamed:@"radio button off11.png"] forState:UIControlStateNormal];
@@ -2826,8 +2810,6 @@
             
             self.deductincometaxfromalarystring=@"1";
             
-            
-            
             if ([[dictioanry objectForKey:@"employee_approve"]isEqualToString:@"1"]) {
                   
                 [self.checkboxbutton setImage:[UIImage imageNamed:@"check_box_tick.png"] forState:UIControlStateNormal];
@@ -2835,17 +2817,14 @@
             }
             else
             {
-                
                 [self.checkboxbutton setImage:[UIImage imageNamed:@"check box.png"] forState:UIControlStateNormal];
                 self.checkboxstringvalue=@"0";
             }
-            
           
             self.nodeductincometaxfromalarystring=@"0";
         }
         else
         {
-            
             
             [self.radiobuttonfirst setImage:[UIImage imageNamed:@"radio button off11.png"] forState:UIControlStateNormal];
             [self.radiobuttonsecond setImage:[UIImage imageNamed:@"radio button on11.png"] forState:UIControlStateNormal];
@@ -2856,15 +2835,10 @@
             
             self.checkboxstringvalue=@"0";
               self.nodeductincometaxfromalarystring=@"1";
-
-            
             
         }
         
-        
-        
         if ([[dictioanry objectForKey:@"disable_deduction"]isEqualToString:@"1"]) {
-            
             
             [self.radiobuttonfirst setImage:[UIImage imageNamed:@"radio button off11.png"] forState:UIControlStateNormal];
             [self.radiobuttonsecond setImage:[UIImage imageNamed:@"radio button on11.png"] forState:UIControlStateNormal];
@@ -2876,12 +2850,9 @@
             self.checkboxstringvalue=@"0";
             self.nodeductincometaxfromalarystring=@"1";
             
-
-            
         }
         else
         {
-            
             
             [self.radiobuttonfirst setImage:[UIImage imageNamed:@"radio button on11.png"] forState:UIControlStateNormal];
             [self.radiobuttonsecond setImage:[UIImage imageNamed:@"radio button off11.png"] forState:UIControlStateNormal];
@@ -2903,16 +2874,11 @@
             }
             
             self.nodeductincometaxfromalarystring=@"0";
-
-            
             
         }
         
-        
-        
         if ([[dictioanry objectForKey:@"enable"]isEqualToString:@"1"]) {
             
-          
             [self.switchButton setImage:[UIImage imageNamed:@"button_2 (1).png"] forState:UIControlStateNormal];
             //        self.switchButton.imageView.animationImages =
             //        [NSArray arrayWithObjects:
@@ -2944,7 +2910,6 @@
             self.swichbuttonstringvalue=@"1";
             self.s1=0;
             
-            
         }
         else
         {
@@ -2968,7 +2933,6 @@
             self.checktext.userInteractionEnabled=NO;
             
             
-            
             //self.s1++;
             //  [self.scrollView setAlpha:0.6];//off
             [self.mytableview setAlpha:0.6];
@@ -2984,13 +2948,7 @@
             
             self.swichbuttonstringvalue=@"0";
 
-            
-            
         }
-
-        
-        
-    
         
         
         if (taxdetailsmainarray.count<5)
@@ -3007,8 +2965,6 @@
                     [self.zeroarray addObject:[mydict objectForKey:@"begin"]];
                     [self.amountarray addObject:[mydict objectForKey:@"end"]];
                     [self.percentagetaxarray addObject:[NSString stringWithFormat:@"%@%@",[mydict objectForKey:@"tax"],str]];
-                    
-                    
                     
                 }
 
@@ -3037,14 +2993,9 @@
                 [self.amountfieldSelectedarray addObject:myindexPath];
                 [self.amountfieldSelectedarray addObject:myindexPath1];
                 
-                
-                
-                
-                
             }
             else if (taxdetailsmainarray.count==2)
             {
-                
                 
                 for (int i=0; i<[taxdetailsmainarray count]; i++) {
                     
@@ -3056,11 +3007,8 @@
                     [self.amountarray addObject:[mydict objectForKey:@"end"]];
                     [self.percentagetaxarray addObject:[NSString stringWithFormat:@"%@%@",[mydict objectForKey:@"tax"],str]];
                     
-                    
-                    
                 }
 
-                
                 [self.taxarray1 addObject:@"3"];
                 [self.taxarray1 addObject:@"4"];
                 [self.zeroarray addObject:[NSString stringWithFormat:@"%lu",[[self.amountarray objectAtIndex:1] integerValue]+1]];
@@ -3081,19 +3029,13 @@
                 [self.selectedarray addObject:myindexPath1];
                 [self.selectedarray addObject:myindexPath2];
                 
-                
-                
                 [self.amountfieldSelectedarray addObject:myindexPath1];
                 [self.amountfieldSelectedarray addObject:myindexPath2];
                 [self.amountfieldSelectedarray addObject:myindexPath3];
                 
-                
-                
-                
             }
             else if (taxdetailsmainarray.count==3)
             {
-                
                 
                 for (int i=0; i<[taxdetailsmainarray count]; i++) {
                     
@@ -3105,11 +3047,8 @@
                     [self.amountarray addObject:[mydict objectForKey:@"end"]];
                     [self.percentagetaxarray addObject:[NSString stringWithFormat:@"%@%@",[mydict objectForKey:@"tax"],str]];
                     
-                    
-                    
                 }
 
-                
                 [self.taxarray1 addObject:@"4"];
                 [self.zeroarray addObject:[NSString stringWithFormat:@"%lu",[[self.amountarray objectAtIndex:2] integerValue]+1]];
                 [self.amountarray addObject:@""];
@@ -3119,27 +3058,19 @@
                 self.aboveResultvalue.text=[self.amountarray objectAtIndex:2];
                // self.aboveTaxtextfield.text=@"";
                 
-                
                 NSIndexPath *myindexPath1 = [NSIndexPath indexPathForRow:0 inSection:0];
                 NSIndexPath *myindexPath2 = [NSIndexPath indexPathForRow:1 inSection:0];
                 NSIndexPath *myindexPath3 = [NSIndexPath indexPathForRow:2 inSection:0];
                 NSIndexPath *myindexPath4 = [NSIndexPath indexPathForRow:3 inSection:0];
                 
-                
                 [self.selectedarray addObject:myindexPath1];
                 [self.selectedarray addObject:myindexPath2];
                 [self.selectedarray addObject:myindexPath3];
-                
-                
                 
                 [self.amountfieldSelectedarray addObject:myindexPath1];
                 [self.amountfieldSelectedarray addObject:myindexPath2];
                 [self.amountfieldSelectedarray addObject:myindexPath3];
                 [self.amountfieldSelectedarray addObject:myindexPath4];
-                
-                
-            
-                
                 
             }
             
@@ -3156,10 +3087,7 @@
                     [self.amountarray addObject:[mydict objectForKey:@"end"]];
                     [self.percentagetaxarray addObject:[NSString stringWithFormat:@"%@%@",[mydict objectForKey:@"tax"],str]];
                     
-                    
-                    
                 }
-
                 
                 [self.taxarray1 addObject:@"5"];
                 [self.zeroarray addObject:[NSString stringWithFormat:@"%lu",[[self.amountarray objectAtIndex:3] integerValue]+1]];
@@ -3173,29 +3101,22 @@
                 //                                                                       NSIndexPath *myindexPath = [NSIndexPath indexPathForRow:4 inSection:0];
                 //                                                                       [self.selectedarray addObject:myindexPath];
                 
-                
-                
                 NSIndexPath *myindexPath1 = [NSIndexPath indexPathForRow:0 inSection:0];
                 NSIndexPath *myindexPath2 = [NSIndexPath indexPathForRow:1 inSection:0];
                 NSIndexPath *myindexPath3 = [NSIndexPath indexPathForRow:2 inSection:0];
                 NSIndexPath *myindexPath4 = [NSIndexPath indexPathForRow:3 inSection:0];
                 NSIndexPath *myindexPath5 = [NSIndexPath indexPathForRow:4 inSection:0];
                 
-                
                 [self.selectedarray addObject:myindexPath1];
                 [self.selectedarray addObject:myindexPath2];
                 [self.selectedarray addObject:myindexPath3];
                 [self.selectedarray addObject:myindexPath4];
-                
                 
                 [self.amountfieldSelectedarray addObject:myindexPath1];
                 [self.amountfieldSelectedarray addObject:myindexPath2];
                 [self.amountfieldSelectedarray addObject:myindexPath3];
                 [self.amountfieldSelectedarray addObject:myindexPath4];
                 [self.amountfieldSelectedarray addObject:myindexPath5];
-                
-                
-                
                 
             }
             else if (taxdetailsmainarray.count==0)
@@ -3234,8 +3155,6 @@
         else
         {
             
-            
-            
             for (int i=0; i<[taxdetailsmainarray count]; i++) {
                 
                 NSString *str=@"%";
@@ -3246,12 +3165,8 @@
                 [self.amountarray addObject:[mydict objectForKey:@"end"]];
                 [self.percentagetaxarray addObject:[NSString stringWithFormat:@"%@%@",[mydict objectForKey:@"tax"],str]];
                 
-                
-                
             }
 
-            
-            
             [self.taxarray1 addObject:[NSString stringWithFormat:@"%lu",[taxdetailsmainarray count]+1]];
             NSString *storedvalue=[self.amountarray lastObject];
             [self.zeroarray addObject:[NSString stringWithFormat:@"%lu",[[self.amountarray lastObject] integerValue]+1]];
@@ -3275,18 +3190,12 @@
                 
                 NSIndexPath *myindexPath1 = [NSIndexPath indexPathForRow:i inSection:0];
                 [self.amountfieldSelectedarray addObject:myindexPath1];
-                
             }
-            
             
         }
 
         
-
-        
         [self.mytableview reloadData];
-        
-        
         
         [self.otherInstanceRangeArray removeAllObjects];
         [self.otherInstanceTaxArray removeAllObjects];
@@ -3300,8 +3209,6 @@
         self.forinstanceaboveAmtvalue.hidden=FALSE;
         self.forinstanceaboveTaxvalue.hidden=FALSE;
         
-        
-        
         [self.amountdropdownArray removeAllObjects];
         [self.amountdropdownArray addObject:@"0"];
         
@@ -3313,15 +3220,9 @@
                 [self.amountdropdownArray addObject:[self.amountarray objectAtIndex:i]];
                 
             }
-            
-            
         }
         
         [self.amountdropTC reloadData];
-        
-        
-        
-        
         
         [self.amountarray insertObject:@"0" atIndex:0];
         // [self.amountarray removeLastObject];
@@ -3333,8 +3234,6 @@
                 [self.otherInstanceRangeArray addObject:[NSString stringWithFormat:@"%@-%@",[self.amountarray objectAtIndex:i],[self.amountarray objectAtIndex:i+1]]];
             }
             
-            
-            
         }
         
         
@@ -3344,15 +3243,11 @@
             if (![[self.amountarray objectAtIndex:i+1]isEqualToString:@""]) {
                 
                 [self.otherInstanceTaxableAmountArray addObject:[NSString stringWithFormat:@"%lu",[[self.amountarray objectAtIndex:i+1] integerValue]-[[self.amountarray objectAtIndex:i] integerValue]]];
-                
             }
-            
         }
         
         //[self.percentagetaxarray removeLastObject];
         [self.otherInstanceTaxArray addObjectsFromArray:self.percentagetaxarray];
-        
-        
         
         self.instancenotapplicable1.text=@" 100";
         
@@ -3375,10 +3270,7 @@
             amount+=[[self.otherInstanceTaxAmtArray objectAtIndex:i] integerValue];
             self.grosspayableAmountLabel.text=[NSString stringWithFormat:@"%ld", amount ];
             
-            
         }
-        
-        
         
         [self.instancetableview reloadData];
         
@@ -3394,11 +3286,8 @@
         self.forinstanceaboveTaxvalue.text=self.aboveTaxtextfield.text;
         
         
-        
-        
         NSMutableArray *surchargedetailsmainarray = [displayresponsedict objectForKey:@"surcharge"];
         if (surchargedetailsmainarray.count>0) {
-            
             
             [self.otherChargesArray removeAllObjects];
             [self.otherChargesTaxArray removeAllObjects];
@@ -3408,7 +3297,6 @@
             [self.sur_selectedarray removeAllObjects];
             [self.sur_selectedarray2 removeAllObjects];
             [self.subchargerangeRedarray removeAllObjects];
-            
             
             
             if (surchargedetailsmainarray.count>0) {
@@ -3426,9 +3314,7 @@
                             [self.otherChargesTaxArray addObject:[NSString stringWithFormat:@"%@%@",[mydict objectForKey:@"percent"],str]];
                             [self.otherChargesAmountArray addObject:[mydict objectForKey:@"above"]];
                             
-                            
                         }
-                        
                         
                         NSIndexPath *myindexPath = [NSIndexPath indexPathForRow:0 inSection:0];
                         NSIndexPath *myindexPath1 = [NSIndexPath indexPathForRow:1 inSection:0];
@@ -3450,7 +3336,6 @@
                         [self.otherChargesAmountArray addObject:@""];
                         [self.otherChargesAmountArray addObject:@""];
                         
-                        
                     }
                     else if (surchargedetailsmainarray.count==2) {
                         
@@ -3463,7 +3348,6 @@
                             [self.otherChargesArray addObject:[mydict objectForKey:@"name"]];
                             [self.otherChargesTaxArray addObject:[NSString stringWithFormat:@"%@%@",[mydict objectForKey:@"percent"],str]];
                             [self.otherChargesAmountArray addObject:[mydict objectForKey:@"above"]];
-                            
                             
                         }
                         
@@ -3492,10 +3376,6 @@
                         
                         [self.otherChargesAmountArray addObject:@""];
                         [self.otherChargesAmountArray addObject:@""];
-                        
-                        
-                        
-                        
                         
                     }
                     else if (surchargedetailsmainarray.count==3) {

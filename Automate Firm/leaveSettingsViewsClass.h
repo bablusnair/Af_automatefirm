@@ -159,4 +159,7 @@
 @property(nonatomic,retain)NSString *switchValue8;
 
 @property(nonatomic,retain)NSString *carryForwardDropFlag;
+
+@property(nonatomic,retain)NSString *conditionString2;
+
 @end

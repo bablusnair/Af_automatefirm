@@ -1167,16 +1167,10 @@
 -(void)conditionDetailsResponse:(id)responseData
 {    dispatch_async(dispatch_get_main_queue(), ^{
 
-  //  self.paymentinterveltext.text=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"payment_interval"];
-   // self.paidbytext.text=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"paid_by"];
-   // self.agetext.text=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"age_condition"];
-   // self.issue1PaymentText.text=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_hourly_issue"];
-   // self.hoursWorkedText.text=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_hourly_working_hour"];
-    //self.issue2PaymentText.text=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_basic_gross_pay"];
-    //int value = [typeStr intValue];
-    
+  
+    NSMutableDictionary *earningsDetailsDict = [[responseData objectForKey:@"earnings_condition_details"]objectAtIndex:0];
 
-    switch ([[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"payment_interval"]intValue]) {
+    switch ([[earningsDetailsDict objectForKey:@"payment_interval"]intValue]) {
         case 1:
             self.paymentinterveltext.text=@"          Annual";
  
@@ -1216,7 +1210,7 @@
         default:
             break;
     }
-    switch ([[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_hourly_issue"]intValue]) {
+    switch ([[earningsDetailsDict objectForKey:@"earnings_hourly_issue"]intValue]) {
         case 1:
             self.issue1PaymentText.text=@"Annual";
             
@@ -1258,7 +1252,7 @@
     }
     
 
-    switch ([[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_basic_gross_pay"]intValue]) {
+    switch ([[earningsDetailsDict objectForKey:@"earnings_basic_gross_pay"]intValue]) {
         case 1:
             self.issue2PaymentText.text=@"Annual";
             
@@ -1300,7 +1294,7 @@
     }
 
     
-    switch ([[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_hourly_working_hour"]intValue]) {
+    switch ([[earningsDetailsDict objectForKey:@"earnings_hourly_working_hour"]intValue]) {
         case 1:
             self.hoursWorkedText.text=[self.dummyHoursWorkedArray objectAtIndex:0];
 
@@ -1316,7 +1310,7 @@
             break;
     }
     
-    switch ([[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"paid_by"]intValue]) {
+    switch ([[earningsDetailsDict objectForKey:@"paid_by"]intValue]) {
         case 1:
             self.paidbytext.text=[self.paidbyarray objectAtIndex:0];
             
@@ -1328,7 +1322,7 @@
         default:
             break;
     }
-    switch ([[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"age_condition"]intValue]) {
+    switch ([[earningsDetailsDict objectForKey:@"age_condition"]intValue]) {
         case 1:
              self.agetext.text=[self.agearray objectAtIndex:0];
             
@@ -1340,14 +1334,14 @@
         default:
             break;
     }
-    if ([[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_amt_hour_issue_check"]isEqualToString:@"1"]) {
+    if ([[earningsDetailsDict objectForKey:@"earnings_amt_hour_issue_check"]isEqualToString:@"1"]) {
         [self.issueCheckButton setImage:[UIImage imageNamed:@"check_box.png32.png"] forState:UIControlStateNormal];
 
     }
     else{
         [self.issueCheckButton setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
     }
-    if ([[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_hourly_paid_holidays"]isEqualToString:@"1"]) {
+    if ([[earningsDetailsDict objectForKey:@"earnings_hourly_paid_holidays"]isEqualToString:@"1"]) {
         [self.checkButton3 setImage:[UIImage imageNamed:@"check_box.png32.png"] forState:UIControlStateNormal];
 
     }
@@ -1355,7 +1349,7 @@
         [self.checkButton3 setImage:[UIImage imageNamed:@"checkbox1.png23.png"] forState:UIControlStateNormal];
 
     }
-    if ([[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_hourly_paid_leaves"]isEqualToString:@"1"]) {
+    if ([[earningsDetailsDict objectForKey:@"earnings_hourly_paid_leaves"]isEqualToString:@"1"]) {
         [self.checkButton4 setImage:[UIImage imageNamed:@"check_box.png32.png"] forState:UIControlStateNormal];
         
     }
@@ -1364,18 +1358,18 @@
         
     }
    
-    self.issueFlagString=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_amt_hour_issue_check"];
-    self.paidholiflag=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_hourly_paid_holidays"];
-    self.paidleaveflag=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_hourly_paid_leaves"];
-    self.radioFlag1=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_payment_radio"];
-    self.accumalateFlag=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_accumulate"];
-    self.earningflag=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_taxed"];
+    self.issueFlagString=[earningsDetailsDict objectForKey:@"earnings_amt_hour_issue_check"];
+    self.paidholiflag=[earningsDetailsDict objectForKey:@"earnings_hourly_paid_holidays"];
+    self.paidleaveflag=[earningsDetailsDict objectForKey:@"earnings_hourly_paid_leaves"];
+    self.radioFlag1=[earningsDetailsDict objectForKey:@"earnings_payment_radio"];
+    self.accumalateFlag=[earningsDetailsDict objectForKey:@"earnings_accumulate"];
+    self.earningflag=[earningsDetailsDict objectForKey:@"earnings_taxed"];
     
     if ([self.radioFlag1 isEqualToString:@"1"]) {
         [self continueRadioButtonAction];
     }
     else{
-        self.payondateString=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_pay_on"];
+        self.payondateString=[earningsDetailsDict objectForKey:@"earnings_pay_on"];
         
         NSDateFormatter *dateformat = [[NSDateFormatter alloc]init];
         [dateformat setDateFormat:@"dd-MM-yyyy"];
@@ -1407,24 +1401,24 @@
         
     }
     
-    self.eligibilityText.text=[NSString stringWithFormat:@"%@ Day(s)",[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"eligible_months"]];
-    self.ageValueText.text=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"age"];
-    self.hoursWorkedText1.text=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_amt_hour_worked_option"];
-    self.issueHoursText1.text=[NSString stringWithFormat:@"%@ H",[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_amt_hour_worked_hours"]];
-    self.issueRateText.text=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_hourly_rate"];
-    self.issueRateText1.text=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_amt_hour_rate"];
-    self.issueHoursText.text=[NSString stringWithFormat:@"%@ Hours",[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_amt_hour_issue"]];
-    self.fixedAmountText.text=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_amount"];
-    self.maxLimitText.text=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"max_limit"];
+    self.eligibilityText.text=[NSString stringWithFormat:@"%@ Day(s)",[earningsDetailsDict objectForKey:@"eligible_months"]];
+    self.ageValueText.text=[earningsDetailsDict objectForKey:@"age"];
+    self.hoursWorkedText1.text=[earningsDetailsDict objectForKey:@"earnings_amt_hour_worked_option"];
+    self.issueHoursText1.text=[NSString stringWithFormat:@"%@ H",[earningsDetailsDict objectForKey:@"earnings_amt_hour_worked_hours"]];
+    self.issueRateText.text=[earningsDetailsDict objectForKey:@"earnings_hourly_rate"];
+    self.issueRateText1.text=[earningsDetailsDict objectForKey:@"earnings_amt_hour_rate"];
+    self.issueHoursText.text=[NSString stringWithFormat:@"%@ Hours",[earningsDetailsDict objectForKey:@"earnings_amt_hour_issue"]];
+    self.fixedAmountText.text=[earningsDetailsDict objectForKey:@"earnings_amount"];
+    self.maxLimitText.text=[earningsDetailsDict objectForKey:@"max_limit"];
     NSString *symbolString=@"%";
 
-    self.issuePercentageText.text=[NSString stringWithFormat:@"%@ %@ ",[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_base_issue"],symbolString];
+    self.issuePercentageText.text=[NSString stringWithFormat:@"%@ %@ ",[earningsDetailsDict objectForKey:@"earnings_base_issue"],symbolString];
     
-    self.replaceStringFlag=[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_amt_hour_replace"];
+    self.replaceStringFlag=[earningsDetailsDict objectForKey:@"earnings_amt_hour_replace"];
         app.tableRowId=0;
     
-    int value=[[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_hourly_issue"]intValue];
-    int value1=[[[[responseData objectForKey:@"earnings_condtion_details"]objectAtIndex:0]objectForKey:@"earnings_basic_gross_pay"]intValue];
+    int value=[[earningsDetailsDict objectForKey:@"earnings_hourly_issue"]intValue];
+    int value1=[[earningsDetailsDict objectForKey:@"earnings_basic_gross_pay"]intValue];
     [self.issuePaymentArray removeAllObjects];
     [self.dummyIssuePaymentArray removeAllObjects];
     

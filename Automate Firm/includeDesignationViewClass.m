@@ -468,6 +468,7 @@
         app.designationFlag5=1;
     }
     
+    app.designationFlag=1;
     
     NSMutableArray *desig=[[NSMutableArray alloc]initWithObjects:self.officename.text, nil];
     [desig addObjectsFromArray:self.storesArray];

@@ -68,7 +68,7 @@
     self.fixedAmountText.text=@"";
     self.eligibilityText.text=@"";
     self.ageValueText.text=@"";
-    self.agetext.text=@"";
+    //self.agetext.text=@"";
     self.payOnText.text=@"";
     self.payondateString=@"";
     self.issueHoursText.text=@"";
@@ -258,7 +258,7 @@
     self.fixedAmountText.text=@"";
     self.eligibilityText.text=@"";
     self.ageValueText.text=@"";
-    self.agetext.text=@"";
+    //self.agetext.text=@"";
     self.payOnText.text=@"";
     self.issueHoursText.text=@"";
     self.issueRateText1.text=@"";
@@ -304,10 +304,10 @@
     NSMutableDictionary *desigDict=[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedDesignation"];
     self.sendDesig=[self.designationArray componentsJoinedByString:@"###"];
 
-    NSString *ageString=[[NSString stringWithFormat:@"%@###%@",self.ageString,self.ageValueText.text]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
     NSString *eligibleString=[[[self.eligibilityText.text componentsSeparatedByString:@" Day(s)"] objectAtIndex:0]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
-    NSMutableDictionary *tileDict=[[NSMutableDictionary alloc]initWithObjectsAndKeys:self.paymentIntervalString,@"d_interval",self.maxLimitText.text,@"max_limit",self.fixedAmountText.text,@"d_amount",eligibleString,@"d_applicable",ageString,@"age",self.payondateString,@"pay_on",self.radioString,@"payment_cycle",self.deductionCheckString,@"d_taxed",self.accumalteCheckString,@"accumulate_payment",self.switchString,@"checkbox_enable",[[self.issueHoursText.text componentsSeparatedByString:@" Hours"] objectAtIndex:0],@"deduct",self.issueRateText1.text,@"d_rate",self.deductOnlyCheckString,@"d_only_checkbox",self.deductOnlyTableString,@"d_only",self.issueHoursText1.text,@"d_hours",[[self.issuePercentageText.text componentsSeparatedByString:@" %"] objectAtIndex:0],@"d_percent",self.basicString,@"d_basic",self.sendDesig,@"designationstring", nil];
+    NSMutableDictionary *tileDict=[[NSMutableDictionary alloc]initWithObjectsAndKeys:self.paymentIntervalString,@"d_interval",self.maxLimitText.text,@"max_limit",self.fixedAmountText.text,@"d_amount",eligibleString,@"d_applicable",self.ageString,@"age_condition",self.ageValueText.text,@"age",self.payondateString,@"pay_on",self.radioString,@"payment_cycle",self.deductionCheckString,@"d_taxed",self.accumalteCheckString,@"accumulate_payment",self.switchString,@"checkbox_enable",[[self.issueHoursText.text componentsSeparatedByString:@" Hours"] objectAtIndex:0],@"deduct",self.issueRateText1.text,@"d_rate",self.deductOnlyCheckString,@"d_only_checkbox",self.deductOnlyTableString,@"d_only",self.issueHoursText1.text,@"d_hours",[[self.issuePercentageText.text componentsSeparatedByString:@" %"] objectAtIndex:0],@"d_percent",self.basicString,@"d_basic",self.sendDesig,@"designationstring", nil];
 
     
     if ([app.deductionRuleId isEqualToString:@"0"] && ([app.deductionTileIdDict objectForKey:app.deductionTileIdString]==nil)) {
@@ -1057,7 +1057,18 @@
             NSString *symbolString=@"%";
         
             self.issuePercentageText.text=[NSString stringWithFormat:@"%@ %@ ",[[response objectAtIndex:0]objectForKey:@"d_percent"],symbolString];
-            self.ageValueText.text=[[[[response objectAtIndex:0]objectForKey:@"age"]componentsSeparatedByString:@"###"]objectAtIndex:1];
+            self.ageValueText.text=[[response objectAtIndex:0] objectForKey:@"age"];
+            if ([[[response objectAtIndex:0] objectForKey:@"age_condition"]isEqualToString:@"1"]) {
+                self.agetext.text=@"   >=";
+                self.ageString=@"1";
+            }
+            else
+            {
+                self.agetext.text=@"   <=";
+                self.ageString=@"0";
+            }
+            
+            //[[[[response objectAtIndex:0]objectForKey:@"age"]componentsSeparatedByString:@"###"]objectAtIndex:1];
       //  self.issue2PaymentText.text=[[response objectAtIndex:0]objectForKey:@"d_basic"];
             self.eligibilityText.text=[NSString stringWithFormat:@"%@ Day(s)",[[response objectAtIndex:0]objectForKey:@"d_applicable"]];
               [self.designationArray removeAllObjects];

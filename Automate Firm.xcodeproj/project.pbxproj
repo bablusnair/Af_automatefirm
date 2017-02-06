@@ -1142,6 +1142,8 @@
 		AE9EAA7A1DB6054D00F367DB /* shifttime.png in Resources */ = {isa = PBXBuildFile; fileRef = AE9EAA781DB6054C00F367DB /* shifttime.png */; };
 		AE9EAA7E1DB6089100F367DB /* calenderCollectionShiftCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9EAA7C1DB6089100F367DB /* calenderCollectionShiftCell.m */; };
 		AE9EAA7F1DB6089100F367DB /* calenderCollectionShiftCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9EAA7D1DB6089100F367DB /* calenderCollectionShiftCell.xib */; };
+		AEA54DDD1E484543001EED24 /* resetpasswordsignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA54DDC1E484542001EED24 /* resetpasswordsignupViewController.m */; };
+		AEA54DDF1E48457A001EED24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEA54DDE1E48457A001EED24 /* Main.storyboard */; };
 		AEA802321D9E5B1500DCDB6A /* DropboxBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA802311D9E5B1500DCDB6A /* DropboxBrowserViewController.m */; };
 		AEA802341D9E5D6800DCDB6A /* DropboxMedia.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEA802331D9E5D6800DCDB6A /* DropboxMedia.xcassets */; };
 		AEB05ACF1D17D5A000BBAA62 /* advancedplustableviewcell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB05ACC1D17D5A000BBAA62 /* advancedplustableviewcell.xib */; };
@@ -1218,7 +1220,6 @@
 		AEB0A3DF1E3B1BC000E38EC9 /* ELCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB0A3D51E3B1BC000E38EC9 /* ELCImagePickerController.m */; };
 		AEB0A3E01E3B1BC000E38EC9 /* ELCConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB0A3D81E3B1BC000E38EC9 /* ELCConsole.m */; };
 		AEB0A3E11E3B1BC000E38EC9 /* ELCOverlayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB0A3DA1E3B1BC000E38EC9 /* ELCOverlayImageView.m */; };
-		AEB0A3E41E3B1C3F00E38EC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEB0A3E31E3B1C3F00E38EC9 /* Main.storyboard */; };
 		AEB3C1511D2F867F00C047A2 /* grey_ellipse_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AEB3C1501D2F867F00C047A2 /* grey_ellipse_1.png */; };
 		AEB3C1531D2F86A400C047A2 /* blue_ellipse_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AEB3C1521D2F86A400C047A2 /* blue_ellipse_1.png */; };
 		AEB3C1551D2F8C0900C047A2 /* revertededsx1.png in Resources */ = {isa = PBXBuildFile; fileRef = AEB3C1541D2F8C0900C047A2 /* revertededsx1.png */; };
@@ -2950,6 +2951,9 @@
 		AE9EAA7B1DB6089100F367DB /* calenderCollectionShiftCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = calenderCollectionShiftCell.h; sourceTree = "<group>"; };
 		AE9EAA7C1DB6089100F367DB /* calenderCollectionShiftCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = calenderCollectionShiftCell.m; sourceTree = "<group>"; };
 		AE9EAA7D1DB6089100F367DB /* calenderCollectionShiftCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = calenderCollectionShiftCell.xib; sourceTree = "<group>"; };
+		AEA54DDB1E484542001EED24 /* resetpasswordsignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = resetpasswordsignupViewController.h; sourceTree = "<group>"; };
+		AEA54DDC1E484542001EED24 /* resetpasswordsignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = resetpasswordsignupViewController.m; sourceTree = "<group>"; };
+		AEA54DDE1E48457A001EED24 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		AEA802301D9E5B1500DCDB6A /* DropboxBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxBrowserViewController.h; sourceTree = "<group>"; };
 		AEA802311D9E5B1500DCDB6A /* DropboxBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxBrowserViewController.m; sourceTree = "<group>"; };
 		AEA802331D9E5D6800DCDB6A /* DropboxMedia.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = DropboxMedia.xcassets; sourceTree = "<group>"; };
@@ -3044,7 +3048,6 @@
 		AEB0A3D81E3B1BC000E38EC9 /* ELCConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCConsole.m; sourceTree = "<group>"; };
 		AEB0A3D91E3B1BC000E38EC9 /* ELCOverlayImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCOverlayImageView.h; sourceTree = "<group>"; };
 		AEB0A3DA1E3B1BC000E38EC9 /* ELCOverlayImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCOverlayImageView.m; sourceTree = "<group>"; };
-		AEB0A3E31E3B1C3F00E38EC9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		AEB3C1501D2F867F00C047A2 /* grey_ellipse_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grey_ellipse_1.png; sourceTree = "<group>"; };
 		AEB3C1521D2F86A400C047A2 /* blue_ellipse_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue_ellipse_1.png; sourceTree = "<group>"; };
 		AEB3C1541D2F8C0900C047A2 /* revertededsx1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = revertededsx1.png; sourceTree = "<group>"; };
@@ -5794,7 +5797,7 @@
 		AEE06E341BA6C215009C17AD /* Automate Firm */ = {
 			isa = PBXGroup;
 			children = (
-				AEB0A3E31E3B1C3F00E38EC9 /* Main.storyboard */,
+				AEA54DDE1E48457A001EED24 /* Main.storyboard */,
 				AE4012911D9A5E3400A28157 /* back_arrow_88 x 88.png */,
 				AE4012921D9A5E3400A28157 /* back_arrow.png */,
 				AE4012971D9A5E3E00A28157 /* download (1).jpeg */,
@@ -5849,6 +5852,8 @@
 				AEB0A39E1E3B1B9600E38EC9 /* paymentBrowseCollectionCell.m */,
 				AEB0A39F1E3B1B9600E38EC9 /* signupViewController.h */,
 				AEB0A3A01E3B1B9600E38EC9 /* signupViewController.m */,
+				AEA54DDB1E484542001EED24 /* resetpasswordsignupViewController.h */,
+				AEA54DDC1E484542001EED24 /* resetpasswordsignupViewController.m */,
 				AEB0A3E21E3B1BC900E38EC9 /* Multiple Image Picker */,
 				AEE06EB91BA6C2D8009C17AD /* oxygen font */,
 				AEE06EC01BA6C2F2009C17AD /* categoryimagepicker */,
@@ -7356,7 +7361,7 @@
 				AE4614DA1C59D3680016BC3E /* leave_box.png in Resources */,
 				AE6808C71BEA13EB00F5D243 /* leaveCustomTableViewCell.xib in Resources */,
 				AE5C18E11BE1E3F400A2B291 /* arrow_greater_new.png in Resources */,
-				AEB0A3E41E3B1C3F00E38EC9 /* Main.storyboard in Resources */,
+				AEA54DDF1E48457A001EED24 /* Main.storyboard in Resources */,
 				AE5E4D701D49D25800638D7C /* barcodeid.png in Resources */,
 				DA0B5DED1CEDCFCF004B12DC /* icon_time.png in Resources */,
 				AE3E2B521BCE538500FAAB31 /* icon01.png in Resources */,
@@ -7697,6 +7702,7 @@
 				DAFB224B1C804F75002F55CF /* grouppopupviewclass.m in Sources */,
 				AE6805F41E235CC0002C3774 /* designationDeletionPopUpClass.m in Sources */,
 				AEEF0EED1C69ED3E007CA307 /* bankcustomcellclass.m in Sources */,
+				AEA54DDD1E484543001EED24 /* resetpasswordsignupViewController.m in Sources */,
 				AE6795BA1D59A3460008E3C7 /* documentViewClass.m in Sources */,
 				AEE06EBF1BA6C2EB009C17AD /* UIImagePickerController+OrientationFix.m in Sources */,
 				DABDC9A81D2FB5320097A773 /* filtercellTableViewCell.m in Sources */,
@@ -7869,7 +7875,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ambu Vamadevan (LXTJ35U49E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = LXTJ35U49E;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				INFOPLIST_FILE = "Automate Firm/Info.plist";
@@ -7878,8 +7884,8 @@
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = leonine.AutomateFirmLatest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a8b0a43f-7917-4378-8eac-fe036df6bfb2";
-				PROVISIONING_PROFILE_SPECIFIER = AutomateFirmLatest;
+				PROVISIONING_PROFILE = "51cf0a84-a413-40ee-986e-7b8057a4233e";
+				PROVISIONING_PROFILE_SPECIFIER = 2017AFDevelopement;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;

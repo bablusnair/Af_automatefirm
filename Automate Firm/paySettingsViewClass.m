@@ -353,7 +353,7 @@
             return YES;
         }
         if (textField.text.length<=4) {
-            NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"];
+            NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
             unichar c = [string characterAtIndex:0];
             if ([myCharSet characterIsMember:c])
             {

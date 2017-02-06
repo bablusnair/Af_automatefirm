@@ -1273,115 +1273,50 @@
     
 }
 
--(void)created_loanresponse:(NSString *)loanresponsestring
+-(void)created_loanresponse:(id)loanresponsestring
 {
     
-    if (![loanresponsestring isEqualToString:@"duplicate data"]) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+                
+        AppDelegate *myappde =(AppDelegate *)[[UIApplication sharedApplication]delegate];
         
-        if (![loanresponsestring isEqualToString:@"0"]) {
-            
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                AppDelegate *myappde =(AppDelegate *)[[UIApplication sharedApplication]delegate];
-                
-                
-                if ([[NSUserDefaults standardUserDefaults] objectForKey:@"selectedDesignation"]!=nil) {
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"selectedDesignation"]!=nil) {
                     
+            [myappde.appde_localdict setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedDesignation"] forKey:[NSString stringWithFormat:@"%d",myappde.myselectedTag]];
+        }
+        if (self.grouparray.count>0) {
                     
-                    [myappde.appde_localdict setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedDesignation"] forKey:[NSString stringWithFormat:@"%d",myappde.myselectedTag]];
-                    
-                    
-                    
-                }
+            [myappde.appde_locgroupdictionary setObject:[self.grouparray copy] forKey:[NSString stringWithFormat:@"%d",myappde.myselectedTag]];
+        }
                 
-                
-                if (self.grouparray.count>0) {
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"selectedDesignation"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"officeDetails"];
+        
                     
+        myappde.loan_idstring=[NSString stringWithFormat:@"%@",[loanresponsestring objectForKey:@"rule_id"]];
                     
-                    
-                    [myappde.appde_locgroupdictionary setObject:[self.grouparray copy] forKey:[NSString stringWithFormat:@"%d",myappde.myselectedTag]];
-                    
-                }
-                
-                
-                [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"selectedDesignation"];
-                [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"officeDetails"];
-                
-                
-                NSArray *myarray = [loanresponsestring componentsSeparatedByString:@"###"];
-                
-                
-                if (myarray.count>0) {
-                    
-                     myappde.loan_idstring=[myarray objectAtIndex:1];
-                    
-                    if (![myappde.loantileid_array containsObject:[myarray objectAtIndex:0]]) {
+        if (![myappde.loantileid_array containsObject:[loanresponsestring objectForKey:@"condition_id"]]) {
                         
-                        [myappde.loantileid_array addObject:[myarray objectAtIndex:0]];
-                    }
+            [myappde.loantileid_array addObject:[NSString stringWithFormat:@"%@",[loanresponsestring objectForKey:@"condition_id"]]];
+        }
                     
-
-                }
-                
-               
-            
-                loanTileClass *ob = (loanTileClass *)self.superview.superview;
-                
-                [ob addaccordianview];
-                
-                loansettingsviewclass *obj = (loansettingsviewclass *)self.superview.superview.superview;
-                [obj enableddonebutton];
-                
-            });
-            
-        }
-        else
-        {
-            
-            
-            UIAlertController *alert= [UIAlertController
-                                       alertControllerWithTitle:@"Failed"
-                                       message:[NSString stringWithFormat:@"%@",@"Loan Rule insertion failed"]
-                                       preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                       handler:^(UIAlertAction * action){
-                                                           //Do Some action here
-                                                       }];
-            [alert addAction:ok];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [(settingsViewController *)[self.superview.superview.superview.superview.superview.superview.superview nextResponder] presentViewController:alert animated:YES completion:nil];
-
-            });
-            
-            
-        }
         
-        
-    }
-    else
-    {
-        UIAlertController *alert= [UIAlertController
-                                   alertControllerWithTitle:@"Duplicate"
-                                   message:[NSString stringWithFormat:@"%@",@"Enter Duplicate Entry"]
-                                   preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                   handler:^(UIAlertAction * action){
-                                                       //Do Some action here
-                                                   }];
-        [alert addAction:ok];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
+        loanTileClass *ob = (loanTileClass *)self.superview.superview;
+                
+        [ob addaccordianview];
+                
+        loansettingsviewclass *obj = (loansettingsviewclass *)self.superview.superview.superview;
+        [obj enableddonebutton];
+                
+    });
             
-            [(settingsViewController *)[self.superview.superview.superview.superview.superview.superview.superview nextResponder] presentViewController:alert animated:YES completion:nil];
-        });
-    
-    }
 }
+
+        
+        
+    
+    
+
 
 -(void)updationofloanResponse:(NSMutableDictionary *)updatedloanresponse
 {

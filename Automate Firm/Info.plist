@@ -49,9 +49,12 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLName</key>
+			<string>leonine.AutomateFirmLatest</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>db-d1npf9a2hx66ano</string>
+				<string>automatefirm</string>
 			</array>
 		</dict>
 	</array>
