@@ -713,10 +713,10 @@ NSString *const subdomainURL = @"http://192.168.1.35/af1.1/";
     [request setHTTPMethod:@"POST"];
     
     NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys:@"administrator",@"identity",@"password",@"password",@"D46CE605-AC20-4C50-95CD-66E01B025D45",@"deviceid",nil];
+    
     NSData *postData = [NSJSONSerialization dataWithJSONObject:mapData options:0 error:&error];
     [request setHTTPBody:postData];
-    
-    
+
     NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
