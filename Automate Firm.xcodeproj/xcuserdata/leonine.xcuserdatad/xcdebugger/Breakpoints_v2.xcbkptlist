@@ -1849,8 +1849,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "3533"
             endingLineNumber = "3533"
-            landmarkName = "-updateBank:::::::::::::"
-            landmarkType = "7">
+            landmarkName = "@implementation connectionclass"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2408,7 +2408,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "3900"
             endingLineNumber = "3900"
-            landmarkName = "-getallBankList"
+            landmarkName = "-displayAllCities:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

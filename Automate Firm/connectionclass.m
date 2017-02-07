@@ -713,6 +713,7 @@ NSString *const subdomainURL = @"http://192.168.1.35/af1.1/";
     [request setHTTPMethod:@"POST"];
     
     //scmwwk ekcjeoc mkm wdwckmc kmce3cfdec djcencdec icvd cndec  dc d  d   nd dn wkswekdoec dcioc kmn kd n
+    //my chages 2
     NSString *deviceID = [[NSUserDefaults standardUserDefaults]objectForKey:@"device_id"];
     
     NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys:@"administrator",@"identity",@"password",@"password",deviceID,@"deviceid",nil];
