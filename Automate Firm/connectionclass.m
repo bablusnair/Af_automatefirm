@@ -711,6 +711,7 @@ NSString *const subdomainURL = @"http://192.168.1.35/af1.1/";
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setHTTPMethod:@"POST"];
+    //Add ,qdmlq l;jlqwdm ckef eck klmsklcdmc mdwc l,dcmewcm dwckdk mdw
     
     NSString *deviceID = [[NSUserDefaults standardUserDefaults]objectForKey:@"device_id"];
     
