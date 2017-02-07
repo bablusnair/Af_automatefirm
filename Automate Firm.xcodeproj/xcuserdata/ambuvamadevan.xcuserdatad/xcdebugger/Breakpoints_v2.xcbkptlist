@@ -317,9 +317,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2995"
-            endingLineNumber = "2995"
-            landmarkName = "-deleteResponsibility:"
-            landmarkType = "7">
+            endingLineNumber = "2995">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -333,9 +331,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6367"
-            endingLineNumber = "6367"
-            landmarkName = "-createMainDoneHolidayService:othrDetails:officeid:ruleid:"
-            landmarkType = "7">
+            endingLineNumber = "6367">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -397,9 +393,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "3086"
-            endingLineNumber = "3086"
-            landmarkName = "-updateDesignation:"
-            landmarkType = "7">
+            endingLineNumber = "3086">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -413,9 +407,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "3136"
-            endingLineNumber = "3136"
-            landmarkName = "-updateDesignation:"
-            landmarkType = "7">
+            endingLineNumber = "3136">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -429,9 +421,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "3163"
-            endingLineNumber = "3163"
-            landmarkName = "-deleteDesignation:"
-            landmarkType = "7">
+            endingLineNumber = "3163">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -445,9 +435,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2690"
-            endingLineNumber = "2690"
-            landmarkName = "-createNewDesignations:"
-            landmarkType = "7">
+            endingLineNumber = "2690">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -461,9 +449,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2719"
-            endingLineNumber = "2719"
-            landmarkName = "-createNewDesignations:"
-            landmarkType = "7">
+            endingLineNumber = "2719">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -477,9 +463,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2761"
-            endingLineNumber = "2761"
-            landmarkName = "-viewAllDesignations"
-            landmarkType = "7">
+            endingLineNumber = "2761">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -493,9 +477,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2910"
-            endingLineNumber = "2910"
-            landmarkName = "-individualDesignationView:"
-            landmarkType = "7">
+            endingLineNumber = "2910">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -509,9 +491,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2578"
-            endingLineNumber = "2578"
-            landmarkName = "-deleteShiftRule::"
-            landmarkType = "7">
+            endingLineNumber = "2578">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -525,9 +505,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2531"
-            endingLineNumber = "2531"
-            landmarkName = "@implementation connectionclass"
-            landmarkType = "3">
+            endingLineNumber = "2531">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -669,9 +647,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "9339"
-            endingLineNumber = "9339"
-            landmarkName = "-deletethemainloanRules:"
-            landmarkType = "7">
+            endingLineNumber = "9339">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -685,9 +661,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "9305"
-            endingLineNumber = "9305"
-            landmarkName = "-deletethemainloanRules:"
-            landmarkType = "7">
+            endingLineNumber = "9305">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -701,9 +675,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "9361"
-            endingLineNumber = "9361"
-            landmarkName = "-loanindividualtileservices:tileid:"
-            landmarkType = "7">
+            endingLineNumber = "9361">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -717,9 +689,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "9376"
-            endingLineNumber = "9376"
-            landmarkName = "-loanindividualtileservices:tileid:"
-            landmarkType = "7">
+            endingLineNumber = "9376">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -733,9 +703,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "9907"
-            endingLineNumber = "9907"
-            landmarkName = "-viewAdvanceRuleTileDetails:"
-            landmarkType = "7">
+            endingLineNumber = "9907">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -749,9 +717,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "9867"
-            endingLineNumber = "9867"
-            landmarkName = "-viewAdvanceRuleConditions:"
-            landmarkType = "7">
+            endingLineNumber = "9867">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -765,9 +731,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "9887"
-            endingLineNumber = "9887"
-            landmarkName = "-viewAdvanceRuleConditions:"
-            landmarkType = "7">
+            endingLineNumber = "9887">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
@@ -828,9 +792,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "10077"
-            endingLineNumber = "10077"
-            landmarkName = "-deleteAdvanceTile:"
-            landmarkType = "7">
+            endingLineNumber = "10077">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
