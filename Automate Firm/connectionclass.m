@@ -646,6 +646,7 @@ NSString *const subdomainURL = @"http://192.168.1.35/af1.1/";
 {
     
     
+    
     NSError *error;
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
