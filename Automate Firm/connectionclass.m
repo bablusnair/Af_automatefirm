@@ -639,13 +639,12 @@ NSString *const subdomainURL = @"http://192.168.1.35/af1.1/";
     
 }
 
-//hgjhkhjihhhjhjhjhjhjjhjjjjhhjjhjhyyhhyhy
-// Login Function
+
 
 -(void)LoginService:(NSString *)username paswrd:(NSString *)pasword officeid:(NSString *)officeid
 {
     
-    
+    //1345647890-0987675890987657890-098767890-98767890-9876
     
     NSError *error;
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
