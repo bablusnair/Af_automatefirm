@@ -645,59 +645,6 @@ NSString *const subdomainURL = @"http://192.168.1.35/af1.1/";
 -(void)LoginService:(NSString *)username paswrd:(NSString *)pasword officeid:(NSString *)officeid
 {
     
-//    NSError *error;
-//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-//    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-//    NSString *urlString=[NSString stringWithFormat:@"%@%@",subdomainURL,loginurl];
-//    NSURL *url = [NSURL URLWithString:urlString];
-//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
-//                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
-//                                                       timeoutInterval:60.0];
-//    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-//    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-//    [request setHTTPMethod:@"POST"];
-//    
-//    NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys:username,@"username",pasword,@"password",officeid,@"office",nil];
-//    
-//    
-//    NSData *postData = [NSJSONSerialization dataWithJSONObject:mapData options:0 error:&error];
-//    [request setHTTPBody:postData];
-//    
-//    
-//    NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-//        
-//        
-//        if (data==Nil) {
-//            
-//            
-//            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
-//            {
-//                
-//                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
-//                
-//            }
-//            
-//        }
-//        
-//        else
-//        {
-//            NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//            NSLog(@"%@",mystring);
-//            if ([self.mydelegate respondsToSelector:@selector(loginResponse:)]&&(self.mydelegate!=NULL))
-//            {
-//                
-//                [self.mydelegate loginResponse:mystring];
-//                
-//            }
-//            
-//        }
-//        
-//    }];
-//    
-//    
-//    [postDataTask resume];
-    
-    //hi i'm bablu
     
     
     NSError *error;
@@ -711,6 +658,7 @@ NSString *const subdomainURL = @"http://192.168.1.35/af1.1/";
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setHTTPMethod:@"POST"];
+    //Add ,qdmlq l;jlqwdm ckef eck klmsklcdmc mdwc l,dcmewcm dwckdk mdw
     
     NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys:@"administrator",@"identity",@"password",@"password",@"D46CE605-AC20-4C50-95CD-66E01B025D45",@"deviceid",nil];
     
