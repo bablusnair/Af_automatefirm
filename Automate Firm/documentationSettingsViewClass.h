@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "connectionclass.h"
 #import "headerprotocol.h"
+#import "customPaperworkRuleClass.h"
 @interface documentationSettingsViewClass : UIView<UICollectionViewDataSource,UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,headerprotocol>
 @property(nonatomic,retain)connectionclass *myconnection;
 

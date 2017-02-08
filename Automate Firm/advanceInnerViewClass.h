@@ -8,23 +8,33 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
+#import "advanceDocumentTile.h"
+#import "connectionclass.h"
+#import "loanDocumentTile.h"
 
-@interface advanceInnerViewClass : UIView<UITableViewDataSource,UITableViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
+@interface advanceInnerViewClass : UIView<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,headerprotocol>
 {
     AppDelegate *app;
 }
+@property(nonatomic,retain)connectionclass *myconnection;
+@property(nonatomic,retain)IBOutlet UIScrollView *scrollView;
+@property(nonatomic,retain)IBOutlet UITextField *activeField;
+
 -(IBAction)includeDesignationAction:(id)sender;
 @property(nonatomic,retain)IBOutlet UICollectionView *mycollectionview;
 @property(nonatomic,retain)IBOutlet UIView *popUpView;
 @property(nonatomic,retain)IBOutlet UITableView *popupTableView;
 @property(nonatomic,retain)NSMutableArray *popupArray;
+@property(nonatomic,retain)NSMutableArray *dropHighlightArray;
 
 @property(nonatomic,retain)NSMutableArray *grouparray;
 @property(nonatomic,retain)NSIndexPath *indexpath;
 -(void)collectionViewReload:(NSMutableArray *)desigArray;
 -(void)assignDesignation:(NSMutableArray *)desigArray;
+
 -(void)specificEmployee:(NSMutableArray *)selectedEmployee : (NSData *)selectedEmployeeIcon;
 -(IBAction)saveButtonAction:(id)sender;
+@property(nonatomic,retain)NSString *countString;
 
 
 -(IBAction)button1Action:(id)sender;
@@ -58,5 +68,7 @@
 @property(nonatomic,assign)int q;
 
 @property(nonatomic,retain)NSMutableDictionary *finalDict;
+@property(nonatomic,retain)NSMutableDictionary *popupStorageDict;
+-(IBAction)editingChanged:(id)sender;
 
 @end

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Oxygen-Bold.ttf">
+            <string>Oxygen-Bold</string>
+        </array>
+        <array key="Oxygen-Regular.ttf">
+            <string>Oxygen-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="cWv-Ss-Gas" customClass="loanInnerViewClass">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="245"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="search_bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="K5z-zd-cV5">
+                    <frame key="frameInset" width="600" height="245"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ovel.png" translatesAutoresizingMaskIntoConstraints="NO" id="sn8-uj-A7g">
+                    <frame key="frameInset" minX="33" minY="68" width="530" height="70"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jec-9V-ztf">
+                    <frame key="frameInset" minX="380" minY="72" width="62" height="62"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="circle_4.png"/>
+                    <connections>
+                        <action selector="button4Action:" destination="cWv-Ss-Gas" eventType="touchUpInside" id="eOA-n3-4KZ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1KC-Ym-ZCR">
+                    <frame key="frameInset" minX="497" minY="72" width="62" height="62"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="circle_4.png"/>
+                    <connections>
+                        <action selector="button5Action:" destination="cWv-Ss-Gas" eventType="touchUpInside" id="ViT-Ct-kPY"/>
+                    </connections>
+                </button>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="651-Bc-UOn">
+                    <frame key="frameInset" minX="11" minY="173" width="578" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="10" id="iIx-0X-FhN">
+                        <size key="itemSize" width="130" height="30"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="cWv-Ss-Gas" id="6t8-7D-Oya"/>
+                        <outlet property="delegate" destination="cWv-Ss-Gas" id="boT-oc-nug"/>
+                    </connections>
+                </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yhR-JP-Y6R">
+                    <frame key="frameInset" minX="11" minY="147" width="121" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Include Employee">
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="includeDesignationAction:" destination="cWv-Ss-Gas" eventType="touchUpInside" id="mJ7-hn-qZe"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4SK-XC-jx7">
+                    <frame key="frameInset" minX="539" minY="210" width="50" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="done_button_new.png">
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="saveButtonAction:" destination="cWv-Ss-Gas" eventType="touchUpInside" id="eap-qZ-6GJ"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Save" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tzn-EU-E4I">
+                    <frame key="frameInset" minX="547" minY="212" width="34" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Oxygen-Bold" family="Oxygen" pointSize="13"/>
+                    <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AeS-Qa-9Pj">
+                    <frame key="frameInset" minX="11" minY="25" width="445" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Oxygen-Regular" family="Oxygen" pointSize="13"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <connections>
+                        <action selector="editingChanged:" destination="cWv-Ss-Gas" eventType="editingChanged" id="PF5-iG-vey"/>
+                        <outlet property="delegate" destination="cWv-Ss-Gas" id="LJb-XR-DWe"/>
+                    </connections>
+                </textField>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D79-VD-LBU">
+                    <frame key="frameInset" minX="425" minY="128" width="180" height="116"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="popup.png" translatesAutoresizingMaskIntoConstraints="NO" id="Aut-rG-4rj">
+                            <frame key="frameInset" width="180" height="116"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="30" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qCX-cr-A0s">
+                            <frame key="frameInset" minX="8" minY="21" width="164" height="90"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <outlet property="dataSource" destination="cWv-Ss-Gas" id="Se1-I5-xog"/>
+                                <outlet property="delegate" destination="cWv-Ss-Gas" id="Bgs-n8-4zR"/>
+                            </connections>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="heU-OS-irx">
+                    <frame key="frameInset" minX="11" minY="2" width="81" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Oxygen-Bold" family="Oxygen" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oB1-Th-w63">
+                    <frame key="frameInset" minX="150" minY="72" width="62" height="62"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="circle_4.png"/>
+                    <connections>
+                        <action selector="button2Action:" destination="cWv-Ss-Gas" eventType="touchUpInside" id="hH9-jx-onS"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1O-bL-e1B">
+                    <frame key="frameInset" minX="38" minY="72" width="62" height="62"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" backgroundImage="circle_4.png"/>
+                    <connections>
+                        <action selector="button1Action:" destination="cWv-Ss-Gas" eventType="touchUpInside" id="oRg-wy-ycH"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEl-EN-XQ1">
+                    <frame key="frameInset" minX="265" minY="72" width="62" height="62"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="circle_4.png"/>
+                    <connections>
+                        <action selector="button3Action:" destination="cWv-Ss-Gas" eventType="touchUpInside" id="Iv0-Gj-2Qo"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="process_arrow_black.png" translatesAutoresizingMaskIntoConstraints="NO" id="2bn-h6-Lu8">
+                    <frame key="frameInset" minX="101" minY="95" width="48" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="process_arrow_black.png" translatesAutoresizingMaskIntoConstraints="NO" id="Daa-0b-fAi">
+                    <frame key="frameInset" minX="215" minY="95" width="48" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="process_arrow_black.png" translatesAutoresizingMaskIntoConstraints="NO" id="xGo-Hq-zuK">
+                    <frame key="frameInset" minX="330" minY="95" width="48" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="process_arrow_black.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jar-p5-5GB">
+                    <frame key="frameInset" minX="446" minY="95" width="48" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="arrowImage1" destination="2bn-h6-Lu8" id="FOG-fh-UL4"/>
+                <outlet property="arrowImage2" destination="Daa-0b-fAi" id="ogF-Q3-tFK"/>
+                <outlet property="arrowImage3" destination="xGo-Hq-zuK" id="VAd-8z-REp"/>
+                <outlet property="arrowImage4" destination="Jar-p5-5GB" id="7L3-R3-iOv"/>
+                <outlet property="button1" destination="t1O-bL-e1B" id="vog-pH-Raw"/>
+                <outlet property="button2" destination="oB1-Th-w63" id="f0q-og-5Sx"/>
+                <outlet property="button3" destination="pEl-EN-XQ1" id="VWr-8v-ihB"/>
+                <outlet property="button4" destination="jec-9V-ztf" id="Wvf-dg-cTd"/>
+                <outlet property="button5" destination="1KC-Ym-ZCR" id="5yy-bO-16K"/>
+                <outlet property="descriptionText" destination="AeS-Qa-9Pj" id="Utt-iv-vAJ"/>
+                <outlet property="mycollectionview" destination="651-Bc-UOn" id="ZPT-Vm-Maj"/>
+                <outlet property="popUpView" destination="D79-VD-LBU" id="slw-fC-U0p"/>
+                <outlet property="popupTableView" destination="qCX-cr-A0s" id="jhP-Od-gWr"/>
+            </connections>
+            <point key="canvasLocation" x="314" y="71.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="circle_4.png" width="100" height="100"/>
+        <image name="done_button_new.png" width="70" height="28"/>
+        <image name="ovel.png" width="1011" height="158"/>
+        <image name="popup.png" width="700" height="458"/>
+        <image name="process_arrow_black.png" width="110" height="35"/>
+        <image name="search_bar.png" width="658" height="60"/>
+    </resources>
+</document>

@@ -8,15 +8,32 @@
 
 #import <UIKit/UIKit.h>
 #import "advanceDocumentTile.h"
-@interface advanceDocumentsViewClass : UIView<UITextViewDelegate>
+#import "AppDelegate.h"
+#import "connectionclass.h"
+#import "advanceDocumentTile.h"
+#import "settingsViewController.h"
+@interface advanceDocumentsViewClass : UIView<UITextViewDelegate,headerprotocol>
 {
     advanceDocumentTile *accordion;
+    AppDelegate *app;
 }
-@property(nonatomic,retain)IBOutlet UILabel *leaveNameLabel;
-@property(nonatomic,retain)IBOutlet UILabel *leaveTypeLabel;
+
+@property(nonatomic,retain)connectionclass *myconnection;
+@property(nonatomic,retain)IBOutlet UIScrollView *scrollView;
+@property(nonatomic,retain)IBOutlet UITextField *activeField;
+@property(nonatomic,retain)IBOutlet UILabel *advanceLabel;
+@property(nonatomic,retain)NSString *modifiedDate;
 @property(nonatomic,retain)IBOutlet UITextView *declarationText;
 @property(nonatomic,retain)IBOutlet UIView *declarationView;
+@property(nonatomic,retain)IBOutlet UIButton *plusButton;
+@property(nonatomic,retain)IBOutlet UIButton *doneButton;
+@property(nonatomic,retain)IBOutlet UIButton *cancelButton;
+-(void)enable;
+-(void)disable;
+-(IBAction)AddNewTile:(id)sender;
 -(IBAction)doneButtonAction:(id)sender;
 -(IBAction)cancelButtonAction:(id)sender;
+@property(nonatomic,assign)int alertFlag;
+
 
 @end

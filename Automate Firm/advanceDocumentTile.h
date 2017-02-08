@@ -7,20 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "AppDelegate.h"
+#import "connectionclass.h"
 @class advanceDocumentTile;
 @protocol AccordionViewDelegate <NSObject>
 @optional
 - (void)accordion:(advanceDocumentTile *)accordion didChangeSelection:(NSIndexSet *)selection;
 @end
 
-@interface advanceDocumentTile : UIView <UIScrollViewDelegate> {
+@interface advanceDocumentTile : UIView <UIScrollViewDelegate,headerprotocol> {
     NSMutableArray *views;
     NSMutableArray *headers;
     NSMutableArray *originalSizes;
     int flag;
     int selectedIndexValue;
     int deleteflag;
+    AppDelegate *myappde;
 }
 -(void)addaccordianview;
 - (void)addHeader:(UIControl *)aHeader withView:(id)aView;
@@ -28,6 +30,7 @@
 - (void)setOriginalSize:(CGSize)size forIndex:(NSUInteger)index;
 - (void)scrollViewDidScroll:(UIScrollView *)aScrollView;
 
+@property(nonatomic,retain)connectionclass *myconnection;
 @property (nonatomic, strong) UIScrollView *scrollView;
 
 @property (nonatomic, assign) NSInteger selectedIndex;
@@ -43,5 +46,8 @@
 @property (nonatomic, assign)NSInteger indexvalue;
 @property(nonatomic,retain)NSMutableArray *subviewarray;
 @property(nonatomic,assign)int mytag;
+-(void)CreationoftileforUpdation:(int)count;
+-(void)addNewTileForUpdation:(int)conditionId;
+-(void)closeTile;
 
 @end

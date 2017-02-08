@@ -109,5 +109,34 @@
 
 @property(nonatomic,retain)NSMutableArray *dropbox_array;
 @property(nonatomic,assign)int dropboxFlag;
+
+
+
+
+
+
+
+
+
+
+
+@property(nonatomic,retain)NSString *docDelFlag;
+
+
+
+
+
+
+
+
+@property(nonatomic,retain)NSMutableArray *selectedDoc_array;
+
+@property(nonatomic,retain)NSMutableArray *identifyMoveingFoldersArray;
+
+@property(nonatomic,retain)NSMutableArray *pdfDisplaydataArray;
+
+@property(nonatomic,assign)NSInteger sizecalculation;
+
+@property(nonatomic,retain)NSMutableDictionary *sizeDictionarydata;
 @end
 

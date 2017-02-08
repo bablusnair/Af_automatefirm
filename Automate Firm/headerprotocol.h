@@ -114,6 +114,12 @@
 //documentationemployeefiltering
 -(void)documentationemployeefilteringdocumentResponse:(NSMutableDictionary *)filteringemployeedocumentsresponsedict;
 
+//pdfviewer
+-(void)pdfviewerdisplaydata:(id)pdfresponse;
+-(void)mailidDSendingImagesresponse:(id)mailresponse;
+-(void)printDataDocumentresponse:(id)pdfresponse;
+-(void)sizedeterminationResponse:(id)pdfresponse;
+
 //signupservice..........
 
 -(void)signupmodulesectorResponse:(id)details;

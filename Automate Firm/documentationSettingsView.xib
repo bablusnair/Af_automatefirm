@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Oxygen-Regular.ttf">
+            <string>Oxygen-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -48,11 +53,12 @@
                             </connections>
                         </tableView>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dkb-BF-Kmc">
-                            <frame key="frameInset" minX="2" minY="530" width="268" height="35"/>
+                            <frame key="frameInset" minX="17" minY="530" width="268" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Oxygen-Regular" family="Oxygen" pointSize="15"/>
                             <inset key="titleEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <connections>
-                                <action selector="createAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="9Rh-UI-eEZ"/>
+                                <action selector="createAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Lbw-ec-2gx"/>
                             </connections>
                         </button>
                     </subviews>
@@ -62,7 +68,7 @@
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="addNewButton" destination="dkb-BF-Kmc" id="MLr-Dx-VI4"/>
+                <outlet property="addNewButton" destination="dkb-BF-Kmc" id="a3G-xP-4cb"/>
                 <outlet property="documentsContainsView" destination="zf5-zC-nTK" id="Etj-AO-F7K"/>
                 <outlet property="mycollectionview" destination="Vef-Lt-gMp" id="JO5-V4-b80"/>
                 <outlet property="mytableview" destination="lXj-ot-7Sb" id="sZu-zP-f4v"/>

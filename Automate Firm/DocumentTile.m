@@ -20,6 +20,7 @@
 #import "DocumentTile.h"
 #import "AppDelegate.h"
 #import "settingsViewController.h"
+#import "leaveDocumentsClass.h"
 @implementation DocumentTile
 
 @synthesize selectedIndex, isHorizontal, animationDuration, animationCurve;
@@ -33,6 +34,9 @@
     
     myappde=(AppDelegate *)[[UIApplication sharedApplication]delegate];
     
+    self.myconnection=[[connectionclass alloc]init];
+    self.myconnection.mydelegate=self;
+    
     views = [NSMutableArray new];
     headers = [NSMutableArray new];
     originalSizes = [NSMutableArray new];
@@ -45,6 +49,8 @@
     //  self.delegate=self;
     self.userInteractionEnabled = YES;
     scrollView.userInteractionEnabled = YES;
+   
+    self.autoScrollToTopOnSelect=YES;//To show the opened tile to first tiles position(Top Position)
     
     animationDuration = 0.3;
     animationCurve = UIViewAnimationCurveEaseIn;
@@ -245,9 +251,15 @@
         myappde.selectedRow=selectedIndexValue;
         myappde.conditionID=[myappde.conditionIDArray objectAtIndex:selectedIndexValue];
         
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"PaperworkProtocol" object:nil];
         
-        if (allowsMultipleSelection) {
+        
+        if (allowsMultipleSelection)
+        {
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"PaperworkProtocol" object:nil];
+            leaveDocumentsClass *ob = (leaveDocumentsClass *)self.superview.superview;
+            [ob disable];
+            
+            
             
             allowsMultipleSelection=NO;
             self.startsClosed=YES;
@@ -281,12 +293,17 @@
             }
             
             if (([selectionIndexes firstIndex] == [sender tag]) && self.allowsEmptySelection) {
-                
+                //Close
+                leaveDocumentsClass *ob = (leaveDocumentsClass *)self.superview.superview;
+                [ob enable];
                 [self setSelectionIndexes:[NSIndexSet indexSet]];
                 
             }
             else {
-                
+                //Open
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"PaperworkProtocol" object:nil];
+                leaveDocumentsClass *ob = (leaveDocumentsClass *)self.superview.superview;
+                [ob disable];
                 [self setSelectedIndex:[sender tag]];
             }
         }
@@ -304,6 +321,16 @@
                                                        self.startsClosed=YES;
                                                        //AppDelegate *myappde =(AppDelegate *)[[UIApplication sharedApplication]delegate];
                                                        myappde.warningflag=0;
+                                                       myappde.designationFlag=0;
+                                                       myappde.designationFlag1=myappde.designationFlag2=myappde.designationFlag3=myappde.designationFlag4=myappde.designationFlag5=0;
+                                                       myappde.specificEmployeeFlag1=myappde.specificEmployeeFlag2=myappde.specificEmployeeFlag3=myappde.specificEmployeeFlag4=myappde.specificEmployeeFlag5=0;
+                                                       for (int i=0; i<[headers count]; i++) {
+                                                           UIButton *mybutton=[headers objectAtIndex:i];
+                                                           [mybutton setUserInteractionEnabled:TRUE];
+                                                       }
+                                                       leaveDocumentsClass *ob = (leaveDocumentsClass *)self.superview.superview;
+                                                       [ob enable];
+                                                       
                                                    }];
         [alert addAction:ok];
         UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
@@ -315,7 +342,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            [(settingsViewController *)[self.superview.superview.superview.superview.superview nextResponder] presentViewController:alert animated:YES completion:nil];
+            [(settingsViewController *)[self.superview.superview.superview.superview.superview.superview nextResponder] presentViewController:alert animated:YES completion:nil];
         });
         
         
@@ -480,17 +507,20 @@
         UIButton *mybutton=[headers objectAtIndex:i];
         [mybutton setUserInteractionEnabled:TRUE];
     }
+    leaveDocumentsClass *ob = (leaveDocumentsClass *)self.superview.superview;
+    [ob enable];
 }
 -(void)deletetile:(UILongPressGestureRecognizer *)sender
 {
-    if (headers.count > 1)
+    UIButton *btn = (UIButton*)sender.view;
+    mytag=btn.tag;
+    if ((headers.count > 1)&&(!([[myappde.conditionIDArray objectAtIndex:mytag]isEqualToString:@"0"])))
     {
-        UIButton *btn = (UIButton*)sender.view;
-        mytag=btn.tag;
+       
         NSLog(@"%i",mytag);
         // indexvalue=selectedIndex;
         UIButton *mybutton=[headers objectAtIndex:mytag];
-        UIButton *closebutton = [[UIButton alloc] initWithFrame:CGRectMake(560, 0, 39, 29)];
+        UIButton *closebutton = [[UIButton alloc] initWithFrame:CGRectMake(560, 0, 39, 25)];
         [closebutton setImage:[UIImage imageNamed:@"close.png"] forState:UIControlStateNormal];
         closebutton.contentEdgeInsets = UIEdgeInsetsMake(-2,-3,-2,-2);
         closebutton.tag=100;
@@ -510,17 +540,26 @@
                                                handler:^(UIAlertAction * action){
                                                    self.startsClosed=YES;
                                                    
-                                                   [self removeHeaderAtIndex:mytag];
-                                                   [self renamefunction];
-                                                   flag--;
-                                                   if (!(self.indexvalue==0)) {
-                                                       self.indexvalue--;
+                                                  // AppDelegate *myappde =(AppDelegate *)[[UIApplication sharedApplication]delegate];
+                                                   
+                                                   if (!([[myappde.conditionIDArray objectAtIndex:mytag]isEqualToString:@"0"])) {
+                                                       [self.myconnection deletePaperworkProtocol:myappde.ruleID :[myappde.conditionIDArray objectAtIndex:mytag] :@"leave"];
                                                    }
+                                                   
+                                                   
+                                                   [myappde.conditionIDArray removeObjectAtIndex:mytag];
+                                                   myappde.conditionCount--;
                                                    
                                                    deleteflag=0;
                                                    for (int i=0; i<[headers count]; i++) {
                                                        UIButton *mybutton=[headers objectAtIndex:i];
                                                        [mybutton setUserInteractionEnabled:TRUE];
+                                                   }
+                                                   [self removeHeaderAtIndex:mytag];
+                                                   [self renamefunction];
+                                                   flag--;
+                                                   if (!(self.indexvalue==0)) {
+                                                       self.indexvalue--;
                                                    }
                                                    
                                                }];
@@ -530,6 +569,7 @@
                                                        //Do Some action here
                                                        if (deleteflag==1) {
                                                            UIButton *mybutton=(UIButton *)[headers objectAtIndex:mytag];
+                                                           
                                                            
                                                            for (UIView *myview in mybutton.subviews) {
                                                                if ([myview isKindOfClass:[UIButton class]]) {
@@ -544,7 +584,7 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        [(settingsViewController *)[self.superview.superview.superview.superview.superview nextResponder] presentViewController:alert animated:YES completion:nil];
+        [(settingsViewController *)[self.superview.superview.superview.superview.superview.superview nextResponder] presentViewController:alert animated:YES completion:nil];
     });
     
 }
@@ -630,12 +670,15 @@
             UIButton *mybutton=[headers objectAtIndex:i];
             [mybutton setUserInteractionEnabled:TRUE];
         }
-       // doc *ob = (expenseReimbursementSettingsViewClass *)self.superview;
-       // [ob enable];
+        leaveDocumentsClass *ob = (leaveDocumentsClass *)self.superview.superview;
+        [ob enable];
     });
     
 }
-
+-(void)serviceGotResponse:(id)responseData
+{
+    myappde.docDelFlag=@"1";
+}
 
 
 

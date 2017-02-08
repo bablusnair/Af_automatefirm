@@ -19,20 +19,27 @@
 -(void)awakeFromNib
 {
     [super awakeFromNib];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"FDoc" forKey:@"CorrectView"];
     self.myconnection=[[connectionclass alloc]init];
     self.myconnection.mydelegate=self;
-    
+    self.app.sizecalculation=0;
      self.obj=[[commonFunctionsCallClass alloc]init];
     
     [self.myconnection filterlistingaction:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"]];
 
     [self.myconnection documentationList:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"]];
     self.folderFlag=0;
-     self.documentDictionary=[[NSMutableDictionary alloc]init];
+    self.flagvalue=0;
+    self.sizevalues=0;
+    
+    self.documentDictionary=[[NSMutableDictionary alloc]init];
+    
     self.documentdict=[[NSMutableDictionary alloc] init];
     
-     self.saveingDictionary=[[NSMutableDictionary alloc] init];
+    self.saveingDictionary=[[NSMutableDictionary alloc] init];
     
+    self.maincreativedictionary=[[NSMutableDictionary alloc] init];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(upperbuttonchaneges) name:@"buttondisabledfunction" object:Nil];
     
@@ -70,9 +77,13 @@
     
      self.foldernamesdict=[[NSMutableDictionary alloc] init];
     
+    self.filterdict=[[NSMutableDictionary alloc] init];
+    
     self.selectedarray=[[NSMutableArray alloc] init];
     
     self.customfoldernamesarray=[[NSMutableArray alloc] init];
+    
+    self.settingsFolderIdarray=[[NSMutableArray alloc] init];
     
     self.CustomFolderarray=[[NSMutableArray alloc] init];
     
@@ -92,7 +103,7 @@
     
     self.printbutton.userInteractionEnabled=FALSE;
     
-    self.emailbutton.userInteractionEnabled=FALSE;
+    //self.emailbutton.userInteractionEnabled=FALSE;
     
     
 //    self.dictarray5=[[NSMutableArray alloc] initWithObjects:dict1124,dict2124,dict3124,dict4124,dict5124,dict6124,dict7124, nil];
@@ -111,6 +122,9 @@
     [self.tableView registerClass:[documentationfronttablecellviewclass class] forCellReuseIdentifier:@"ContainerTableCell"];
     
      self.app=(AppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    [self.app.documentarray removeAllObjects];
+    [self.app.selectedDoc_array removeAllObjects];
     
    // self.app.dropboxFlag=1;
     //NSLog(@"%d",self.app.dropboxFlag);
@@ -290,7 +304,11 @@
                 }
                 else
                 {
-                    [textField resignFirstResponder];
+                    
+                    if (!(self.flagvalue==1)) {
+                        
+                         [textField resignFirstResponder];
+                    }
                     
                     self.folderFlag=0;
                 }
@@ -303,8 +321,11 @@
     {
         CGPoint buttonPosition = [textField convertPoint:CGPointZero toView:self.tableView];
         
+         if (self.flagvalue==1) {
+             
         [self.tableView setContentOffset:CGPointMake(0, buttonPosition.y) animated:YES];
         
+        }
     }
 
 }
@@ -329,21 +350,76 @@
         else
             return NO;
     }
-    else
-        return  YES;
-}
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    if (textField==self.renameTextField) {
-        self.renameView.frame=CGRectMake(self.renameView.frame.origin.x, 200, self.renameView.frame.size.width, self.renameView.frame.size.height);
+    else if(textField==self.searchfield)
+        
+    {
+        
+        if ([string isEqualToString:@""] && textField.text.length==1) {
+            
+            self.flagvalue=0;
+            
+        }
+        else
+        {
+            self.flagvalue=1;
+            
+        }
+    
+    
+    [self.filterdict removeAllObjects];
+        
+    
+    NSSortDescriptor *sortOrder = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+    NSArray *dictioarray  = [[self.maincreativedictionary allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrder]];
+    
+    for (int i=0; i<dictioarray.count; i++) {
+        
+        NSMutableDictionary *dict=[self.maincreativedictionary objectForKey:[dictioarray objectAtIndex:i]];
+        
+        NSPredicate *bPredicate = [NSPredicate predicateWithFormat:@"SELF beginswith[c] %@",[textField.text stringByReplacingCharactersInRange:range withString:string]];
+        
+        NSDictionary *whiteDictionary = [dict dictionaryWithValuesForKeys:[dict.allKeys filteredArrayUsingPredicate:bPredicate]];
+        
+        [self.filterdict setObject:whiteDictionary forKey:[dictioarray objectAtIndex:i]];
+        
     }
+    NSInteger countvalue=[[self.filterdict copy] count];
+    
+    for (int i=0; i<countvalue; i++) {
+        
+        NSMutableDictionary *dict = [self.filterdict objectForKey:[dictioarray objectAtIndex:i]];
+        
+        if(!(dict.count>0)) {
+            
+            [self.filterdict removeObjectForKey:[dictioarray objectAtIndex:i]];
+        }
+        
+    }
+    
+    
+    [self.tableView reloadData];
+        
     return  YES;
 }
--(BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
-    self.renameView.frame=CGRectMake(self.renameView.frame.origin.x, 227, self.renameView.frame.size.width, self.renameView.frame.size.height);
+    
+ else
+ 
     return  YES;
+ 
 }
+//-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+//{
+//    if (textField==self.renameTextField) {
+//        self.renameView.frame=CGRectMake(self.renameView.frame.origin.x, 200, self.renameView.frame.size.width, self.renameView.frame.size.height);
+//    }
+//    [textField becomeFirstResponder];
+//    return  YES;
+//}
+//-(BOOL)textFieldShouldEndEditing:(UITextField *)textField
+//{
+//    self.renameView.frame=CGRectMake(self.renameView.frame.origin.x, 227, self.renameView.frame.size.width, self.renameView.frame.size.height);
+//    return  YES;
+//}
 -(void)textFieldDidChange:(UIButton *)sender
 {
     
@@ -368,7 +444,11 @@
                 
                 NSMutableDictionary *dict =[[NSMutableDictionary alloc] init];
                 [dict setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] forKey:@"o_id"];
-                [dict setObject:textField.text forKey:@"folder_name"];
+                NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en-US"];
+                NSString *firstChar = [textField.text substringToIndex:1];
+                NSString *folded = [firstChar stringByFoldingWithOptions:NSDiacriticInsensitiveSearch locale:locale];
+                NSString *result = [[folded uppercaseString] stringByAppendingString:[textField.text substringFromIndex:1]];
+                [dict setObject:result forKey:@"folder_name"];
                 [dict setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"myfolderId"] forKey:@"id"];
                 
                 [self.myconnection addnewDocumentationfolder:dict];
@@ -424,15 +504,26 @@
 
     }
     
-    [self.tableView setContentOffset:CGPointMake(0,0) animated:YES];
-    
+  
+    [textField resignFirstResponder];
+      [self.tableView setContentOffset:CGPointMake(0,0) animated:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
     if (tableView==self.tableView) {
         
-        return [self.documentdict count];
+        if (self.flagvalue==0) {
+            
+            
+            return [self.documentdict count];
+        }
+        else
+        {
+            
+            return [self.filterdict count];
+        }
+
     }
     else
     {
@@ -479,7 +570,6 @@
         
         static NSString *simpleTableIdentifier = @"ContainerTableCell";
         
-        
         documentationfronttablecellviewclass *cell = (documentationfronttablecellviewclass *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
         
         
@@ -490,6 +580,8 @@
             cell = [nib objectAtIndex:0];
             
         }
+        
+         if (self.flagvalue==0) {
         
         NSSortDescriptor *sortOrder = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
         NSMutableArray *dictarray  = [[[self.documentdict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrder]] mutableCopy];
@@ -517,6 +609,36 @@
 
         
         [cell setCollectionData:sendarray];
+             
+        
+       }
+        else
+        {
+            
+            NSSortDescriptor *sortOrder = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+            NSArray *dictarray  = [[self.filterdict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrder]];
+            
+            
+            // NSDictionary *cellData = [self.gettinglastarray objectAtIndex:[indexPath section]];  // Note we're using section, not row here
+            
+            
+            NSDictionary *articleData = [self.filterdict objectForKey:[dictarray objectAtIndex:indexPath.section]];
+            
+            
+            NSSortDescriptor *sortOrder1 = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+            NSArray *sortedarray  = [[articleData allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrder1]];
+            
+            NSMutableArray *sendarray=[[NSMutableArray alloc] init];
+            
+            for (int i=0; i<sortedarray.count; i++) {
+                
+                [sendarray addObject:[articleData objectForKey:[sortedarray objectAtIndex:i]]];
+                
+            }
+            
+            [cell setCollectionData:sendarray];
+        
+        }
         
         return cell;
     }
@@ -688,9 +810,92 @@
         v.backgroundColor = [UIColor clearColor];
         movetableviewcellview *cell= (movetableviewcellview *)[self.movetableview cellForRowAtIndexPath:indexPath];
         cell.selectedBackgroundView = v;
-       // NSLog(@"%@",[self.foldernamesdict objectForKey:cell.customfoldername.text]);
         
-        [self.myconnection MovingCopyfunctionality:self.app.documentarray moveingfolder:[self.foldernamesdict objectForKey:cell.customfoldername.text] correspondingAction:self.actionstring];
+        
+        
+        if (![self.app.identifyMoveingFoldersArray containsObject:[self.foldernamesdict objectForKey:cell.customfoldername.text]]) {
+            
+            if ([self.actionstring isEqualToString:@"Move"]) {
+                
+                
+                NSMutableArray *checkarray=[[NSMutableArray alloc] init];
+                
+                for (int i=0; i< self.app.selectedDoc_array.count; i++)
+                {
+                    if(![self.settingsFolderIdarray containsObject:[self.app.selectedDoc_array objectAtIndex:i]])
+                    {
+                        NSLog(@"No Setting id");
+                    }
+                    else{
+                        
+                        [checkarray addObject:[self.app.selectedDoc_array objectAtIndex:i]];
+                    }
+                }
+                
+                if (!(checkarray.count>0)) {
+                    
+                    [self.myconnection MovingCopyfunctionality:self.app.selectedDoc_array moveingfolder:[self.foldernamesdict objectForKey:cell.customfoldername.text] correspondingAction:self.actionstring];
+                }
+                else
+                {
+                    
+                    UIAlertController *alert= [UIAlertController
+                                               alertControllerWithTitle:@"Setting Folder!"
+                                               message:@"Can't delete Settings Folder Document Please UnSelect the Document"
+                                               preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                               handler:^(UIAlertAction * action){
+                                                                   //Do Some action here
+                                                                   
+                                                                   self.folderslistview.hidden=TRUE;
+                                                                   
+                                                               }];
+                    [alert addAction:ok];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        [(homeViewController *)[self.superview.superview.superview nextResponder] presentViewController:alert animated:YES completion:nil];
+                    });
+                    
+                    
+                }
+                
+            }
+            else
+            {
+                
+                [self.myconnection MovingCopyfunctionality:self.app.selectedDoc_array moveingfolder:[self.foldernamesdict objectForKey:cell.customfoldername.text] correspondingAction:self.actionstring];
+                
+                
+            }
+        
+        }
+        else
+        {
+            
+            
+            
+            UIAlertController *alert= [UIAlertController
+                                       alertControllerWithTitle:@"Selected Folder!"
+                                       message:@"Can't Copy/Move Same Folder Please Select Another Folder"
+                                       preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * action){
+                                                           //Do Some action here
+                                                           
+                                                           self.folderslistview.hidden=TRUE;
+                                                           
+                                                       }];
+            [alert addAction:ok];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [(homeViewController *)[self.superview.superview.superview nextResponder] presentViewController:alert animated:YES completion:nil];
+            });
+            
+        }
         
     }
   else  if (tableView==self.workingpremisetableview) {
@@ -1154,26 +1359,42 @@
         UIImageView *iconimgview = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 25, 25)];
         
         [tableHeaderView addSubview:iconimgview];
-    
-        NSSortDescriptor *sortOrder1 = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
-        
-        NSMutableArray *sortedarray  = [[[self.documentdict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrder1]] mutableCopy];
-        
-        [sortedarray removeObject:@"signed_document"];
-        [sortedarray insertObject:@"signed_document" atIndex:0];
         
         
-        NSMutableArray *custom_array=[self.saveingDictionary objectForKey:@"custom_folder"];
-          NSMutableArray *foldelistarray=[[NSMutableArray alloc] init];
-        if (custom_array.count>0) {
+        
+        NSMutableArray *sortedarray;
+        NSMutableArray *foldelistarray;
+        
+        
+        if (self.flagvalue==0) {
             
-            for (int i=0; i<custom_array.count; i++) {
+            NSSortDescriptor *sortOrder1 = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+            
+            sortedarray  = [[[self.documentdict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrder1]] mutableCopy];
+            
+            [sortedarray removeObject:@"signed_document"];
+            [sortedarray insertObject:@"signed_document" atIndex:0];
+            
+            
+            NSMutableArray *custom_array=[self.saveingDictionary objectForKey:@"custom_folder"];
+            foldelistarray=[[NSMutableArray alloc] init];
+            
+            if (custom_array.count>0) {
                 
-                NSMutableDictionary *dict=[custom_array objectAtIndex:i];
-                [foldelistarray addObject:[dict objectForKey:@"folder"]];
+                for (int i=0; i<custom_array.count; i++) {
+                    
+                    NSMutableDictionary *dict=[custom_array objectAtIndex:i];
+                    [foldelistarray addObject:[dict objectForKey:@"folder"]];
+                    
+                }
                 
             }
+        }
+        else
+        {
+            NSSortDescriptor *sortOrder1 = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
             
+            sortedarray  = [[[self.filterdict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrder1]] mutableCopy];
         }
         
         NSString *header = [sortedarray objectAtIndex:section];
@@ -1292,13 +1513,12 @@
                                                        
                                                    }
                                                        
-                                                   if ([checkingcustomarray containsObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"DeletedfolderTextvalue"]]) {
+                                                   if ([checkingcustomarray containsObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"DeletedfolderTextvalue"]])
+                                                   {
                                                        
                                                          NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"DeletedfolderID"]);
                                                        
-                                                       
-                                                       
-                                                       
+                                                       [self.myconnection DocumentationMainFolderdeletion:[[NSUserDefaults standardUserDefaults] objectForKey:@"DeletedfolderID"]];
                                                        
                                                        
                                                    }
@@ -1367,7 +1587,7 @@
 
 -(IBAction)adddnewsession:(id)sender
 {
-    NSLog(@"%@",self.documentdict);
+  //  NSLog(@"%@",self.documentdict);
     
     UIButton *mybutton =(UIButton *)sender;
     
@@ -1384,8 +1604,10 @@
         if ([[self.documentdict allKeys]containsObject:self.Folderstring]) {
             
           
-           NSInteger lastChar = [[self.Folderstring substringFromIndex:[self.Folderstring length] - 1] integerValue];
-        
+            
+            NSArray *array=[self.Folderstring componentsSeparatedByString:@" "];
+            NSInteger lastChar = [[array lastObject] integerValue];
+            
            lastChar++;
             
           // NSLog(@"%d",lastChar);
@@ -1570,10 +1792,10 @@
     
         [pdfDict setObject:image64BaseString forKey:@"image_doc"];
         [pdfDict setObject:@"0" forKey:@"doc_id"];
-        [pdfDict setObject:[NSString stringWithFormat:@"image %@.png",str] forKey:@"file_name"];
+        [pdfDict setObject:[NSString stringWithFormat:@"Document %@.png",str] forKey:@"file_name"];
         [imageArray addObject:pdfDict];
     
-        [self.documentDictionary setObject:imageArray forKey:@"custom_documents"];
+        [self.documentDictionary setObject:imageArray forKey:@"0"];
     
         [picker dismissViewControllerAnimated:YES completion:NULL];
     
@@ -1595,7 +1817,14 @@
     [vc performSegueWithIdentifier:@"dropbox" sender:nil];
     
 }
-
+-(IBAction)signatureButtonAction:(id)sender
+{
+    if (self.app.sizeDictionarydata.count>0) {
+        
+         [self.myconnection sizedeterminationFunctionality:self.app.sizeDictionarydata];
+    }
+   
+}
 -(IBAction)uploadaction:(id)sender
 {
     if (self.y1%2==0) {
@@ -1675,19 +1904,25 @@
 {
     AppDelegate *myappde =(AppDelegate *)[[UIApplication sharedApplication]delegate];
     [myappde.documentarray removeAllObjects];
-    
+    myappde.sizecalculation=0;
+    [self.app.selectedDoc_array removeAllObjects];
     [self upperbuttonoldchanges];
+    [myappde.sizeDictionarydata removeAllObjects];
     [self.tableView reloadData];
 }
 
 -(void)documentationFrontscreenlistingService:(NSMutableDictionary *)listingdocuments
 {
-    
+    [self.app.sizeDictionarydata removeAllObjects];
+    self.app.sizecalculation=0;
+    [self.app.selectedDoc_array removeAllObjects];
+    [self.app.documentarray removeAllObjects];
     [self.documentdict removeAllObjects];
     [self.foldernamesdict removeAllObjects];
     [self.CustomFolderarray removeAllObjects];
     [self.customfoldernamesarray removeAllObjects];
-    
+    [self.settingsFolderIdarray removeAllObjects];
+    [self.app.identifyMoveingFoldersArray removeAllObjects];
     
     NSMutableArray *dictarray = [listingdocuments objectForKey:@"document_folder"];
     NSLog(@"%lu",(unsigned long)dictarray.count);
@@ -1707,16 +1942,32 @@
            
             NSMutableDictionary *dictionary=[[NSMutableDictionary alloc] init];
             
+            NSMutableDictionary *ForFilterdictionary=[[NSMutableDictionary alloc] init];
+            
+            NSMutableDictionary *mydocdict;
+            
             for (int j=0; j<array.count; j++) {
             
                 
-               NSMutableDictionary *mydocdict=[array objectAtIndex:j];
+               mydocdict=[array objectAtIndex:j];
+                
+                
+                if (![self.settingsFolderIdarray containsObject:[mydocdict objectForKey:@"id"]]) {
+                    
+                    [self.settingsFolderIdarray addObject:[mydocdict objectForKey:@"id"]];
+                }
                
                 [dictionary setObject:mydocdict forKey:[mydocdict objectForKey:@"emp_id"]];
+                
+                [ForFilterdictionary setObject:mydocdict forKey:[NSString stringWithFormat:@"%@%@",[mydocdict objectForKey:@"emp_name"],[mydocdict objectForKey:@"emp_id"]]];
             
             }
             
             [self.documentdict setObject:dictionary forKey:[mydict objectForKey:@"folder"]];
+            
+             [self.maincreativedictionary setObject:dictionary forKey:[mydict objectForKey:@"folder"]];
+            
+             [self.maincreativedictionary setObject:ForFilterdictionary forKey:[NSString stringWithFormat:@"%@%@",[mydict objectForKey:@"folder"],@" "]];
         }
         else
         {
@@ -1746,11 +1997,13 @@
                  
                  NSMutableDictionary *mydocdict=[mysignearray objectAtIndex:j];
                  
-                 [dictionary setObject:mydocdict forKey:[mydocdict objectForKey:@"emp_id"]];
+                 [dictionary setObject:mydocdict forKey:[mydocdict objectForKey:@"file_name"]];//lastmodifieddate....
                  
              }
              
              [self.documentdict setObject:dictionary forKey:@"signed_document"];
+              [self.maincreativedictionary setObject:dictionary forKey:[mydict objectForKey:@"file_name"]];
+             
          }
          else
          {
@@ -1799,6 +2052,8 @@
             }
             
             [self.documentdict setObject:dictionary forKey:[mydict objectForKey:@"folder"]];
+            
+            [self.maincreativedictionary setObject:dictionary forKey:[mydict objectForKey:@"folder"]];
     }
         else
         {
@@ -1838,8 +2093,10 @@
         
         for (int i=0; i<folderarray.count; i++) {
             
-            NSInteger lastChar = [[[folderarray objectAtIndex:i] substringFromIndex:[[folderarray objectAtIndex:i] length] - 1] integerValue];
-            
+           // NSInteger lastChar = [[[folderarray objectAtIndex:i] substringFromIndex:[[folderarray objectAtIndex:i] length] - 1] integerValue];
+            NSArray *array=[[folderarray objectAtIndex:i] componentsSeparatedByString:@" "];
+            NSInteger lastChar = [[array lastObject] integerValue];
+           
             [numbicdict setObject:@"values" forKey:[NSString stringWithFormat:@"%ld",(long)lastChar]];
             
         }
@@ -1861,6 +2118,8 @@
     
     NSLog(@"%@",self.Folderstring);
     
+  //  [[NSUserDefaults standardUserDefaults] setObject:self.settingsFolderIdarray forKey:@"SettingsfolderIds"];
+    //[[NSUserDefaults standardUserDefaults] synchronize];
     dispatch_async(dispatch_get_main_queue(), ^{
         
         [self.tableView reloadData];
@@ -1881,6 +2140,23 @@
     UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
                                                handler:^(UIAlertAction * action){
                                                    //Do Some action here
+                                                   
+                                                      [self.app.sizeDictionarydata removeAllObjects];
+                                                    [self.folderbutton setImage:[UIImage imageNamed:@"folder_plusfrfr.png"] forState:UIControlStateNormal];
+                                                      self.y1=0;
+                                                      self.y=0;
+                                                   [self.app.selectedDoc_array removeAllObjects];
+                                                    self.signaturebutton.hidden=TRUE;
+                                                   
+                                                   self.filterflag=0;
+                                                  // self.actionstring=@"Move";
+                                                   self.moveView.hidden=TRUE;
+                                                   self.folderslistview.hidden=TRUE;
+                                                   self.filterviews.hidden=TRUE;
+                                                   self.deletebutton.hidden=TRUE;
+                                                   self.app.sizecalculation=0;
+                                                   [self upperbuttonoldchanges];
+                                                   
                                                }];
     [alert addAction:ok];
     
@@ -1921,7 +2197,7 @@
                 [pdfDict setObject:@"0" forKey:@"doc_id"];
                 [pdfDict setObject:fileName forKey:@"file_name"];
                 [imageArray addObject:pdfDict];
-                [self.documentDictionary setObject:imageArray forKey:@"custom_documents"];
+                [self.documentDictionary setObject:imageArray forKey:@"0"];
             
             
             
@@ -1964,7 +2240,7 @@
         }
     
     
-    [self.documentDictionary setObject:imageArray forKey:@"custom_documents"];
+    [self.documentDictionary setObject:imageArray forKey:@"0"];
     
     [self.myconnection customfolderAddnewdocuments:[[NSUserDefaults standardUserDefaults] objectForKey:@"storeCustomfolderId"] documentsdict:self.documentDictionary];
     
@@ -2030,11 +2306,54 @@
         
         self.filterviews.hidden=FALSE;
         self.folderFlag++;
+        
+        
+        
+      
+        //
+        //    self.frame=CGRectMake(9, 116, self.frame.size.width, self.frame.size.height);
+        //
+        //    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(-350, -300, 1300, 1000)];
+        //
+        //    self.layer.masksToBounds = NO;
+        //
+        //    self.layer.shadowColor = [UIColor blackColor].CGColor;
+        //
+        //    //  self.layer.shadowOffset = CGSizeMake(0.0f, 5.0f);
+        //
+        //    self.layer.shadowOpacity = 0.5f;
+        //
+        //    self.layer.shadowPath = shadowPath.CGPath;
+        
+        self.filtertableView1.hidden=TRUE;
+        self.workingpremisetableview.hidden=FALSE;
+        self.departmenttableview.hidden=TRUE;
+        self.categorytableview.hidden=TRUE;
+        
+        
+        
+        [self.workingpremisebutton setImage:[UIImage imageNamed:@"work_premise_red.png"] forState:UIControlStateNormal];
+        [self.departmentbutton setImage:[UIImage imageNamed:@"dept_blue.png"] forState:UIControlStateNormal];
+        [self.categorybutton setImage:[UIImage imageNamed:@"category_blue.png"] forState:UIControlStateNormal];
+        [self.designationbutton setImage:[UIImage imageNamed:@"salesman_blue.png"] forState:UIControlStateNormal];
+        
+
     }
     else
     {
         self.filterviews.hidden=TRUE;
         self.folderFlag++;
+        
+        
+        self.filtertableView1.hidden=TRUE;
+        self.workingpremisetableview.hidden=TRUE;
+        self.departmenttableview.hidden=TRUE;
+        self.categorytableview.hidden=TRUE;
+        
+        [self.workingpremisebutton setImage:[UIImage imageNamed:@"work_premise_blue.png"] forState:UIControlStateNormal];
+        [self.departmentbutton setImage:[UIImage imageNamed:@"dept_blue.png"] forState:UIControlStateNormal];
+        [self.categorybutton setImage:[UIImage imageNamed:@"category_blue.png"] forState:UIControlStateNormal];
+        [self.designationbutton setImage:[UIImage imageNamed:@"salesman_blue.png"] forState:UIControlStateNormal];
     }
 }
 
@@ -2043,6 +2362,8 @@
     self.filterviews.hidden=TRUE;
     self.folderFlag=0;
 
+    
+    [self.myconnection filteringEmployeeDocumentsInDocumentFrontscreen:self.office_servicesendarray storearray:self.store_servicesendarray departArray:self.department_servicesendarray catearray:self.category_servicesendarray designation:self.designation_servicesendarray officeid:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"]];
 }
 
 -(void)allEmployeeFilterResponse:(NSMutableDictionary *)responsedict
@@ -2055,7 +2376,10 @@
         [self.departmentarray removeAllObjects];
         [self.categoryarray removeAllObjects];
         [self.designationarray removeAllObjects];
-        
+        [self.selectedarray1 removeAllObjects];
+        [self.selectedarray2 removeAllObjects];
+        [self.selectedarray3 removeAllObjects];
+        [self.selectedarray4 removeAllObjects];
         
         NSMutableArray *office_array = [responsedict objectForKey:@"office"];
         
@@ -2094,7 +2418,7 @@
             
             NSMutableDictionary *dict = [category_array objectAtIndex:i];
             [self.categoryarray addObject:[dict objectForKey:@"cat_name"]];
-            [self.categoryfilterdictionary setObject:[dict objectForKey:@"id"] forKey:[dict objectForKey:@"cat_name"]];
+            [self.categoryfilterdictionary setObject:[dict objectForKey:@"cat_id"] forKey:[dict objectForKey:@"cat_name"]];
             
         }
         
@@ -2254,20 +2578,349 @@
 
 -(void)documentationemployeefilteringdocumentResponse:(NSMutableDictionary *)filteringemployeedocumentsresponsedict
 {
-    
     NSLog(@"%@",filteringemployeedocumentsresponsedict);
+    [self.documentdict removeAllObjects];
+    
+//    [self.foldernamesdict removeAllObjects];
+//    [self.CustomFolderarray removeAllObjects];
+//    [self.customfoldernamesarray removeAllObjects];
+    
+    
+    NSMutableArray *dictarray = [filteringemployeedocumentsresponsedict objectForKey:@"document_folder"];
+    
+    NSLog(@"%lu",(unsigned long)dictarray.count);
+    
+   // [self.saveingDictionary addEntriesFromDictionary:filteringemployeedocumentsresponsedict];
+    
+    for (int i=0; i<dictarray.count; i++) {
+        
+        NSMutableDictionary *mydict=[dictarray objectAtIndex:i];
+        
+        NSMutableArray *array=[mydict objectForKey:@"thumb"];
+        
+       // [self.foldernamesdict setObject:[mydict objectForKey:@"doc_id"] forKey:[mydict objectForKey:@"folder"]];
+        
+        
+        if (array.count>0) {
+            
+            NSMutableDictionary *dictionary=[[NSMutableDictionary alloc] init];
+            
+            for (int j=0; j<array.count; j++) {
+                
+                
+                NSMutableDictionary *mydocdict=[array objectAtIndex:j];
+                
+                [dictionary setObject:mydocdict forKey:[mydocdict objectForKey:@"emp_id"]];
+                
+            }
+            
+            [self.documentdict setObject:dictionary forKey:[mydict objectForKey:@"folder"]];
+        }
+        else
+        {
+            NSMutableDictionary *dictionary2=[[NSMutableDictionary alloc] init];
+            
+            [self.documentdict setObject:dictionary2 forKey:[mydict objectForKey:@"folder"]];
+            
+        }
+    }
+    
+    NSMutableArray *signedarray = [filteringemployeedocumentsresponsedict objectForKey:@"signed_document"];
+    
+    if (signedarray.count>0) {
+        
+        NSMutableDictionary *mydict=[signedarray objectAtIndex:0];
+        
+        NSMutableArray *mysignearray=[mydict objectForKey:@"thumb"];
+        
+       // [self.foldernamesdict setObject:[mydict objectForKey:@"doc_id"] forKey:@"signed_document"];
+        
+        if (mysignearray.count>0) {
+            
+            NSMutableDictionary *dictionary=[[NSMutableDictionary alloc] init];
+            
+            for (int j=0; j<mysignearray.count; j++) {
+                
+                
+                NSMutableDictionary *mydocdict=[mysignearray objectAtIndex:j];
+                
+                [dictionary setObject:mydocdict forKey:[mydocdict objectForKey:@"emp_id"]];
+                
+            }
+            
+            [self.documentdict setObject:dictionary forKey:@"signed_document"];
+        }
+        else
+        {
+            
+            NSMutableDictionary *dictionary2=[[NSMutableDictionary alloc] init];
+            
+            [self.documentdict setObject:dictionary2 forKey:@"signed_document"];
+            
+            //  [self.foldernamesdict setObject:@"100" forKey:[mydict objectForKey:@"signed_document"]];
+        }
+        
+    }
+    else
+    {
+        NSMutableDictionary *dictionary2=[[NSMutableDictionary alloc] init];
+        
+        [self.documentdict setObject:dictionary2 forKey:@"signed_document"];
+        
+       // [self.foldernamesdict setObject:@"100" forKey:@"signed_document"];
+        
+    }
+    
+    NSMutableArray *customdictarray = [filteringemployeedocumentsresponsedict objectForKey:@"custom_folder"];
+    
+    NSLog(@"%lu",(unsigned long)dictarray.count);
+    
+    for (int i=0; i<customdictarray.count; i++) {
+        
+        NSMutableDictionary *mydict=[customdictarray objectAtIndex:i];
+        NSMutableArray *array=[mydict objectForKey:@"thumb"];
+        [self.foldernamesdict setObject:[mydict objectForKey:@"cus_id"] forKey:[mydict objectForKey:@"folder"]];
+        [self.customfoldernamesarray addObject:[mydict objectForKey:@"folder"]];
+        
+        if (array.count>0) {
+            
+            NSMutableDictionary *dictionary=[[NSMutableDictionary alloc] init];
+            
+            for (int j=0; j<array.count; j++) {
+                
+                NSMutableDictionary *mydocdict=[array objectAtIndex:j];
+                
+                [dictionary setObject:mydocdict forKey:[mydocdict objectForKey:@"file_name"]];
+                
+            }
+            
+            [self.documentdict setObject:dictionary forKey:[mydict objectForKey:@"folder"]];
+        }
+        else
+        {
+            
+            NSMutableDictionary *dictionary2=[[NSMutableDictionary alloc] init];
+            
+            [self.documentdict setObject:dictionary2 forKey:[mydict objectForKey:@"folder"]];
+        }
+    }
+    
+    NSMutableArray *folderarray=[[NSMutableArray alloc] init];
+    
+    for (int i=0; i<[self.documentdict allKeys].count; i++) {
+        
+        NSString *checkstring=[[self.documentdict allKeys] objectAtIndex:i];
+        
+        if ([checkstring rangeOfString:@"New Folder"].location == NSNotFound) {
+            //  NSLog(@"string does not contain bla");
+        }
+        else {
+            // NSLog(@"string contains bla!");
+            [folderarray addObject:checkstring];
+        }
+    }
+    
+    if (folderarray.count>0) {
+        
+        NSMutableDictionary *numbicdict= [[NSMutableDictionary alloc] init];
+        
+        for (int i=0; i<folderarray.count; i++) {
+            
+            NSInteger lastChar = [[[folderarray objectAtIndex:i] substringFromIndex:[[folderarray objectAtIndex:i] length] - 1] integerValue];
+            
+            [numbicdict setObject:@"values" forKey:[NSString stringWithFormat:@"%ld",(long)lastChar]];
+        }
+        
+        NSArray *numbicarray=[[NSArray alloc] init];
+        
+        numbicarray=[numbicdict allKeys];
+        
+        numbicarray = [numbicarray sortedArrayUsingComparator:^(id str1, id str2){
+            return [(NSString *)str1 compare:(NSString *)str2 options:NSNumericSearch];
+        }];
+        
+        self.Folderstring=[NSString stringWithFormat:@"New Folder %@",[numbicarray lastObject]];
+    }
+    else
+    {
+        self.Folderstring=@"New Folder 1";
+    }
+    
+    
+    NSLog(@"%@",self.Folderstring);
+    
+   // [[NSUserDefaults standardUserDefaults] setObject:self.settingsFolderIdarray forKey:@"SettingsFolderIDS"];
+   // [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self.tableView reloadData];
+       
+    });
     
 }
 
 -(IBAction)deletedDocumentsInfrontscreen:(id)sender
 {
-     NSLog(@"%@",self.app.documentarray);
+    //NSLog(@"%@",self.app.documentarray);
     
-    if (self.app.documentarray.count>0) {
-        
-        [self.myconnection deletedDocumentsinDocumentationfrontscreen:self.app.documentarray];
-       
+    NSMutableArray *checkarray=[[NSMutableArray alloc] init];
+    
+    for (int i=0; i< self.app.selectedDoc_array.count; i++)
+    {
+        if(![self.settingsFolderIdarray containsObject:[self.app.selectedDoc_array objectAtIndex:i]])
+        {
+            NSLog(@"No Setting id");
+        }
+        else{
+            
+            [checkarray addObject:[self.app.selectedDoc_array objectAtIndex:i]];
+        }
     }
     
+    if (!(checkarray.count>0)) {
+        
+         [self.myconnection deletedDocumentsinDocumentationfrontscreen:self.app.selectedDoc_array];
+    }
+    else
+    {
+        
+        UIAlertController *alert= [UIAlertController
+                                   alertControllerWithTitle:@"Setting Folder!"
+                                   message:@"Can't delete Settings Folder Document Please UnSelect the Document"
+                                   preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action){
+                                                       //Do Some action here
+                                                       
+                                                       self.folderslistview.hidden=TRUE;
+                                                       
+                                                   }];
+        [alert addAction:ok];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [(homeViewController *)[self.superview.superview.superview nextResponder] presentViewController:alert animated:YES completion:nil];
+        });
+
+    }
+
 }
+- (IBAction)mailViewOpenAction:(id)sender {
+    
+    UIView *view=[[[NSBundle mainBundle]loadNibNamed:@"docMailView" owner:self options:nil]objectAtIndex:0];
+    view.frame=CGRectMake(100, 10, 660, 650);
+    [self addSubview:view];
+
+}
+
+-(IBAction)printbuttonaction:(id)sender
+{
+    
+    UIImage *image  = [UIImage imageNamed:@"document-thumbnail.jpg"];
+    NSMutableString *printBody = [NSMutableString stringWithFormat:@"%@",@"Hello World"];
+    NSArray *array = [[NSArray alloc] initWithObjects:@"Simulator Screen Shot 15-Nov-2016, 4.33.55 PM.png",@"Simulator Screen Shot 15-Nov-2016, 4.33.55 PM.png",@"Simulator Screen Shot 15-Nov-2016, 4.33.55 PM.png", nil];
+    
+    UIPrintInteractionController *pic = [UIPrintInteractionController sharedPrintController];
+    
+    //pic.delegate = self;
+    
+    UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+    
+    printInfo.outputType = UIPrintInfoOutputGeneral;
+    
+    printInfo.jobName = @"PrintJob";
+    
+    pic.printInfo = printInfo;
+    
+    pic.printingItem = image;
+    
+    pic.printingItems=array;
+    
+    UISimpleTextPrintFormatter *textFormatter = [[UISimpleTextPrintFormatter alloc] initWithText:printBody];
+    
+    textFormatter.startPage = 0;
+    
+    textFormatter.perPageContentInsets = UIEdgeInsetsMake(72.0, 72.0, 72.0, 72.0);
+    
+    textFormatter.maximumContentWidth = 6 * 72.0;
+    
+    //  pic.printFormatter = textFormatter;
+    
+    // pic.sh = YES;
+    
+    void (^completionHandler)(UIPrintInteractionController *, BOOL, NSError *) = ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
+        
+        if (!completed && error) {
+            
+            NSLog(@"Printing could not complete because of error: %@", error);
+            
+        }
+    };
+    
+    [pic presentAnimated:YES completionHandler:completionHandler];
+    
+    [self.myconnection PrintDocumentsinFrontScreen:self.app.selectedDoc_array];
+    
+}
+
+-(void)printDataDocumentresponse:(id)pdfresponse
+{
+    NSLog(@"%@",pdfresponse);
+}
+
+-(void)renameDocumentFunction:(NSString *)docid rename:(NSString *)rename
+{
+    [self.myconnection documentRenameprocessingFunctionality:docid renameVariable:rename];
+}
+
+-(IBAction)cancelbuttonaction:(id)sender
+{
+    [self.myconnection filterlistingaction:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"]];
+    
+    [self.myconnection documentationList:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"]];
+    
+    self.folderFlag=0;
+    self.filterviews.hidden=true;
+}
+
+-(void)sizedeterminationResponse:(id)pdfresponse
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSLog(@"%ld",(long)[pdfresponse integerValue]);
+        
+        NSInteger integer = [pdfresponse integerValue];
+        
+        if (integer<15000000) {
+            
+            NSArray *nib=[[NSBundle mainBundle]loadNibNamed:@"customDocumentSigningView" owner:self options:nil];
+            [self.superview addSubview:[nib objectAtIndex:0]];
+        }
+        else
+        {
+            
+            UIAlertController *alert= [UIAlertController
+                                       alertControllerWithTitle:@"Size Error"
+                                       message:@"Can't Upload more than 15MB Documents In Signature Process"
+                                       preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * action){
+                                                           
+                                                           
+                                                       }];
+            [alert addAction:ok];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [(homeViewController *)[self.superview.superview.superview nextResponder] presentViewController:alert animated:YES completion:nil];
+            });
+        }
+
+    });
+
+   }
+
 @end

@@ -10,12 +10,13 @@
 #import "AppDelegate.h"
 #import "connectionclass.h"
 
-@interface documentInnerViewClass : UIView<UITableViewDataSource,UITableViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,headerprotocol>
+@interface documentInnerViewClass : UIView<UITableViewDataSource,UITableViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UITextFieldDelegate,headerprotocol>
 {
     AppDelegate *app;
 }
 @property(nonatomic,retain)connectionclass *myconnection;
-
+@property(nonatomic,retain)IBOutlet UIScrollView *scrollView;
+@property(nonatomic,retain)IBOutlet UITextField *activeField;
 
 -(IBAction)includeDesignationAction:(id)sender;
 @property(nonatomic,retain)IBOutlet UICollectionView *mycollectionview;
@@ -61,12 +62,14 @@
 @property(nonatomic,assign)int z;
 @property(nonatomic,assign)int p;
 @property(nonatomic,assign)int q;
+//@property(nonatomic,retain)NSString *statusFlag;
+@property(nonatomic,retain)NSString *countString;
 
 @property(nonatomic,retain)NSMutableDictionary *finalDict;
 
 -(void)settingsLocalStorageValue:(NSString *)key;
 @property(nonatomic,retain)NSMutableDictionary *popupStorageDict;
-
+-(IBAction)editingChanged:(id)sender;
 
 
 @end

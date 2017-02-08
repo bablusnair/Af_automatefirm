@@ -21,4 +21,6 @@
 @property (retain, nonatomic) NSMutableDictionary *selecteddictionary;
 @property(nonatomic,retain)NSMutableArray *strorearray;
 @property(nonatomic,retain)connectionclass *myconnection;
+
+
 @end
