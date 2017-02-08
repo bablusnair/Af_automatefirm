@@ -91,6 +91,48 @@
 //    NSString *uniqueIdentifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
 //    UIDevice *device = [UIDevice currentDevice];
 //    NSString *uniqueIdentifier = [device uniqueIdentifier];
+    
+    
+    
+    
+    
+    
+    self.docDelFlag=@"0";
+    
+    
+    
+    self.selectedDoc_array=[[NSMutableArray alloc]init];
+    
+    
+    
+    self.pdfDisplaydataArray=[[NSMutableArray alloc]init];
+    
+    self.identifyMoveingFoldersArray=[[NSMutableArray alloc]init];
+    
+    
+    
+    self.advanceTileIdDict= [[NSMutableDictionary alloc] init];
+    //self.earningsTileIdDict= [[NSMutableDictionary alloc] init];
+    // self.deductionTileIdDict= [[NSMutableDictionary alloc] init];
+    self.sizecalculation=0;
+    self.advanceAmtChangeFlag=0;
+    self.appde_localdict=[[NSMutableDictionary alloc]initWithObjectsAndKeys:dict,@"0",nil];
+    self.loanupdate_dictionary = [[NSMutableDictionary alloc] init];
+    
+    
+    //  NSLog(@"%@",documentsDirectory);
+    // NSString * appBuildString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+    // NSLog(@"%@",appBuildString);
+    
+    //  NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"Autoincrementedalue"])
+    
+    self.sizeDictionarydata = [[NSMutableDictionary alloc] init];
+    
+    
+    
+    
+    
+    
    
     NSString* Identifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString]; // IOS 6+
     NSLog(@"output is : %@", Identifier);

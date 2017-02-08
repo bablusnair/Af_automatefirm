@@ -7,15 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DocumentTile.h"
-@interface fineDocumentsViewClass : UIView<UITextViewDelegate>
+#import "fineDocumentTile.h"
+#import "AppDelegate.h"
+@interface fineDocumentsViewClass : UIView<headerprotocol>
 {
-    DocumentTile *accordion;
+    fineDocumentTile *accordion;
+    AppDelegate *app;
 }
-@property(nonatomic,retain)IBOutlet UILabel *leaveNameLabel;
-@property(nonatomic,retain)IBOutlet UILabel *leaveTypeLabel;
-@property(nonatomic,retain)IBOutlet UILabel *descriptionLabel;
+@property(nonatomic,retain)connectionclass *myconnection;
+@property(nonatomic,retain)IBOutlet UIScrollView *scrollView;
+
+
+
+@property(nonatomic,retain)IBOutlet UILabel *fineNameLabel;
+@property(nonatomic,retain)NSString *modifiedDate;
+@property(nonatomic,retain)IBOutlet UIButton *plusButton;
+@property(nonatomic,retain)IBOutlet UIButton *doneButton;
+@property(nonatomic,retain)IBOutlet UIButton *cancelButton;
+-(void)enable;
+-(void)disable;
+-(IBAction)plusButtonAction:(id)sender;
 -(IBAction)doneButtonAction:(id)sender;
 -(IBAction)cancelButtonAction:(id)sender;
+
 
 @end

@@ -19,6 +19,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
+#import "connectionclass.h"
 
 @class DocumentTile;
 @protocol AccordionViewDelegate <NSObject>
@@ -26,7 +27,7 @@
 - (void)accordion:(DocumentTile *)accordion didChangeSelection:(NSIndexSet *)selection;
 @end
 
-@interface DocumentTile : UIView <UIScrollViewDelegate> {
+@interface DocumentTile : UIView <UIScrollViewDelegate,headerprotocol> {
     NSMutableArray *views;
     NSMutableArray *headers;
     NSMutableArray *originalSizes;
@@ -41,6 +42,7 @@
 - (void)setOriginalSize:(CGSize)size forIndex:(NSUInteger)index;
 - (void)scrollViewDidScroll:(UIScrollView *)aScrollView;
 
+@property(nonatomic,retain)connectionclass *myconnection;
 @property (nonatomic, strong) UIScrollView *scrollView;
 
 @property (nonatomic, assign) NSInteger selectedIndex;

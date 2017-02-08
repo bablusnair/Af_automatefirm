@@ -64,6 +64,7 @@
 @property (retain, nonatomic)IBOutlet UIButton *deletebutton;
 
 -(IBAction)deselectallbutton:(id)sender;
+-(IBAction)signatureButtonAction:(id)sender;
 
 @property (retain, nonatomic)NSMutableDictionary *documentdict;
 
@@ -144,4 +145,15 @@
 
 -(IBAction)deletedDocumentsInfrontscreen:(id)sender;
 
+@property(nonatomic,retain)NSMutableDictionary *maincreativedictionary;
+@property(nonatomic,assign)NSInteger flagvalue;
+@property (strong, nonatomic) NSMutableDictionary *filterdict;
+@property (retain, nonatomic)IBOutlet UITextField *searchfield;
+
+
+@property(nonatomic,retain)NSMutableArray *settingsFolderIdarray;
+-(IBAction)printbuttonaction:(id)sender;
+-(IBAction)cancelbuttonaction:(id)sender;
+-(void)renameDocumentFunction:(NSString *)docid rename:(NSString *)rename;
+@property(nonatomic,assign)int sizevalues;
 @end

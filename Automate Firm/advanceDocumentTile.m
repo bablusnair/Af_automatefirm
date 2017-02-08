@@ -1,15 +1,26 @@
-//
-//  advanceDocumentTile.m
-//  Automate Firm
-//
-//  Created by leonine on 11/4/16.
-//  Copyright © 2016 leonine. All rights reserved.
-//
+/*
+ AccordionView.m
+ 
+ Created by Wojtek Siudzinski on 19.12.2011.
+ Copyright (c) 2011 Appsome. All rights reserved.
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
 
 #import "advanceDocumentTile.h"
-
 #import "AppDelegate.h"
 #import "settingsViewController.h"
+#import "advanceDocumentsViewClass.h"
 @implementation advanceDocumentTile
 
 @synthesize selectedIndex, isHorizontal, animationDuration, animationCurve;
@@ -20,6 +31,9 @@
     
     flag=1;
     selectedIndexValue=-1;
+    
+    myappde=(AppDelegate *)[[UIApplication sharedApplication]delegate];
+    self.myconnection=[[connectionclass alloc]init];
     
     views = [NSMutableArray new];
     headers = [NSMutableArray new];
@@ -33,6 +47,8 @@
     //  self.delegate=self;
     self.userInteractionEnabled = YES;
     scrollView.userInteractionEnabled = YES;
+    
+    self.autoScrollToTopOnSelect=YES;//To show the opened tile to first tiles position(Top Position)
     
     animationDuration = 0.3;
     animationCurve = UIViewAnimationCurveEaseIn;
@@ -49,13 +65,17 @@
     self.allowsEmptySelection = YES;
     self.subviewarray=[[NSMutableArray alloc] init];
     
+    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"paperworkAction"]isEqualToString:@"create"]) {
+        
+        [self addaccordianview];
+    }
+    
 }
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self initAccordion];
-        [self addaccordianview];
     }
     
     return self;
@@ -224,9 +244,17 @@
         
         // NSLog(@"%@",self.subviewarray);
         
-        selectedIndexValue=[sender tag];
+        selectedIndexValue = [sender tag] ;
+        
+        myappde.selectedRow=selectedIndexValue;
+        myappde.conditionID=[myappde.conditionIDArray objectAtIndex:selectedIndexValue];
+        
+        
         
         if (allowsMultipleSelection) {
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"advancePaperworkProtocol" object:nil];
+            advanceDocumentsViewClass *ob = (advanceDocumentsViewClass *)self.superview.superview;
+            [ob disable];
             
             allowsMultipleSelection=NO;
             self.startsClosed=YES;
@@ -260,12 +288,17 @@
             }
             
             if (([selectionIndexes firstIndex] == [sender tag]) && self.allowsEmptySelection) {
-                
+                //Close
+                advanceDocumentsViewClass *ob = (advanceDocumentsViewClass *)self.superview.superview;
+                [ob enable];
                 [self setSelectionIndexes:[NSIndexSet indexSet]];
                 
             }
             else {
-                
+                //Open
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"advancePaperworkProtocol" object:nil];
+                advanceDocumentsViewClass *ob = (advanceDocumentsViewClass *)self.superview.superview;
+                [ob disable];
                 [self setSelectedIndex:[sender tag]];
             }
         }
@@ -281,8 +314,18 @@
         UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Discard Changes" style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action){
                                                        self.startsClosed=YES;
-                                                       AppDelegate *myappde =(AppDelegate *)[[UIApplication sharedApplication]delegate];
+                                                       
+                                                       advanceDocumentsViewClass *ob = (advanceDocumentsViewClass *)self.superview.superview;
+                                                       [ob enable];
+                                                       
                                                        myappde.warningflag=0;
+                                                       myappde.designationFlag=0;
+                                                       myappde.designationFlag1=myappde.designationFlag2=myappde.designationFlag3=myappde.designationFlag4=myappde.designationFlag5=0;
+                                                       myappde.specificEmployeeFlag1=myappde.specificEmployeeFlag2=myappde.specificEmployeeFlag3=myappde.specificEmployeeFlag4=myappde.specificEmployeeFlag5=0;
+                                                       for (int i=0; i<[headers count]; i++) {
+                                                           UIButton *mybutton=[headers objectAtIndex:i];
+                                                           [mybutton setUserInteractionEnabled:TRUE];
+                                                       }
                                                    }];
         [alert addAction:ok];
         UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
@@ -294,7 +337,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            [(settingsViewController *)[self.superview.superview.superview.superview.superview nextResponder] presentViewController:alert animated:YES completion:nil];
+            [(settingsViewController *)[self.superview.superview.superview.superview.superview.superview nextResponder] presentViewController:alert animated:YES completion:nil];
         });
         
         
@@ -448,7 +491,6 @@
         NSArray *array=[[NSBundle mainBundle]loadNibNamed:@"advanceInnerView" owner:self options:nil];
         [self  addHeader:header withView:[array objectAtIndex:0]];
         
-        
         //[[headers objectAtIndex:indexvalue]setUserInteractionEnabled:TRUE];
         
         UILongPressGestureRecognizer *press=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(deletetile:)];
@@ -460,13 +502,15 @@
         UIButton *mybutton=[headers objectAtIndex:i];
         [mybutton setUserInteractionEnabled:TRUE];
     }
+    advanceDocumentsViewClass *ob = (advanceDocumentsViewClass *)self.superview.superview;
+    [ob enable];
 }
 -(void)deletetile:(UILongPressGestureRecognizer *)sender
 {
-    if (headers.count > 1)
+    UIButton *btn = (UIButton*)sender.view;
+    mytag=btn.tag;
+    if ((headers.count > 1)&&(!([[myappde.conditionIDArray objectAtIndex:mytag]isEqualToString:@"0"])))
     {
-        UIButton *btn = (UIButton*)sender.view;
-        mytag=btn.tag;
         NSLog(@"%i",mytag);
         // indexvalue=selectedIndex;
         UIButton *mybutton=[headers objectAtIndex:mytag];
@@ -489,6 +533,14 @@
     UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault
                                                handler:^(UIAlertAction * action){
                                                    self.startsClosed=YES;
+                                                   
+                                                   
+                                                   if (!([[myappde.conditionIDArray objectAtIndex:mytag]isEqualToString:@"0"])) {
+                                                       [self.myconnection deletePaperworkProtocol:myappde.ruleID :[myappde.conditionIDArray objectAtIndex:mytag] :@"advance"];
+                                                   }
+                                                   
+                                                   [myappde.conditionIDArray removeObjectAtIndex:mytag];
+                                                   myappde.conditionCount--;
                                                    
                                                    [self removeHeaderAtIndex:mytag];
                                                    [self renamefunction];
@@ -524,7 +576,7 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        [(settingsViewController *)[self.superview.superview.superview.superview.superview nextResponder] presentViewController:alert animated:YES completion:nil];
+        [(settingsViewController *)[self.superview.superview.superview.superview.superview.superview nextResponder] presentViewController:alert animated:YES completion:nil];
     });
     
 }
@@ -534,11 +586,89 @@
         UIButton *button=[headers objectAtIndex:i];
         for (UILabel *myview in button.subviews) {
             if ([myview isKindOfClass:[UILabel class]]) {
-                myview.text=[NSString stringWithFormat:@"Condition %d",i+1];
+                myview.text=[NSString stringWithFormat:@"Protocol %d",i+1];
             }
             
         }
     }
 }
+
+-(void)addNewTileForUpdation:(int)conditionId
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        flag=conditionId+1;
+        UIButton *header1 = [[UIButton alloc] initWithFrame:CGRectMake(0, 50, 0, 30)];
+        UILabel *label1=[[UILabel alloc]initWithFrame:CGRectMake(15, 5, 150, 20)];
+        label1.text= [NSString stringWithFormat:@"Protocol %d",flag];
+        [label1 setTextColor:[UIColor colorWithRed:88.0/255.0 green:89.0/255.0 blue:91.0/255.0 alpha:1.000]];
+        label1.font = [UIFont fontWithName:@"Oxygen-Regular" size:14];
+        [header1 addSubview:label1];
+        [header1 setImage:[UIImage imageNamed:@"tab_plain.png"] forState:UIControlStateNormal];
+        
+        NSArray *array=[[NSBundle mainBundle]loadNibNamed:@"advanceInnerView" owner:self options:nil];
+        [self addHeader:header1 withView:[array objectAtIndex:0]];
+        header1.tag=flag-1;
+        
+        UILongPressGestureRecognizer *press=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(deletetile:)];
+        
+        [header1 addGestureRecognizer:press];
+        [self setStartsClosed:YES];
+        
+    });
+    AppDelegate *app=(AppDelegate *)[[UIApplication sharedApplication]delegate];
+    [app.conditionIDArray addObject:@"0"];
+}
+-(void)CreationoftileforUpdation:(int)count
+{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self setStartsClosed:YES];
+        
+        for (int i=1; i<=count; i++) {
+            
+            flag=count+1;
+            
+            UIButton *header1 = [[UIButton alloc] initWithFrame:CGRectMake(0, 50, 0, 30)];
+            UILabel *label1=[[UILabel alloc]initWithFrame:CGRectMake(15, 5, 150, 20)];
+            label1.text= [NSString stringWithFormat:@"Protocol %d",i];
+            [label1 setTextColor:[UIColor colorWithRed:88.0/255.0 green:89.0/255.0 blue:91.0/255.0 alpha:1.000]];
+            label1.font = [UIFont fontWithName:@"Oxygen-Regular" size:14];
+            [header1 addSubview:label1];
+            [header1 setImage:[UIImage imageNamed:@"tab_plain.png"] forState:UIControlStateNormal];
+            
+            
+            NSArray *array=[[NSBundle mainBundle]loadNibNamed:@"advanceInnerView" owner:self options:nil];
+            [self addHeader:header1 withView:[array objectAtIndex:0]];
+            header1.tag=i-1;
+            
+            UILongPressGestureRecognizer *press=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(deletetile:)];
+            
+            [header1 addGestureRecognizer:press];
+            
+            [self setStartsClosed:YES];
+            
+        }
+        
+    });
+    
+    
+    
+}
+-(void)closeTile
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self setStartsClosed:YES];
+        for (int i=0; i<[headers count]; i++) {
+            UIButton *mybutton=[headers objectAtIndex:i];
+            [mybutton setUserInteractionEnabled:TRUE];
+        }
+        advanceDocumentsViewClass *ob = (advanceDocumentsViewClass *)self.superview.superview;
+        [ob enable];
+    });
+    
+}
+
+
+
 
 @end

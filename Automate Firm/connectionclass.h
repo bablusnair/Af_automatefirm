@@ -386,11 +386,23 @@
 -(void)employeePopupFilter : (id)filterDict;
 -(void)testService:(NSMutableDictionary *)textDict;
 
--(void)listingAllLeavePaperworkRule:(NSString *)officeID;
+-(void)listingAllPaperworkRule:(NSString *)type : (NSString *)officeID;
 
 -(void)individualProtocolRuleView:(NSString *)officeID : (NSString *)ruleID : (NSString *)type;
 
--(void)saveIndividualLeaveProtocol : (id)protocolDict;
+-(void)saveIndividualProtocol : (id)protocolDict;
+-(void)updateIndividualProtocol:(id)protocolDict;
+-(void)savePaperworkRule: (NSString *)ruleID : (NSString *)ruleType : (id)declarationMsg;
+-(void)viewIndividualPaperworkProtocol:(NSString *)officeID : (NSString *)ruleID : (NSString *)tileID : (NSString *)type;
+
+-(void)deletePaperworkProtocol:(NSString *)ruleID : (NSString *)tileID : (NSString *)ruleType;
+
+-(void)createCustomPaperworkRule:(id)ruleDict : (NSString *)rule_type;
+-(void)individualCustomPaperworkRuleView: (NSString *)officeID : (NSString *)ruleID : (NSString *)ruleType;
+-(void)updateCustomPaperworkRule:(id)ruleDict : (NSString *)ruleType;
+-(void)deleteCustomPaperworkRule:(NSString *)ruleID ;
+
+//documentation
 
 //documentation
 
@@ -417,6 +429,17 @@
 -(void)documentRenameprocessingFunctionality:(NSString *)doc_id renameVariable:(NSString *)rename;
 
 
+-(void)EmailDocumentationprocess:(NSString *)fromaddress toaddress:(NSString *)toaddress subject:(NSString *)subject composematter:(NSString *)composematter attachedimages:(NSMutableArray *)attachedidArray;
+
+-(void)DocumentationdetailViewpdfviewer:(NSString *)pdfid documenttype:(NSString *)docType folderId:(NSString *)FolderId;
+
+-(void)PrintDocumentsinFrontScreen:(NSMutableArray *)printdocid;
+
+-(void)sizedeterminationFunctionality:(NSMutableDictionary *)Doc_dict;
+
+
+-(void)mytestcase;
+
 //forsignupservices.....................................
 
 
@@ -425,6 +448,9 @@
 -(void)signupsectorlistingservice;
 
 -(void)signupserviceForAdminModule:(NSString *)urlstringdata username:(NSString *)username firmname:(NSString *)firmname sector:(NSString *)sector estdate:(NSString *)estdate sub:(NSString *)sub agent:(NSString *)agent firstname:(NSString *)firstname lastname:(NSString *)lastname dob:(NSString *)dob regcontact:(NSString *)regcontact regemail:(NSString *)regemail recoverymail:(NSString *)recoverymail livingin:(NSString *)livingin state:(NSString *)state city:(NSString *)city imagedata:(NSString *)imagedata status:(NSString *)status;
+
+
+
 
 
 //resetpasswordscreen

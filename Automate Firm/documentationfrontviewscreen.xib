@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2659" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -48,6 +48,9 @@
                     <state key="normal" image="Print_icon_inactive.png">
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
+                    <connections>
+                        <action selector="printbuttonaction:" destination="85d-QY-lqV" eventType="touchUpInside" id="nhe-sd-s1T"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfS-oC-pTP">
                     <frame key="frameInset" minX="384" minY="62" width="27" height="25"/>
@@ -55,6 +58,9 @@
                     <state key="normal" image="Signature_icon.png">
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
+                    <connections>
+                        <action selector="signatureButtonAction:" destination="85d-QY-lqV" eventType="touchUpInside" id="riH-2Z-40g"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7KJ-gL-38Q">
                     <frame key="frameInset" minX="341" minY="60" width="25" height="27"/>
@@ -81,6 +87,9 @@
                     <state key="normal" image="Mail_icon_inactive.png">
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
+                    <connections>
+                        <action selector="mailViewOpenAction:" destination="85d-QY-lqV" eventType="touchUpInside" id="3Xq-bL-Fua"/>
+                    </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="search_boxpjt.png" translatesAutoresizingMaskIntoConstraints="NO" id="Vgb-6h-PBK">
                     <frame key="frameInset" minX="547" minY="60" width="220" height="29"/>
@@ -112,6 +121,9 @@
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="85d-QY-lqV" id="7eN-Xq-ktd"/>
+                    </connections>
                 </textField>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="grouped" separatorStyle="none" rowHeight="410" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="dz3-sT-D7x">
                     <frame key="frameInset" minX="17" minY="103" width="820" height="553"/>
@@ -368,7 +380,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kM3-bf-29R">
-                            <frame key="frameInset" minX="157" minY="211" width="60" height="30"/>
+                            <frame key="frameInset" minX="197" minY="211" width="60" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="select.png"/>
                             <connections>
@@ -376,7 +388,22 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Done" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pUz-a7-75x">
-                            <frame key="frameInset" minX="168" minY="215" width="40" height="21"/>
+                            <frame key="frameInset" minX="208" minY="215" width="40" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vSc-3V-2cM">
+                            <frame key="frameInset" minX="118" minY="211" width="60" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="select.png"/>
+                            <connections>
+                                <action selector="cancelbuttonaction:" destination="85d-QY-lqV" eventType="touchUpInside" id="rCS-te-Jrc"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cancel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ih4-iw-hVZ">
+                            <frame key="frameInset" minX="123" minY="215" width="51" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -445,13 +472,14 @@
                 <outlet property="renameExistAlertlabel" destination="2RP-lC-kI5" id="fHJ-of-yoP"/>
                 <outlet property="renameTextField" destination="T93-tG-qrh" id="6mY-ZZ-Mz8"/>
                 <outlet property="renameView" destination="bDx-za-K3a" id="WPm-Qk-ata"/>
+                <outlet property="searchfield" destination="T0U-yX-fjk" id="dom-DB-KQb"/>
                 <outlet property="signaturebutton" destination="nfS-oC-pTP" id="5IY-GI-2xf"/>
                 <outlet property="tableView" destination="dz3-sT-D7x" id="zov-mx-6PK"/>
                 <outlet property="uploadbutton" destination="Ome-bC-gi4" id="RTO-rE-EsB"/>
                 <outlet property="workingpremisebutton" destination="3rR-Uv-40U" id="Bg3-V4-5ef"/>
                 <outlet property="workingpremisetableview" destination="8Gw-oG-WC7" id="Aht-2m-tl2"/>
             </connections>
-            <point key="canvasLocation" x="396.5" y="174"/>
+            <point key="canvasLocation" x="661" y="-231"/>
         </view>
     </objects>
     <resources>

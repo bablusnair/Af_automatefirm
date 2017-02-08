@@ -7,17 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DocumentTile.h"
-
-@interface expenseDocumentViewClass : UIView<UITextViewDelegate>
+#import "expenseDocumentTile.h"
+#import "AppDelegate.h"
+@interface expenseDocumentViewClass : UIView<UITextViewDelegate,headerprotocol>
 {
-    DocumentTile *accordion;
+    expenseDocumentTile *accordion;
+    AppDelegate *app;
 }
-@property(nonatomic,retain)IBOutlet UILabel *leaveNameLabel;
-@property(nonatomic,retain)IBOutlet UILabel *leaveTypeLabel;
+@property(nonatomic,retain)IBOutlet UIScrollView *scrollView;
+@property(nonatomic,retain)connectionclass *myconnection;
+@property(nonatomic,retain)IBOutlet UILabel *expenseLabel;
+@property(nonatomic,retain)NSString *modifiedDate;
 @property(nonatomic,retain)IBOutlet UITextView *declarationText;
 @property(nonatomic,retain)IBOutlet UIView *declarationView;
+@property(nonatomic,retain)IBOutlet UIButton *plusButton;
+@property(nonatomic,retain)IBOutlet UIButton *doneButton;
+@property(nonatomic,retain)IBOutlet UIButton *cancelButton;
+-(void)enable;
+-(void)disable;
+-(IBAction)AddNewTile:(id)sender;
 -(IBAction)doneButtonAction:(id)sender;
 -(IBAction)cancelButtonAction:(id)sender;
+@property(nonatomic,assign)int alertFlag;
 
 @end
