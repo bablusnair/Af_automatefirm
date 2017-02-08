@@ -14,7 +14,7 @@
 
 
 NSString *const subDomainMainURL = @"http://automatefirm.com/automate_new/";
-NSString *const subdomainURL = @"http://192.168.1.35/af1.1/";
+NSString *const subdomainURL = @"http://192.168.1.22/af1.1/";
 
 
 //-----------------------------------Time--------------------------------------------------
@@ -90,7 +90,6 @@ NSString *const subdomainURL = @"http://192.168.1.35/af1.1/";
 #define signupserviceregisrtation @"rest/signup_api/firm_save"
 
 
-
 //--------------------------------------------Week---------------------------------------------
 
 #define createNewweeekRule @"rest/week_rule_api/insert_week_rule"
@@ -105,10 +104,6 @@ NSString *const subdomainURL = @"http://192.168.1.35/af1.1/";
 #define nationalityUrl @"get_details/get_nationality"
 #define viewselecedStaes @"rest/getdetails_api/get_state"
 #define viewselecedCity @"rest/getdetails_api/get_city"
-
-
-
-
 
 
 //--------------------------------------Add New Employee-----------------------------------------
@@ -639,8 +634,12 @@ NSString *const subdomainURL = @"http://192.168.1.35/af1.1/";
     
 }
 
+
+
 //hgjhkhjihhhjhjhjhjhjjhjjjjhhjjhjhyyhhyhy
 // Login Function
+
+
 
 -(void)LoginService:(NSString *)username paswrd:(NSString *)pasword officeid:(NSString *)officeid
 {
@@ -660,7 +659,7 @@ NSString *const subdomainURL = @"http://192.168.1.35/af1.1/";
     [request setHTTPMethod:@"POST"];
     //Add ,qdmlq l;jlqwdm ckef eck klmsklcdmc mdwc l,dcmewcm dwckdk mdw
     
-    NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys:@"administrator",@"identity",@"password",@"password",@"D46CE605-AC20-4C50-95CD-66E01B025D45",@"deviceid",nil];
+    NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys:@"kp",@"identity",@"password",@"password",@"D46CE605-AC20-4C50-95CD-66E01B025D45",@"deviceid",nil];
     
     NSData *postData = [NSJSONSerialization dataWithJSONObject:mapData options:0 error:&error];
     [request setHTTPBody:postData];
