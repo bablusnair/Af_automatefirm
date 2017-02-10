@@ -60,9 +60,9 @@
         NSString * userString = [self.userNameField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
         NSString * pwdstring = [self.paswrdText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
         
-        [self.myconnection LoginService:userString paswrd:pwdstring officeid:self.officeidString];
+       // [self.myconnection LoginService:userString paswrd:pwdstring officeid:self.officeidString];
         
-       // [self performSegueWithIdentifier:@"loggedUser" sender:nil];
+        [self performSegueWithIdentifier:@"loggedUser" sender:nil];
     
     
 //    }

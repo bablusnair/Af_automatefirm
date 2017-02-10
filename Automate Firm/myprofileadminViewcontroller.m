@@ -22,9 +22,9 @@
     // Do any additional setup after loading the view.
 
     self.addnewPaymentmethodview.hidden=true;
-    self.estDatePicker.backgroundColor=[UIColor lightGrayColor];
+   // self.estDatePicker.backgroundColor=[UIColor lightGrayColor];
     self.dobPicker.backgroundColor=[UIColor lightGrayColor];
-
+    self.datebackgroundView.hidden=true;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardDidShow:)
                                                  name:UIKeyboardDidShowNotification
@@ -38,22 +38,97 @@
     self.imagearray=[[NSMutableArray alloc] init];
     
     
+    
+    
+    self.myconnection=[[connectionclass alloc]init];
+    self.myconnection.mydelegate=self;
+    
+    [self.myconnection displayAllCountries];
+    [self.myconnection signupAgentlistingservice];
+    [self.myconnection signupsectorlistingservice];
+    
+    self.countrydict=[[NSMutableDictionary alloc] init];
+    self.statedict=[[NSMutableDictionary alloc] init];
+    self.citydict=[[NSMutableDictionary alloc] init];
+    self.sectordict=[[NSMutableDictionary alloc] init];
+    self.agentdict=[[NSMutableDictionary alloc] init];
+    
+    
+    self.sectorTableview.hidden=true;
+    self.agentTableview.hidden=true;
+    self.livinginTableview.hidden=true;
+    self.stateTableview.hidden=true;
+    self.cityTableview.hidden=true;
+    self.estdateTableview.hidden=true;
+    
+    self.sectorArray=[[NSMutableArray alloc] init];
+    
+    self.agentArray=[[NSMutableArray alloc] init];
+    
+    self.livingInArray=[[NSMutableArray alloc] init];
+    
+    self.stateArray=[[NSMutableArray alloc] init];
+    
+    self.cityArray=[[NSMutableArray alloc] init];
+    
+    self.estyearArray=[[NSMutableArray alloc] init];
+
+    for (int i=2000; i<3000; i++) {
+        
+        [self.estyearArray addObject:[NSString stringWithFormat:@"%d",i]];
+    }
+    
+    
 }
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     if (textField==self.estmatedDatetext) {
-        self.estDatePicker.hidden=FALSE;
-        return  NO;
+        self.estdateTableview.hidden=false;
+        return NO;
     }
-    if (textField==self.dobtext) {
+   else if (textField==self.dobtext) {
         self.dobPicker.hidden=FALSE;
         return  NO;
     }
-    else{
-        self.activeField=textField;
-
-        return  YES;
+    
+    else if (textField==self.sectorTextfield) {
+        
+        self.sectorTableview.hidden=false;
+        return NO;
+        
     }
+    
+    else if (textField==self.livinginTextfield) {
+        
+        self.livinginTableview.hidden=false;
+        return NO;
+        
+    }
+    else if (textField==self.stateTextfield) {
+        
+        self.stateTableview.hidden=false;
+        return NO;
+        
+    }
+    else if (textField==self.cityTextfield) {
+        
+        self.cityTableview.hidden=false;
+        return NO;
+        
+    }
+    else if (textField==self.dateofbirthTextfield) {
+        
+        self.datebackgroundView.hidden=false;
+        return NO;
+        
+    }
+    else
+    {
+        self.activeField=textField;
+        return  YES;
+        
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -106,6 +181,61 @@
         return 5;
         
     }
+    
+    else if (tableView==self.sectorTableview) {
+        
+        return [self.sectorArray count];
+    }
+    
+    else if (tableView==self.agentTableview) {
+        
+        return [self.agentArray count];
+    }
+    
+    else if (tableView==self.livinginTableview) {
+        
+        // if (self.filterflag==1)
+        //{
+        // return [self.filtercountryArray count];
+        // }
+        // else
+        // {
+        return [self.livingInArray count];
+        // }
+        
+    }
+    
+    else if (tableView==self.stateTableview) {
+        
+        //if (self.filterflag1==1)
+        // {
+        //    return [self.filterstateArray count];
+        // }
+        //  else
+        // {
+        return [self.stateArray count];
+        // }
+        
+    }
+    
+    else if(tableView==self.cityTableview)
+    {
+        
+        // if (self.filterflag2==1)
+        // {
+        //return [self.filtercityArray count];
+        // }
+        // else
+        // {
+        return [self.cityArray count];
+        //}
+        
+    }
+    else if (tableView==self.estdateTableview) {
+        
+        return [self.estyearArray count];
+    }
+
     else
     {
         return 0;
@@ -125,6 +255,8 @@
         return cell;
         
     }
+    
+    
     else if (tableView==self.cartHistroytable)
     {
         paymentHistoryTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"myprofile"];
@@ -134,6 +266,8 @@
         }
         return cell;
     }
+    
+    
     else if (tableView==self.paymentMethodtableview)
     {
         paymethodTablecell *cell=[tableView dequeueReusableCellWithIdentifier:@"payment"];
@@ -146,11 +280,146 @@
         
         return cell;
     }
-
+    
+    else if (tableView==self.sectorTableview) {
+        
+        UITableViewCell *cell =[[UITableViewCell alloc] init];
+        cell.textLabel.text=[self.sectorArray objectAtIndex:indexPath.row];
+        return cell;
+    }
+    
+    else  if (tableView==self.agentTableview) {
+        
+        UITableViewCell *cell =[[UITableViewCell alloc] init];
+        cell.textLabel.text=[self.agentArray objectAtIndex:indexPath.row];
+        return cell;
+    }
+    
+    else  if (tableView==self.livinginTableview) {
+        
+        UITableViewCell *cell =[[UITableViewCell alloc] init];
+        
+        //   if (self.filterflag==1)
+        //{
+        // cell.textLabel.text = [self.filtercountryArray objectAtIndex:indexPath.row];
+        //}
+        //  else
+        //{
+        cell.textLabel.text=[self.livingInArray objectAtIndex:indexPath.row];
+        // }
+        
+        return cell;
+    }
+    
+    
+    else  if (tableView==self.stateTableview) {
+        
+        UITableViewCell *cell =[[UITableViewCell alloc] init];
+        
+        //        if (self.filterflag1==1)
+        //        {
+        //            cell.textLabel.text = [self.filterstateArray objectAtIndex:indexPath.row];
+        //        }
+        //        else
+        //        {
+        cell.textLabel.text=[self.stateArray objectAtIndex:indexPath.row];
+        //        }
+        
+        return cell;
+    }
+    
+    
+    else if(tableView==self.cityTableview) {
+        
+        UITableViewCell *cell =[[UITableViewCell alloc] init];
+        
+        //        if (self.filterflag2==1)
+        //        {
+        //            cell.textLabel.text = [self.filtercityArray objectAtIndex:indexPath.row];
+        //        }
+        //        else
+        //        {
+        cell.textLabel.text=[self.cityArray objectAtIndex:indexPath.row];
+        
+        //        }
+        
+        return cell;
+    }
+    
+    else if(tableView==self.estdateTableview) {
+        
+        UITableViewCell *cell =[[UITableViewCell alloc] init];
+        
+        //        if (self.filterflag2==1)
+        //        {
+        //            cell.textLabel.text = [self.filtercityArray objectAtIndex:indexPath.row];
+        //        }
+        //        else
+        //        {
+        cell.textLabel.text=[self.estyearArray objectAtIndex:indexPath.row];
+        
+        //        }
+        
+        return cell;
+    }
     else
     {
         return  nil;
     }
+    
+    
+}
+
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView==self.sectorTableview) {
+        
+        self.sectorTextfield.text=[self.sectorArray objectAtIndex:indexPath.row];
+        self.sectorTableview.hidden=true;
+        
+        if (self.sectorTextfield.text.length>0) {
+            
+            self.sectorString=[self.sectordict objectForKey:self.sectorTextfield.text];
+        }
+        
+    }
+    else  if (tableView==self.livinginTableview) {
+        
+        self.livinginTextfield.text=[self.livingInArray objectAtIndex:indexPath.row];
+        
+        if(self.livinginTextfield.text.length>0)
+        {
+            [self.myconnection displaySelectedStates:[self.countrydict objectForKey:self.livinginTextfield.text]];
+            self.countryString=[self.countrydict objectForKey:self.livinginTextfield.text];
+        }
+        
+        self.livinginTableview.hidden=true;
+    }
+    else  if (tableView==self.stateTableview) {
+        
+        self.stateTextfield.text=[self.stateArray objectAtIndex:indexPath.row];
+        
+        if(self.stateTextfield.text.length>0)
+        {
+            [self.myconnection displayAllCities:[self.statedict objectForKey:self.stateTextfield.text]];
+            self.stateString=[self.statedict objectForKey:self.stateTextfield.text];
+        }
+        self.stateTableview.hidden=true;
+    }
+    else  if (tableView==self.cityTableview) {
+        
+        self.cityTextfield.text=[self.cityArray objectAtIndex:indexPath.row];
+        self.cityTableview.hidden=true;
+        self.cityString=[self.citydict objectForKey:self.cityTextfield.text];
+    }
+    else  if (tableView==self.estdateTableview) {
+        
+        self.estmatedDatetext.text=[self.estyearArray objectAtIndex:indexPath.row];
+        self.estdateTableview.hidden=true;
+    }
+    
 }
 
 - (void) keyboardDidShow:(NSNotification *)notification
@@ -208,6 +477,7 @@
     }
     
 }
+
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
@@ -290,6 +560,136 @@
     [self.imagearray removeObjectAtIndex:self.myindexpath.row];
     
     [self.broswecollectionview reloadData];
+}
+
+
+-(void)allcountryresponse:(id)countrylist;
+{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self.livingInArray removeAllObjects];
+        for (int i=0; i<[countrylist count]; i++) {
+            
+            
+            NSMutableDictionary *dict = [countrylist objectAtIndex:i];
+            [self.countrydict setObject:[dict objectForKey:@"country_id"] forKey:[dict objectForKey:@"country_name"]];
+            [self.livingInArray addObject:[dict objectForKey:@"country_name"]];
+            
+        }
+        
+        [self.livinginTableview reloadData];
+        
+    });
+    
+}
+
+-(void)allstateresponse:(id )statelist
+{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self.stateArray removeAllObjects];
+        for (int i=0; i<[statelist count]; i++) {
+            
+            
+            NSMutableDictionary *dict = [statelist objectAtIndex:i];
+            [self.statedict setObject:[dict objectForKey:@"state_id"] forKey:[dict objectForKey:@"name"]];
+            [self.stateArray addObject:[dict objectForKey:@"name"]];
+            
+        }
+        
+        [self.stateTableview reloadData];
+        
+    });
+    
+    
+}
+
+-(void)allcityresponse:(id)Citylist
+{
+    
+    [self.cityArray removeAllObjects];
+    NSLog(@"%@",Citylist);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self.cityArray removeAllObjects];
+        
+        for (int i=0; i<[Citylist count]; i++) {
+            
+            NSMutableDictionary *dict = [Citylist objectAtIndex:i];
+            
+            [self.citydict setObject:[dict objectForKey:@"city_id"] forKey:[dict objectForKey:@"name"]];
+            [self.cityArray addObject:[dict objectForKey:@"name"]];
+        }
+        
+        [self.cityTableview reloadData];
+        
+    });
+    
+}
+
+-(void)signupmodulesectorResponse:(id)details
+{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self.sectorArray removeAllObjects];
+        
+        for (int i=0; i<[details count]; i++) {
+            
+            NSMutableDictionary *dict = [details objectAtIndex:i];
+            
+            [self.sectordict setObject:[dict objectForKey:@"s_id"] forKey:[dict objectForKey:@"title"]];
+            
+            [self.sectorArray addObject:[dict objectForKey:@"title"]];
+        }
+        
+        [self.sectorTableview reloadData];
+        
+    });
+    
+}
+
+
+-(void)showalerviewcontroller:(NSString *)errorMessage
+{
+    UIAlertController *alert= [UIAlertController
+                               alertControllerWithTitle:@"Error"
+                               message:[NSString stringWithFormat:@"%@",errorMessage]
+                               preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction * action){
+                                                   
+                                               }];
+    [alert addAction:ok];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    });
+    
+}
+
+
+-(IBAction)backbutton:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:Nil];
+}
+
+- (IBAction)datepickerDoneaction:(id)sender
+{
+    
+   NSDateFormatter *dateFormat=[[NSDateFormatter alloc]init];
+   dateFormat.dateStyle=NSDateFormatterMediumStyle;
+   [dateFormat setDateFormat:@"dd/MMM/yyyy"];
+
+   NSString *str=[NSString stringWithFormat:@"%@",[dateFormat  stringFromDate:self.dobPicker.date]];
+   self.dateofbirthTextfield.text=str;
+   self.datebackgroundView.hidden=true;
+ 
 }
 
 @end

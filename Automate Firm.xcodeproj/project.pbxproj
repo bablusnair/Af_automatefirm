@@ -1867,7 +1867,7 @@
 		AE3E2ACC1BCE538500FAAB31 /* settingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settingsViewController.h; sourceTree = "<group>"; };
 		AE3E2ACD1BCE538500FAAB31 /* settingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = settingsViewController.m; sourceTree = "<group>"; };
 		AE3E2ACE1BCE538500FAAB31 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		AE3E2ACF1BCE538500FAAB31 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		AE3E2ACF1BCE538500FAAB31 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ViewController.m; sourceTree = "<group>"; };
 		AE3E2AD01BCE538500FAAB31 /* attendancesettingsview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = attendancesettingsview.xib; sourceTree = "<group>"; };
 		AE3E2AD11BCE538500FAAB31 /* attendancesettingsviewclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = attendancesettingsviewclass.h; sourceTree = "<group>"; };
 		AE3E2AD21BCE538500FAAB31 /* attendancesettingsviewclass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = attendancesettingsviewclass.m; sourceTree = "<group>"; };
@@ -7953,7 +7953,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ambu Vamadevan (LXTJ35U49E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = LXTJ35U49E;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				INFOPLIST_FILE = "Automate Firm/Info.plist";
@@ -7962,8 +7962,8 @@
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = leonine.AutomateFirmLatest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e5298592-a905-43c4-888b-06787337cc9a";
-				PROVISIONING_PROFILE_SPECIFIER = "XC Ad Hoc: *";
+				PROVISIONING_PROFILE = "6b563591-40fa-482f-a408-bbb59ee04caa";
+				PROVISIONING_PROFILE_SPECIFIER = AFLatestDev_Bublus;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -7974,7 +7974,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ambu Vamadevan (LXTJ35U49E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = LXTJ35U49E;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				INFOPLIST_FILE = "Automate Firm/Info.plist";
@@ -7983,8 +7983,8 @@
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = leonine.AutomateFirmLatest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a8b0a43f-7917-4378-8eac-fe036df6bfb2";
-				PROVISIONING_PROFILE_SPECIFIER = AutomateFirmLatest;
+				PROVISIONING_PROFILE = "6b563591-40fa-482f-a408-bbb59ee04caa";
+				PROVISIONING_PROFILE_SPECIFIER = AFLatestDev_Bublus;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

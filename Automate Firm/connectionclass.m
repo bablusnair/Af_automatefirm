@@ -14,7 +14,7 @@
 
 
 NSString *const subDomainMainURL = @"http://automatefirm.com/automate_new/";
-NSString *const subdomainURL = @"http://192.168.1.22/af1.1/";
+NSString *const subdomainURL = @"http://192.168.1.20/af/";
 
 
 //-----------------------------------Time--------------------------------------------------
@@ -685,7 +685,9 @@ NSString *const subdomainURL = @"http://192.168.1.22/af1.1/";
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setHTTPMethod:@"POST"];
     
-    NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys:@"kp",@"identity",@"password",@"password",@"D46CE605-AC20-4C50-95CD-66E01B025D45",@"deviceid",nil];
+    NSString *deviceID = [[NSUserDefaults standardUserDefaults]objectForKey:@"device_id"];
+    
+    NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys:@"kp",@"identity",@"password",@"password",deviceID,@"deviceid",nil];
     
     NSData *postData = [NSJSONSerialization dataWithJSONObject:mapData options:0 error:&error];
     [request setHTTPBody:postData];
@@ -836,7 +838,7 @@ NSString *const subdomainURL = @"http://192.168.1.22/af1.1/";
     //  NSError *error;
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-    NSString *urlString=[NSString stringWithFormat:@"%@rest/logout_api?identity=administrator",subdomainURL];
+    NSString *urlString=[NSString stringWithFormat:@"%@rest/logout_api?identity=kp",subdomainURL];
     //  NSString *urlString=[NSString stringWithFormat:@"identity=""/password="];
     
     //   NSURL *url = [NSURL URLWithString:@"192.168.1.20/af1.1/rest/logout_api/identity=admin@leonine.in/deviceid=6E5C534-5D2D-4F3F-AE31-8E0B5EC8C38A"];
@@ -846,7 +848,8 @@ NSString *const subdomainURL = @"http://192.168.1.22/af1.1/";
     [request setHTTPMethod:@"GET"];
     
      NSLog(@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"]);
-    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
+    NSString *apikey=[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"];
+    [request setValue:apikey forHTTPHeaderField:@"apikey"];
     
     
     
@@ -891,7 +894,10 @@ NSString *const subdomainURL = @"http://192.168.1.22/af1.1/";
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"GET"];
-    //  [request setValue:self.AuthString forHTTPHeaderField:@"apikey"];
+    
+    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"api_key"]);
+    
+    [request setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
     
     [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
@@ -939,7 +945,10 @@ NSString *const subdomainURL = @"http://192.168.1.22/af1.1/";
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"GET"];
-    //  [request setValue:self.AuthString forHTTPHeaderField:@"apikey"];
+    
+    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"api_key"]);
+    
+    [request setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
     
     [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
@@ -995,7 +1004,10 @@ NSString *const subdomainURL = @"http://192.168.1.22/af1.1/";
     
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request addValue:@"123456" forHTTPHeaderField:@"apikey"];
+ //   [request addValue:@"123456" forHTTPHeaderField:@"apikey"];
+    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"api_key"]);
+    
+    [request setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
     
     [request setHTTPMethod:@"POST"];
     
@@ -1033,6 +1045,27 @@ NSString *const subdomainURL = @"http://192.168.1.22/af1.1/";
                 
             }
             
+        }
+       else if ([httpResponse statusCode] == 200) {
+
+            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            
+            NSMutableArray *duplicateArray = [json objectForKey:@"message"];
+           
+           if (duplicateArray.count==1) {
+               
+            [self.mydelegate showalerviewcontroller:[NSString stringWithFormat:@"%@ Already Exists",[duplicateArray objectAtIndex:0]]];
+           }
+           else if (duplicateArray.count==2)
+           {
+               
+                [self.mydelegate showalerviewcontroller:[NSString stringWithFormat:@"%@ and %@ are Already Exists",[duplicateArray objectAtIndex:0],[duplicateArray objectAtIndex:1]]];
+           }
+           else if (duplicateArray.count==3)
+           {
+               
+               [self.mydelegate showalerviewcontroller:[NSString stringWithFormat:@"%@ and %@ and %@ are Already Exists",[duplicateArray objectAtIndex:0],[duplicateArray objectAtIndex:1],[duplicateArray objectAtIndex:2]]];
+           }
         }
         else
         {
@@ -3698,13 +3731,17 @@ NSString *const subdomainURL = @"http://192.168.1.22/af1.1/";
 }
 
 -(void)displayAllCountries{
+    
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
     NSString *urlString=[NSString stringWithFormat:@"%@%@",subdomainURL,viewallcountryurl];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"GET"];
-    //  [request setValue:self.AuthString forHTTPHeaderField:@"apikey"];
+    
+    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"api_key"]);
+    
+    [request setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
     
     [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
@@ -3724,6 +3761,7 @@ NSString *const subdomainURL = @"http://192.168.1.22/af1.1/";
                 [self.mydelegate allcountryresponse:json];
                 
             }
+            
         }
         else
         {
@@ -3742,6 +3780,7 @@ NSString *const subdomainURL = @"http://192.168.1.22/af1.1/";
 }
 
 -(void)displayNationality{
+    
     dispatch_async(dispatch_get_main_queue(), ^{
     NSURLSession *session = [NSURLSession sharedSession];
     NSString *urlString=[NSString stringWithFormat:@"%@%@",subdomainURL,nationalityUrl];
@@ -3758,7 +3797,6 @@ NSString *const subdomainURL = @"http://192.168.1.22/af1.1/";
                 
             }
             
-            
         }
         
         else
@@ -3774,10 +3812,10 @@ NSString *const subdomainURL = @"http://192.168.1.22/af1.1/";
             
         }
         
-        
     }];
     
     [dataTask resume];
+        
     });
  
 }
@@ -3790,7 +3828,10 @@ NSString *const subdomainURL = @"http://192.168.1.22/af1.1/";
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"GET"];
-    //  [request setValue:self.AuthString forHTTPHeaderField:@"apikey"];
+    
+    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"api_key"]);
+    
+    [request setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
     
     [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
@@ -3834,7 +3875,10 @@ NSString *const subdomainURL = @"http://192.168.1.22/af1.1/";
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"GET"];
-    //  [request setValue:self.AuthString forHTTPHeaderField:@"apikey"];
+    
+    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"api_key"]);
+    
+    [request setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
     
     [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         

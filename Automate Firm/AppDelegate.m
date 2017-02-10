@@ -127,17 +127,15 @@
     //  NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"Autoincrementedalue"])
     
     self.sizeDictionarydata = [[NSMutableDictionary alloc] init];
-    
-    
-    
-    
-    
-    
    
     NSString* Identifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString]; // IOS 6+
     NSLog(@"output is : %@", Identifier);
     [[NSUserDefaults standardUserDefaults]setObject:Identifier forKey:@"device_id"];
     
+    
+    
+    [[NSUserDefaults standardUserDefaults]setObject:@"123456789" forKey:@"api_key"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     return YES;
 }
