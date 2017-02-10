@@ -628,49 +628,38 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         
         NSLog(@"%@",Response);
-        
-        if ([[Response objectForKey:@"status"]isEqualToString:@"200"]) {
             
-            app.designationFlag=0;
-            app.warningflag=0;
-            app.specificEmployeeFlag1=0;
-            app.specificEmployeeFlag2=0;
-            app.specificEmployeeFlag3=0;
-            app.specificEmployeeFlag4=0;
-            app.specificEmployeeFlag5=0;
-            app.designationFlag1=0;
-            app.designationFlag2=0;
-            app.designationFlag3=0;
-            app.designationFlag4=0;
-            app.designationFlag5=0;
+        app.designationFlag=0;
+        app.warningflag=0;
+        app.specificEmployeeFlag1=0;
+        app.specificEmployeeFlag2=0;
+        app.specificEmployeeFlag3=0;
+        app.specificEmployeeFlag4=0;
+        app.specificEmployeeFlag5=0;
+        app.designationFlag1=0;
+        app.designationFlag2=0;
+        app.designationFlag3=0;
+        app.designationFlag4=0;
+        app.designationFlag5=0;
             
-            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"officeDetails"];
-            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"employeeDict"];
-            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"selected_employees"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"officeDetails"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"employeeDict"];
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"selected_employees"];
             
-            [app.conditionIDArray replaceObjectAtIndex:app.selectedRow withObject:[NSString stringWithFormat:@"%@",[Response objectForKey:@"id"]]];
+        [app.conditionIDArray replaceObjectAtIndex:app.selectedRow withObject:[NSString stringWithFormat:@"%@",[Response objectForKey:@"id"]]];
             
             
-            if([[[NSUserDefaults standardUserDefaults]objectForKey:@"paperworkAction"]isEqualToString:@"create"])
-            {
-                loanDocumentTile *ob = (loanDocumentTile *)self.superview.superview;
-                [app.conditionIDArray addObject:@"0"];
-                [ob addaccordianview];
-            }
-            else
-            {
-                loanDocumentTile *ob = (loanDocumentTile *)self.superview.superview;
-                [ob closeTile];
-            }
+        if([[[NSUserDefaults standardUserDefaults]objectForKey:@"paperworkAction"]isEqualToString:@"create"])
+        {
+            loanDocumentTile *ob = (loanDocumentTile *)self.superview.superview;
+            [app.conditionIDArray addObject:@"0"];
+            [ob addaccordianview];
         }
         else
         {
-            [self showalerviewcontroller:@"Failed to Save Protocol"];
+            loanDocumentTile *ob = (loanDocumentTile *)self.superview.superview;
+            [ob closeTile];
         }
-        
-        
-        
-        
         
     });
 }

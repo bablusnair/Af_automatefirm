@@ -108,6 +108,8 @@
             [mydict setObject:@"0" forKey:@"status"];
         }
         
+        [mydict setObject:app.ruleID forKey:@"rule_id"];
+        [mydict setObject:@"leave" forKey:@"type"];
         [self.myconnection savePaperworkRule:app.ruleID :@"leave" :mydict];
     }
     else

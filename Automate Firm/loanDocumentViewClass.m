@@ -84,6 +84,9 @@
         }
         
         NSMutableDictionary *mydict=[[NSMutableDictionary alloc]initWithObjectsAndKeys:self.declarationText.text,@"decalaration_msg", nil];
+        
+        [mydict setObject:app.ruleID forKey:@"rule_id"];
+        [mydict setObject:@"loan" forKey:@"type"];
     
         [self.myconnection savePaperworkRule:app.ruleID :@"loan" :mydict];
     }
