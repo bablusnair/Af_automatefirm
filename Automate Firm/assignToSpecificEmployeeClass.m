@@ -38,14 +38,14 @@
     x=0;
     
     
-
-
-
+    
+    
+    
     self.maindictionary=[[NSMutableDictionary alloc] init];
     self.finalEmpDict=[[NSMutableDictionary alloc]init];
     self.empDict=[[NSMutableDictionary alloc]init];
-
-
+    
+    
     
     
     
@@ -103,15 +103,273 @@
                 [self loaclView];
             }
         }
-        
-        
-        
-        
-        
     }
     
-    
-    
+    if ([str isEqualToString:@"advancePaperwork"]) {
+        
+        if ([app.flowAction isEqualToString:@"1"]) {
+            if (app.specificEmployeeFlag1==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"advance" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"2"]) {
+            if (app.specificEmployeeFlag2==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"advance" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"3"]) {
+            if (app.specificEmployeeFlag3==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"advance" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"4"]) {
+            if (app.specificEmployeeFlag4==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"advance" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"5"]) {
+            if (app.specificEmployeeFlag5==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"advance" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+    }
+    if ([str isEqualToString:@"loanPaperwork"]) {
+        
+        if ([app.flowAction isEqualToString:@"1"]) {
+            if (app.specificEmployeeFlag1==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"loan" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"2"]) {
+            if (app.specificEmployeeFlag2==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"loan" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"3"]) {
+            if (app.specificEmployeeFlag3==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"loan" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"4"]) {
+            if (app.specificEmployeeFlag4==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"loan" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"5"]) {
+            if (app.specificEmployeeFlag5==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"loan" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+    }
+    if ([str isEqualToString:@"finePaperwork"]) {
+        
+        if ([app.flowAction isEqualToString:@"1"]) {
+            if (app.specificEmployeeFlag1==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"fine" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"2"]) {
+            if (app.specificEmployeeFlag2==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"fine" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"3"]) {
+            if (app.specificEmployeeFlag3==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"fine" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"4"]) {
+            if (app.specificEmployeeFlag4==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"fine" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"5"]) {
+            if (app.specificEmployeeFlag5==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"fine" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+    }
+    if ([str isEqualToString:@"expensePaperwork"]) {
+        
+        if ([app.flowAction isEqualToString:@"1"]) {
+            if (app.specificEmployeeFlag1==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"expense" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"2"]) {
+            if (app.specificEmployeeFlag2==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"expense" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"3"]) {
+            if (app.specificEmployeeFlag3==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"expense" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"4"]) {
+            if (app.specificEmployeeFlag4==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"expense" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"5"]) {
+            if (app.specificEmployeeFlag5==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"expense" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+    }
+    if ([str isEqualToString:@"customPaperwork"]) {
+        
+        if ([app.flowAction isEqualToString:@"1"]) {
+            if (app.specificEmployeeFlag1==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"custom" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"2"]) {
+            if (app.specificEmployeeFlag2==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"custom" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"3"]) {
+            if (app.specificEmployeeFlag3==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"custom" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"4"]) {
+            if (app.specificEmployeeFlag4==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"custom" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"5"]) {
+            if (app.specificEmployeeFlag5==0) {
+                
+                [self.myconnection assigntoSpecificEmployee:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"] : app.ruleID : app.conditionID :app.flowAction :@"custom" ];
+            }
+            else
+            {
+                [self loaclView];
+            }
+        }
+    }
     
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -133,48 +391,48 @@
     cell.myImage.clipsToBounds = YES;
     if (x==1) {
         cell.empID=[self.empDict objectForKey:[self.filterarraycountry objectAtIndex:indexPath.row]];
-       NSInteger anIndex=[self.nameArray indexOfObject:[self.filterarraycountry objectAtIndex:indexPath.row]];
-       if(NSNotFound == anIndex) {
-           NSLog(@"not found");
-       }
-       NSMutableArray *loadarray=[self.maindictionary objectForKey:[self.idArray objectAtIndex:anIndex]];
-       if ([[loadarray objectAtIndex:1]isEqualToString:@""]) {
-           cell.myImage.image=[UIImage imageNamed:@"img 1.png"];
-       }
-       else
-       {
-           NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:[loadarray objectAtIndex:1] options:0];
-           
-           cell.myImage.image=[UIImage imageWithData:decodedData];
-       }
-       cell.nameLabel.text=[loadarray objectAtIndex:0];
-       cell.desigLabel.text=[loadarray objectAtIndex:2];
-       cell.empIDLabel.text=[loadarray objectAtIndex:3];
-       cell.unitLabel.text=[loadarray objectAtIndex:4];
-   }
+        NSInteger anIndex=[self.nameArray indexOfObject:[self.filterarraycountry objectAtIndex:indexPath.row]];
+        if(NSNotFound == anIndex) {
+            NSLog(@"not found");
+        }
+        NSMutableArray *loadarray=[self.maindictionary objectForKey:[self.idArray objectAtIndex:anIndex]];
+        if ([[loadarray objectAtIndex:1]isEqualToString:@""]) {
+            cell.myImage.image=[UIImage imageNamed:@"img 1.png"];
+        }
+        else
+        {
+            NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:[loadarray objectAtIndex:1] options:0];
+            
+            cell.myImage.image=[UIImage imageWithData:decodedData];
+        }
+        cell.nameLabel.text=[loadarray objectAtIndex:0];
+        cell.desigLabel.text=[loadarray objectAtIndex:2];
+        cell.empIDLabel.text=[loadarray objectAtIndex:3];
+        cell.unitLabel.text=[loadarray objectAtIndex:4];
+    }
     else
-   {
-       cell.empID=[self.empDict objectForKey:[self.nameArray objectAtIndex:indexPath.row]];
-       NSInteger anIndex=[self.nameArray indexOfObject:[self.nameArray objectAtIndex:indexPath.row]];
-       if(NSNotFound == anIndex) {
-           NSLog(@"not found");
-       }
-       NSMutableArray *loadarray=[self.maindictionary objectForKey:[self.idArray objectAtIndex:anIndex]];//[self.nameArray objectAtIndex:indexPath.row]];
-       if ([[loadarray objectAtIndex:1]isEqualToString:@""]) {
-           cell.myImage.image=[UIImage imageNamed:@"img 1.png"];
-       }
-       else
-       {
-           NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:[loadarray objectAtIndex:1] options:0];
-           
-           cell.myImage.image=[UIImage imageWithData:decodedData];
-       }
-       cell.nameLabel.text=[loadarray objectAtIndex:0];
-       cell.desigLabel.text=[loadarray objectAtIndex:2];
-       cell.empIDLabel.text=[loadarray objectAtIndex:3];
-       cell.unitLabel.text=[loadarray objectAtIndex:4];
-       
-   }
+    {
+        cell.empID=[self.empDict objectForKey:[self.nameArray objectAtIndex:indexPath.row]];
+        NSInteger anIndex=[self.nameArray indexOfObject:[self.nameArray objectAtIndex:indexPath.row]];
+        if(NSNotFound == anIndex) {
+            NSLog(@"not found");
+        }
+        NSMutableArray *loadarray=[self.maindictionary objectForKey:[self.idArray objectAtIndex:anIndex]];//[self.nameArray objectAtIndex:indexPath.row]];
+        if ([[loadarray objectAtIndex:1]isEqualToString:@""]) {
+            cell.myImage.image=[UIImage imageNamed:@"img 1.png"];
+        }
+        else
+        {
+            NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:[loadarray objectAtIndex:1] options:0];
+            
+            cell.myImage.image=[UIImage imageWithData:decodedData];
+        }
+        cell.nameLabel.text=[loadarray objectAtIndex:0];
+        cell.desigLabel.text=[loadarray objectAtIndex:2];
+        cell.empIDLabel.text=[loadarray objectAtIndex:3];
+        cell.unitLabel.text=[loadarray objectAtIndex:4];
+        
+    }
     
     if ([self.selectedArray containsObject:cell.empID]) {
         [cell.contentView setAlpha:0.6];
@@ -253,25 +511,25 @@
     [self.selectedArray removeObject:[self.empDict objectForKey:cell.employeeNamelabel.text]];
     [self.selectedEmpNameArray removeObject:cell.employeeNamelabel.text];
     [self.selectedEmployeeIconArray removeObjectAtIndex:removeindex.row];
-
+    
     [self.myTableView reloadData];
     [self.mycollectionView reloadData];
 }
 -(IBAction)doneButtonAction:(id)sender
 {
     if ([app.flowAction isEqualToString:@"1"]) {
-        app.designationFlag1=1;
+        app.specificEmployeeFlag1=1;
     }
     if ([app.flowAction isEqualToString:@"2"]) {
-        app.designationFlag2=1;
+        app.specificEmployeeFlag2=1;
     }
     if ([app.flowAction isEqualToString:@"3"]) {
-        app.designationFlag3=1;
+        app.specificEmployeeFlag3=1;
     }
     if ([app.flowAction isEqualToString:@"4"]) {
-        app.designationFlag4=1;
+        app.specificEmployeeFlag4=1;
     }if ([app.flowAction isEqualToString:@"5"]) {
-        app.designationFlag5=1;
+        app.specificEmployeeFlag5=1;
     }
     
     [self.finalEmpDict setObject:self.selectedArray forKey:@"selectedEmployee"];
@@ -334,8 +592,8 @@
             [self.selectedEmpNameArray addObject:[empDict objectForKey:@"emp_name"]];
             [self.selectedEmployeeIconArray addObject:[empDict objectForKey:@"emp_encode_image"]];
         }
-      
-       
+        
+        
         
         [self.myTableView reloadData];
         [self.mycollectionView reloadData];

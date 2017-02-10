@@ -14,22 +14,24 @@
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect {
- 
- 
-     self.frame=CGRectMake(10, -20, self.frame.size.width, self.frame.size.height);
-     self.backgroundColor=[UIColor whiteColor];
-     self.alpha=100;
-     UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(-500, -300, 1300, 1000)];
-     self.layer.masksToBounds = NO;
-     self.layer.shadowColor = [UIColor blackColor].CGColor;
-     //  self.layer.shadowOffset = CGSizeMake(0.0f, 5.0f);
-     self.layer.shadowOpacity = 0.5f;
-     self.layer.shadowPath = shadowPath.CGPath;
- 
+- (void)drawRect:(CGRect)rect {
+    
+    
+    self.frame=CGRectMake(10, -20, self.frame.size.width, self.frame.size.height);
+    self.backgroundColor=[UIColor whiteColor];
+    self.alpha=100;
+    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(-500, -300, 1300, 1000)];
+    self.layer.masksToBounds = NO;
+    self.layer.shadowColor = [UIColor blackColor].CGColor;
+    //  self.layer.shadowOffset = CGSizeMake(0.0f, 5.0f);
+    self.layer.shadowOpacity = 0.5f;
+    self.layer.shadowPath = shadowPath.CGPath;
+    
 }
 -(void)awakeFromNib
 {
+    [super awakeFromNib];
+    
     [ self.storesCollectionView registerNib:[UINib nibWithNibName:@"storeViewCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"myCell"];
     [ self.employeeCollectionView registerNib:[UINib nibWithNibName:@"employeeSelectionCellCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"employeeCell"];
     
@@ -72,10 +74,54 @@
         {
             [self localView];
         }
-
+        
+    }
+    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"ruleType"]isEqualToString:@"advancePaperwork"]) {
+        self.type=@"advance";
+        if (self.app.designationFlag==0) {
+            [self.myconnetion listingAlltheEmployeesAccordingtoType:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] : @"advance" : self.app.ruleID : self.app.conditionID];
+        }
+        else
+        {
+            [self localView];
+        }
+        
+    }
+    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"ruleType"]isEqualToString:@"loanPaperwork"]) {
+        self.type=@"loan";
+        if (self.app.designationFlag==0) {
+            [self.myconnetion listingAlltheEmployeesAccordingtoType:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] : @"loan" : self.app.ruleID : self.app.conditionID];
+        }
+        else
+        {
+            [self localView];
+        }
+        
+    }
+    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"ruleType"]isEqualToString:@"finePaperwork"]) {
+        self.type=@"fine";
+        if (self.app.designationFlag==0) {
+            [self.myconnetion listingAlltheEmployeesAccordingtoType:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] : @"fine" : self.app.ruleID : self.app.conditionID];
+        }
+        else
+        {
+            [self localView];
+        }
+        
+    }
+    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"ruleType"]isEqualToString:@"expensePaperwork"]) {
+        self.type=@"expense";
+        if (self.app.designationFlag==0) {
+            [self.myconnetion listingAlltheEmployeesAccordingtoType:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] : @"expense" : self.app.ruleID : self.app.conditionID];
+        }
+        else
+        {
+            [self localView];
+        }
+        
     }
     
-
+    
     
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -215,34 +261,34 @@
     newRadioButton = [UIButton buttonWithType:UIButtonTypeCustom];
     newRadioButton.frame = CGRectMake(30, 0, 15, 14.5);
     cell.accessoryView = newRadioButton;
-
+    
     if (self.filterFlag==1) {
         if ([self.selectedDepartmentArray containsObject:[self.filterIDArray objectAtIndex:indexPath.row]]) {
-            [newRadioButton setImage:[UIImage imageNamed:@"selection_buttoen.png"] forState:UIControlStateNormal];
+            [newRadioButton setImage:[UIImage imageNamed:@"check_box_tick.png"] forState:UIControlStateNormal];
         }
         else
         {
-            [newRadioButton setImage:[UIImage imageNamed:@"selection_buttoen_white.png"] forState:UIControlStateNormal];
+            [newRadioButton setImage:[UIImage imageNamed:@"check_box_blank.png"] forState:UIControlStateNormal];
         }
     }
     else if (self.filterFlag==2)
     {
         if ([self.selectedCategoryArray containsObject:[self.filterIDArray objectAtIndex:indexPath.row]]) {
-            [newRadioButton setImage:[UIImage imageNamed:@"selection_buttoen.png"] forState:UIControlStateNormal];
+            [newRadioButton setImage:[UIImage imageNamed:@"check_box_tick.png"] forState:UIControlStateNormal];
         }
         else
         {
-            [newRadioButton setImage:[UIImage imageNamed:@"selection_buttoen_white.png"] forState:UIControlStateNormal];
+            [newRadioButton setImage:[UIImage imageNamed:@"check_box_blank.png"] forState:UIControlStateNormal];
         }
     }
     else if (self.filterFlag==3)
     {
         if ([self.selectedDesignationArray containsObject:[self.filterIDArray objectAtIndex:indexPath.row]]) {
-            [newRadioButton setImage:[UIImage imageNamed:@"selection_buttoen.png"] forState:UIControlStateNormal];
+            [newRadioButton setImage:[UIImage imageNamed:@"check_box_tick.png"] forState:UIControlStateNormal];
         }
         else
         {
-            [newRadioButton setImage:[UIImage imageNamed:@"selection_buttoen_white.png"] forState:UIControlStateNormal];
+            [newRadioButton setImage:[UIImage imageNamed:@"check_box_blank.png"] forState:UIControlStateNormal];
         }
     }
     return  cell;
@@ -253,7 +299,7 @@
     UITableViewCell *cell=[self.filterTableView cellForRowAtIndexPath:indexPath];
     if (self.filterFlag==1) {
         UIButton *radioButton = (UIButton *)cell.accessoryView;
-        if([radioButton.currentImage isEqual:[UIImage imageNamed:@"selection_buttoen.png"]])
+        if([radioButton.currentImage isEqual:[UIImage imageNamed:@"check_box_tick.png"]])
         {
             [self.selectedDepartmentArray removeObject:[self.filterIDArray objectAtIndex:indexPath.row]];
         }
@@ -261,12 +307,12 @@
         {
             [self.selectedDepartmentArray addObject:[self.filterIDArray objectAtIndex:indexPath.row]];
         }
-       
+        
     }
     else if (self.filterFlag==2)
     {
         UIButton *radioButton = (UIButton *)cell.accessoryView;
-        if([radioButton.currentImage isEqual:[UIImage imageNamed:@"selection_buttoen.png"]])
+        if([radioButton.currentImage isEqual:[UIImage imageNamed:@"check_box_tick.png"]])
         {
             [self.selectedCategoryArray removeObject:[self.filterIDArray objectAtIndex:indexPath.row]];
         }
@@ -278,7 +324,7 @@
     else if (self.filterFlag==3)
     {
         UIButton *radioButton = (UIButton *)cell.accessoryView;
-        if([radioButton.currentImage isEqual:[UIImage imageNamed:@"selection_buttoen.png"]])
+        if([radioButton.currentImage isEqual:[UIImage imageNamed:@"check_box_tick.png"]])
         {
             [self.selectedDesignationArray removeObject:[self.filterIDArray objectAtIndex:indexPath.row]];
         }
@@ -391,9 +437,9 @@
         [[NSUserDefaults standardUserDefaults]setObject:desigDict forKey:@"selected_employees"];
         [[NSUserDefaults standardUserDefaults]setObject:self.finalDict forKey:@"officeDetails"];
         
-      //  [self removeFromSuperview];
+        //  [self removeFromSuperview];
         
-       // [[NSNotificationCenter defaultCenter] postNotificationName:@"enableall" object:Nil];
+        // [[NSNotificationCenter defaultCenter] postNotificationName:@"enableall" object:Nil];
         
     }
     
@@ -430,9 +476,9 @@
             for (int i=0; i<cateArray.count; i++) {
                 NSMutableDictionary *catDict=[cateArray objectAtIndex:i];
                 [self.filterArray addObject:[catDict objectForKey:@"cat_name"]];
-                [self.filterIDArray addObject:[catDict objectForKey:@"id"]];
+                [self.filterIDArray addObject:[catDict objectForKey:@"cat_id"]];
                 
-                [self.filterDictionary setObject:[catDict objectForKey:@"cat_name"] forKey:[catDict objectForKey:@"id"]];
+                [self.filterDictionary setObject:[catDict objectForKey:@"cat_name"] forKey:[catDict objectForKey:@"cat_id"]];
             }
             
             self.filterView.frame=CGRectMake(160, 167, self.filterView.frame.size.width, self.filterView.frame.size.height);
@@ -525,7 +571,7 @@
             {
                 self.categoryText.text=@"Multiple";
             }
-
+            
             
             [self filterService];
             
@@ -537,7 +583,7 @@
             self.designationText.backgroundColor=[UIColor lightGrayColor];
             self.designationText.userInteractionEnabled=NO;
         }
-
+        
     }
     else
     {
@@ -554,7 +600,7 @@
             {
                 self.designationText.text=@"Multiple";
             }
-
+            
             [self filterService];
         }
         else{
@@ -640,11 +686,6 @@
             [self.empDict setObject:[desigDict objectForKey:@"emp_id"] forKey:[desigDict objectForKey:@"emp_name"]];
         }
         
-        
-        
-        
-        
-        
         NSMutableArray *selected=[officeDetailsDict objectForKey:@"selected_employees"];
         for (int i=0; i<selected.count; i++) {
             NSMutableDictionary *selectedDesigDict=[selected objectAtIndex:i];
@@ -669,7 +710,7 @@
         
         NSMutableArray *catArray=[self.finalDict objectForKey:@"category"];
         for (int i=0; i<catArray.count; i++) {
-            [self.selectedCategoryArray addObject:[[catArray objectAtIndex:i]objectForKey:@"id"]];
+            [self.selectedCategoryArray addObject:[[catArray objectAtIndex:i]objectForKey:@"cat_id"]];
         }
         
         NSMutableArray *desigArray=[self.finalDict objectForKey:@"designation"];
@@ -733,7 +774,7 @@
         
         NSMutableArray *catArray=[self.finalDict objectForKey:@"category"];
         for (int i=0; i<catArray.count; i++) {
-            [self.selectedCategoryArray addObject:[[catArray objectAtIndex:i]objectForKey:@"id"]];
+            [self.selectedCategoryArray addObject:[[catArray objectAtIndex:i]objectForKey:@"cat_id"]];
         }
         
         NSMutableArray *desigArray=[self.finalDict objectForKey:@"designation"];
@@ -754,7 +795,7 @@
 -(void)localView
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-       
+        
         [self.finalDict removeAllObjects];
         [self.empDict removeAllObjects];
         self.finalDict=[[NSUserDefaults standardUserDefaults]objectForKey:@"officeDetails"];
@@ -818,7 +859,7 @@
         
         NSMutableArray *catArray=[self.finalDict objectForKey:@"category"];
         for (int i=0; i<catArray.count; i++) {
-            [self.selectedCategoryArray addObject:[[catArray objectAtIndex:i]objectForKey:@"id"]];
+            [self.selectedCategoryArray addObject:[[catArray objectAtIndex:i]objectForKey:@"cat_id"]];
         }
         
         NSMutableArray *desigArray=[self.finalDict objectForKey:@"designation"];
@@ -841,7 +882,7 @@
 -(void)viewAllResponse:(id)responseList
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-     
+        
         [self.employeeArray removeAllObjects];
         [self.employeeIDArray removeAllObjects];
         [self.employeeImageArray removeAllObjects];

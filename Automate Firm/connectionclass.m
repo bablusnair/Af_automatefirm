@@ -189,7 +189,7 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
 
 //----------------------------Include Designation for Paperwork Authority------------------
 
-#define includeDesignationUrl3 @"http://192.168.1.45/work/automate_new1/index.php/settings/get_employee_details/desig_list?"
+#define includeDesignationUrl3 @"rest/get_employee_details_api/desig_list/"
 
 //---------------------------------------Leave Settings Url-------------------------------------
 
@@ -329,12 +329,12 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
 
 //----------------------------------staffing employee listing----------------------------------
 
-#define staffingemployeeListing @"http://192.168.1.45/work/automate_new1/index.php/staffing/employee_attendance/get_employee_details/"
+#define staffingemployeeListing @"http://192.168.1.35/work/automate_new1/index.php/staffing/employee_attendance/get_employee_details/"
 
 
-#define workingpremiseALLlisting @"http://192.168.1.45/work/automate_new1/index.php/staffing/employee_filter/get_details/"
+#define workingpremiseALLlisting @"http://192.168.1.35/work/automate_new1/index.php/staffing/employee_filter/get_details/"
 
-#define filteringEmployeelistservice @"http://192.168.1.45/work/automate_new1/index.php/staffing/employee_filter/get_filter_data"
+#define filteringEmployeelistservice @"http://192.168.1.35/work/automate_new1/index.php/staffing/employee_filter/get_filter_data"
 
 
 //<<<-----------------------------------PORTAL SETTINGS----------------------------------->>>
@@ -428,23 +428,23 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
 
 //<<<-------------------paperwork Settings Urls--------------------->>>
 
-#define listingEmpAccordingtoTypeUrl @"http://192.168.1.35/af1.0/index.php/settings/get_employee_details/emp_list?"
+#define listingEmpAccordingtoTypeUrl @"rest/paperwork_api/emp_list/"
 #define filterEmpPopUrl @"http://192.168.1.35/af1.0/index.php/settings/pw_employee_filter/emp_filter_data"
 
-#define assigntoSpecificEmployeeURL @"http://192.168.1.35/af1.0/index.php/settings/get_employee_details/whole_employee_list?"
+#define assigntoSpecificEmployeeURL @"rest/get_employee_details_api/whole_employee_list/"
 
-#define listallPaperworkRuleURL @"http://192.168.1.35/af1.0/index.php/settings/paperwork_leave/rule_view_all?"
-#define individualProtocolViewUrl @"http://192.168.1.35/af1.0/index.php/settings/paperwork_leave/get_rule_edit_details/"
+#define listallPaperworkRuleURL @"rest/paperwork_api/rule_view_all/"
+#define individualProtocolViewUrl @"rest/paperwork_api/get_rule_edit_details/"
 
-#define saveProtocolURL @"http://192.168.1.35/af1.0/index.php/settings/paperwork_leave/insert_protocol"
-#define updateProtocolURL @"http://192.168.1.35/af1.0/index.php/settings/paperwork_leave/update_protocol"
-#define savePaperworkRuleURL @"http://192.168.1.35/af1.0/index.php/settings/paperwork_leave/final_rule_save"
-#define viewIndividualProtocolViewURL @"http://192.168.1.35/af1.0/index.php/settings/paperwork_leave/get_protocol_edit_details/"
-#define deletePaperworkProtocolURL @"http://192.168.1.35/af1.0/index.php/settings/paperwork_leave/delete_protocol?"
-#define advancePaperworkListingURL @"http://192.168.1.35/af1.0/index.php/settings/paperwork_leave/advance_view_all?"
-#define saveCustomPaperworkURL @"http://192.168.1.35/af1.0/index.php/settings/custom_document/custom_rule_create"
-#define viewCustomPaperworkURL @"http://192.168.1.35/af1.0/index.php/settings/custom_document/custom_rule_edit_details/"
-#define updateCustomPaperworkURL @"http://192.168.1.35/af1.0/index.php/settings/custom_document/update_custom_rule"
+#define saveProtocolURL @"rest/paperwork_api/insert_protocol"
+#define updateProtocolURL @"rest/paperwork_api/update_protocol"
+#define savePaperworkRuleURL @"rest/paperwork_api/final_rule_save"
+#define viewIndividualProtocolViewURL @"rest/paperwork_api/get_protocol_edit_details/"
+#define deletePaperworkProtocolURL @"rest/paperwork_api/delete_protocol/"
+
+#define saveCustomPaperworkURL @"rest/customer_document_api/custom_rule_create"
+#define viewCustomPaperworkURL @"rest/customer_document_api/custom_rule_edit_details/"
+#define updateCustomPaperworkURL @"rest/customer_document_api/update_custom_rule"
 
 #define deleteCustomPaperworkRuleURL @"http://192.168.1.35/af1.0/index.php/settings/custom_document/delete_custom_rule/"
 
@@ -6710,91 +6710,179 @@ dispatch_async(dispatch_get_main_queue(), ^{
 
 -(void)includeDesignationForPaperworkAuthority:(NSString *)officeID :(NSString *)ruleType :(NSString *)ruleID :(NSString *)tileID :(NSString *)actionFlag
 {
-    NSURLSession *session = [NSURLSession sharedSession];//
-    NSString *urlString=[NSString stringWithFormat:@"%@oid=%@&&type=%@&&rule_id=%@&&tile_id=%@&&progress_id=%@",includeDesignationUrl3,officeID,ruleType,ruleID,tileID,actionFlag];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//    NSURLSession *session = [NSURLSession sharedSession];//
+//    NSString *urlString=[NSString stringWithFormat:@"%@oid=%@&&type=%@&&rule_id=%@&&tile_id=%@&&progress_id=%@",includeDesignationUrl3,officeID,ruleType,ruleID,tileID,actionFlag];
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        
+//        
+//        
+//        if (data==Nil) {
+//            
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//            {
+//                
+//                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+//                
+//            }
+//            
+//            
+//        }
+//        
+//        else
+//        {
+//            NSMutableArray *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//            
+//            NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//            NSLog(@"%@",mystring);
+//            
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(serviceGotResponse:)]&&(self.mydelegate!=NULL))
+//            {
+//                
+//                [self.mydelegate serviceGotResponse:json];
+//                
+//            }
+//            
+//        }
+//        
+//        
+//    }];
+//    
+//    [dataTask resume];
+    
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@%@/%@/%@/%@/%@",subdomainURL,includeDesignationUrl3,officeID,ruleType,ruleID,tileID,actionFlag];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
+    
+    
+    
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         
+        NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
         
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
         
-        if (data==Nil) {
-            
-            
-            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
-            {
-                
-                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
-                
-            }
-            
-            
-        }
-        
-        else
-        {
-            NSMutableArray *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            
-            NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSLog(@"%@",mystring);
-            
-            
+        if ([httpResponse statusCode] == 200) {
+            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             if ([self.mydelegate respondsToSelector:@selector(serviceGotResponse:)]&&(self.mydelegate!=NULL))
             {
-                
                 [self.mydelegate serviceGotResponse:json];
-                
             }
-            
         }
-        
-        
-    }];
-    
-    [dataTask resume];
+        else if ([httpResponse statusCode]==500)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Server Error"];
+            }
+        }
+        else
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+            }
+        }
+    }] resume];
 }
 //<<------------------------Assign to Specific Employee for Paperwork Settings------------->>>
 
 -(void)assigntoSpecificEmployee:(NSString *)officeID :(NSString *)ruleID :(NSString *)conditionID :(NSString *)actionFlow :(NSString *)type
 {
-    NSURLSession *session = [NSURLSession sharedSession];//
-    NSString *urlString=[NSString stringWithFormat:@"%@oid=%@&&rule_id=%@&&tile_id=%@&&progress_id=%@&&type=%@",assigntoSpecificEmployeeURL,officeID,ruleID,conditionID,actionFlow,type];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//    NSURLSession *session = [NSURLSession sharedSession];//
+//    NSString *urlString=[NSString stringWithFormat:@"%@oid=%@&&rule_id=%@&&tile_id=%@&&progress_id=%@&&type=%@",assigntoSpecificEmployeeURL,officeID,ruleID,conditionID,actionFlow,type];
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        
+//        
+//        
+//        if (data==Nil) {
+//            
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//            {
+//                
+//                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+//                
+//            }
+//            
+//            
+//        }
+//        
+//        else
+//        {
+//            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//            
+//            NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//            NSLog(@"%@",mystring);
+//            
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(serviceGotResponse:)]&&(self.mydelegate!=NULL))
+//            {
+//                
+//                [self.mydelegate serviceGotResponse:json];
+//                
+//            }
+//            
+//        }
+//        
+//        
+//    }];
+//    
+//    [dataTask resume];
+    
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+     NSString *urlString=[NSString stringWithFormat:@"%@%@%@/%@/%@/%@/%@",subdomainURL,assigntoSpecificEmployeeURL,officeID,ruleID,conditionID,actionFlow,type];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
+    
+    
+    
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         
+        NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
         
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
         
-        if (data==Nil) {
-            
-            
-            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
-            {
-                
-                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
-                
-            }
-            
-            
-        }
-        
-        else
-        {
+        if ([httpResponse statusCode] == 200) {
             id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            
-            NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSLog(@"%@",mystring);
-            
-            
             if ([self.mydelegate respondsToSelector:@selector(serviceGotResponse:)]&&(self.mydelegate!=NULL))
             {
                 
                 [self.mydelegate serviceGotResponse:json];
                 
             }
-            
         }
-        
-        
-    }];
-    
-    [dataTask resume];
+        else if ([httpResponse statusCode]==500)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Server Error"];
+            }
+        }
+        else
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+            }
+        }
+    }] resume];
 }
 
 #pragma mark Leave Settings
@@ -14389,72 +14477,156 @@ dispatch_async(dispatch_get_main_queue(), ^{
 -(void)employeeListingservice:(NSString *)officeid
 {
   
-    NSURLSession *session = [NSURLSession sharedSession];
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    NSString *urlString=[NSString stringWithFormat:@"%@%@",staffingemployeeListing,officeid];
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        
+//        
+//        
+//        if (data==Nil) {
+//            
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//            {
+//                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+//            }
+//        }
+//        
+//        else
+//        {
+//            NSMutableDictionary *mydict  = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//          //  NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//         //   NSLog(@"%@",mystring);
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(employeelistingService:)]&&(self.mydelegate!=NULL))
+//            {
+//                [self.mydelegate employeelistingService:mydict];
+//            }
+//        }
+//    }];
+//    
+//    [dataTask resume];
+
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
     NSString *urlString=[NSString stringWithFormat:@"%@%@",staffingemployeeListing,officeid];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
+    
+    
+    
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         
+        NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
         
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
         
-        if (data==Nil) {
-            
-            
+        if ([httpResponse statusCode] == 200) {
+            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            if ([self.mydelegate respondsToSelector:@selector(employeelistingService:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate employeelistingService:json];
+            }
+        }
+        else if ([httpResponse statusCode]==500)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Server Error"];
+            }
+        }
+        else
+        {
             if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
             {
                 [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
             }
         }
-        
-        else
-        {
-            NSMutableDictionary *mydict  = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-          //  NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-         //   NSLog(@"%@",mystring);
-            
-            if ([self.mydelegate respondsToSelector:@selector(employeelistingService:)]&&(self.mydelegate!=NULL))
-            {
-                [self.mydelegate employeelistingService:mydict];
-            }
-        }
-    }];
-    
-    [dataTask resume];
-
-    
+    }] resume];
 }
 
 
 -(void)filterlistingaction:(NSString *)officeid
 {
     
-    NSURLSession *session = [NSURLSession sharedSession];
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    NSString *urlString=[NSString stringWithFormat:@"%@%@",workingpremiseALLlisting,officeid];
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        
+//        
+//        
+//        if (data==Nil) {
+//            
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//            {
+//                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+//            }
+//        }
+//        
+//        else
+//        {
+//            NSMutableDictionary *mydict  = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//            //  NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//            //   NSLog(@"%@",mystring);
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(allEmployeeFilterResponse:)]&&(self.mydelegate!=NULL))
+//            {
+//                [self.mydelegate allEmployeeFilterResponse:mydict];
+//            }
+//        }
+//    }];
+//    
+//    [dataTask resume];
+    
+    
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
     NSString *urlString=[NSString stringWithFormat:@"%@%@",workingpremiseALLlisting,officeid];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
+    
+    
+    
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         
+        NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
         
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
         
-        if (data==Nil) {
-            
-            
+        if ([httpResponse statusCode] == 200) {
+            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            if ([self.mydelegate respondsToSelector:@selector(allEmployeeFilterResponse:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate allEmployeeFilterResponse:json];
+            }
+        }
+        else if ([httpResponse statusCode]==500)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Server Error"];
+            }
+        }
+        else
+        {
             if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
             {
                 [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
             }
         }
-        
-        else
-        {
-            NSMutableDictionary *mydict  = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            //  NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            //   NSLog(@"%@",mystring);
-            
-            if ([self.mydelegate respondsToSelector:@selector(allEmployeeFilterResponse:)]&&(self.mydelegate!=NULL))
-            {
-                [self.mydelegate allEmployeeFilterResponse:mydict];
-            }
-        }
-    }];
-    
-    [dataTask resume];
+    }] resume];
     
     
 }
@@ -14462,6 +14634,68 @@ dispatch_async(dispatch_get_main_queue(), ^{
 
 -(void)filteringEmployeelist:(NSMutableArray *)officeArray storearray:(NSMutableArray *)storeArray departArray:(NSMutableArray *)departmentArray catearray:(NSMutableArray *)categoryArray designation:(NSMutableArray *)designationArray officeid:(NSString *)office_id
 {
+    
+//    NSError *error;
+//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+//    NSString *urlString=[NSString stringWithFormat:@"%@",filteringEmployeelistservice];
+//    NSURL *url = [NSURL URLWithString:urlString];
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+//                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+//                                                       timeoutInterval:60.0];
+//    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    [request setHTTPMethod:@"POST"];
+//    
+//    
+//    NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys:officeArray,@"office_list",storeArray,@"store_list",departmentArray,@"department_list",categoryArray,@"category_list",designationArray,@"designation_list",office_id,@"office_id",nil];
+//    
+//    
+//    NSData *postData = [NSJSONSerialization dataWithJSONObject:mapData options:0 error:&error];
+//    [request setHTTPBody:postData];
+//    
+//    
+//    NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        
+//        
+//        if (data==Nil) {
+//            
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//            {
+//                
+//                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+//                
+//            }
+//            
+//        }
+//        
+//        else
+//        {
+//          
+//            
+//            NSMutableDictionary *mydict  = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//         //   NSLog(@"%@",mydict);
+//            
+//            
+//            //  NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//             //  NSLog(@"%@",mystring);
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(filterigemployeelistingService:)]&&(self.mydelegate!=NULL))
+//            {
+//                
+//                [self.mydelegate filterigemployeelistingService:mydict];
+//                
+//            }
+//            
+//        }
+//        
+//    }];
+//    
+//    [postDataTask resume];
+    
+    
+    
     
     NSError *error;
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -14473,8 +14707,8 @@ dispatch_async(dispatch_get_main_queue(), ^{
                                                        timeoutInterval:60.0];
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
     [request setHTTPMethod:@"POST"];
-    
     
     NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys:officeArray,@"office_list",storeArray,@"store_list",departmentArray,@"department_list",categoryArray,@"category_list",designationArray,@"designation_list",office_id,@"office_id",nil];
     
@@ -14485,42 +14719,48 @@ dispatch_async(dispatch_get_main_queue(), ^{
     
     NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         
-        if (data==Nil) {
-            
-            
+        NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
+        
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+        if ([httpResponse statusCode] == 201)
+        {
+            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSLog(@"%@",json);
+            if ([self.mydelegate respondsToSelector:@selector(filterigemployeelistingService:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate filterigemployeelistingService:json];
+            }
+        }
+        else if ([httpResponse statusCode]==501)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Designation Title/ Abbreviation Already Exists"];
+            }
+        }
+        else if ([httpResponse statusCode]==500)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Server Error"];
+            }
+        }
+        else
+        {
             if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
             {
                 
                 [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
                 
             }
-            
-        }
-        
-        else
-        {
-          
-            
-            NSMutableDictionary *mydict  = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-         //   NSLog(@"%@",mydict);
-            
-            
-            //  NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-             //  NSLog(@"%@",mystring);
-            
-            if ([self.mydelegate respondsToSelector:@selector(filterigemployeelistingService:)]&&(self.mydelegate!=NULL))
-            {
-                
-                [self.mydelegate filterigemployeelistingService:mydict];
-                
-            }
-            
         }
         
     }];
-    
     [postDataTask resume];
+    
     
 }
 
@@ -15142,594 +15382,1167 @@ dispatch_async(dispatch_get_main_queue(), ^{
 -(void)listingAlltheEmployeesAccordingtoType:(NSString *)officeID :(NSString *)type :(NSString *)ruleID :(NSString *)tileID
 {
     
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSString *urlString=[NSString stringWithFormat:@"%@oid=%@&&type=%@&&rule_id=%@&&tile_id=%@",listingEmpAccordingtoTypeUrl,officeID,type,ruleID,tileID];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    NSString *urlString=[NSString stringWithFormat:@"%@oid=%@&&type=%@&&rule_id=%@&&tile_id=%@",listingEmpAccordingtoTypeUrl,officeID,type,ruleID,tileID];
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        
+//        if (data==Nil) {
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//            {
+//                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+//            }
+//        }
+//        
+//        else
+//        {
+//            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//            
+//            //id mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(serviceGotResponse:)]&&(self.mydelegate!=NULL))
+//            {
+//                
+//                [self.mydelegate serviceGotResponse:json];
+//                
+//            }
+//        }
+//        
+//    }];
+//    
+//    [dataTask resume];
+    
+    
+    
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@%@/%@/%@/%@",subdomainURL,listingEmpAccordingtoTypeUrl,officeID,type,ruleID,tileID];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
+    
+    
+    
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         
-        if (data==Nil) {
-            
+        NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
+        
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+        
+        if ([httpResponse statusCode] == 200) {
+            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            if ([self.mydelegate respondsToSelector:@selector(serviceGotResponse:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate serviceGotResponse:json];
+            }
+        }
+        else if ([httpResponse statusCode]==500)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Server Error"];
+            }
+        }
+        else
+        {
             if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
             {
                 [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
             }
         }
-        
-        else
-        {
-            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            
-            //id mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            
-            if ([self.mydelegate respondsToSelector:@selector(serviceGotResponse:)]&&(self.mydelegate!=NULL))
-            {
-                
-                [self.mydelegate serviceGotResponse:json];
-                
-            }
-        }
-        
-    }];
+    }] resume];
     
-    [dataTask resume];
 }
 
 -(void)employeePopupFilter:(id)filterDict
 {
-    NSError *error;
+//    NSError *error;
+//    
+//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+//    NSString *urlString=[NSString stringWithFormat:@"%@",filterEmpPopUrl];
+//    NSURL *url = [NSURL URLWithString:urlString];
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+//                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+//                                                       timeoutInterval:60.0];
+//    
+//    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    
+//    [request setHTTPMethod:@"POST"];
+//    NSData *postData = [NSJSONSerialization dataWithJSONObject:filterDict options:0 error:&error];
+//    [request setHTTPBody:postData];
+//    
+//    
+//    NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        
+//        
+//        if (data==Nil) {
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//            {
+//                
+//                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+//                
+//            }
+//            
+//        }
+//        else
+//        {
+//            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//            id mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//            NSLog(@"%@",json);
+//            if ([self.mydelegate respondsToSelector:@selector(viewAllResponse:)]&&(self.mydelegate!=NULL))
+//            {
+//                [self.mydelegate viewAllResponse:json];
+//            }
+//        }
+//    }];
+//    
+//    [postDataTask resume];
     
+    
+    NSError *error;
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-    NSString *urlString=[NSString stringWithFormat:@"%@",filterEmpPopUrl];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@",subdomainURL,filterEmpPopUrl];
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:60.0];
-    
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    
+    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
     [request setHTTPMethod:@"POST"];
+    
     NSData *postData = [NSJSONSerialization dataWithJSONObject:filterDict options:0 error:&error];
     [request setHTTPBody:postData];
     
     
     NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         
-        if (data==Nil) {
-            
-            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
-            {
-                
-                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
-                
-            }
-            
-        }
-        else
+        NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
+        
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+        if ([httpResponse statusCode] == 201)
         {
             id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            id mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSLog(@"%@",json);
             if ([self.mydelegate respondsToSelector:@selector(viewAllResponse:)]&&(self.mydelegate!=NULL))
             {
                 [self.mydelegate viewAllResponse:json];
             }
         }
+        else if ([httpResponse statusCode]==501)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+               // [self.mydelegate showalerviewcontroller:@"Designation Title/ Abbreviation Already Exists"];
+            }
+        }
+        else if ([httpResponse statusCode]==500)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Server Error"];
+            }
+        }
+        else
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                
+                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+                
+            }
+        }
+        
     }];
-    
     [postDataTask resume];
 }
 
 
 -(void)listingAllPaperworkRule:(NSString *)type :(NSString *)officeID
 {
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSString *urlString=[NSString stringWithFormat:@"%@office_id=%@&&rule_type=%@",listallPaperworkRuleURL,officeID,type];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (data==Nil) {
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@%@/%@",subdomainURL,listallPaperworkRuleURL,officeID,type];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
+    
+    
+    
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+        
+        NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
+        
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+        
+        if ([httpResponse statusCode] == 200) {
+            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            if ([self.mydelegate respondsToSelector:@selector(viewAllResponse:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate viewAllResponse:json];
+            }
+        }
+        else if ([httpResponse statusCode]==500)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Server Error"];
+            }
+        }
+        else
+        {
             if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
             {
                 [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
             }
         }
-        
-        else
-        {
-            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            id mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            
-            if ([self.mydelegate respondsToSelector:@selector(viewAllResponse:)]&&(self.mydelegate!=NULL))
-            {
-                
-                [self.mydelegate viewAllResponse:json];
-                
-            }
-            
-        }
-        
-    }];
-    
-    
-    [dataTask resume];
+    }] resume];
 }
 
 -(void)individualProtocolRuleView:(NSString *)officeID :(NSString *)ruleID :(NSString *)type
 {
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSString *urlString=[NSString stringWithFormat:@"%@%@/%@/%@",individualProtocolViewUrl,officeID,ruleID,type];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (data==Nil) {
+    
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@%@/%@/%@",subdomainURL,individualProtocolViewUrl,officeID,ruleID,type];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
+    
+    
+    
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+        
+        NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
+        
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+        
+        if ([httpResponse statusCode] == 200) {
+            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            if ([self.mydelegate respondsToSelector:@selector(serviceGotResponse:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate serviceGotResponse:json];
+            }
+        }
+        else if ([httpResponse statusCode]==500)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Server Error"];
+            }
+        }
+        else
+        {
             if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
             {
                 [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
             }
         }
-        
-        else
-        {
-            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            
-            if ([self.mydelegate respondsToSelector:@selector(serviceGotResponse:)]&&(self.mydelegate!=NULL))
-            {
-                
-                [self.mydelegate serviceGotResponse:json];
-                
-            }
-            
-        }
-        
-    }];
-    
-    
-    [dataTask resume];
+    }] resume];
 }
 
 -(void)saveIndividualProtocol:(id)protocolDict
 {
-    NSError *error;
     
+    NSError *error;
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-    NSString *urlString=[NSString stringWithFormat:@"%@",saveProtocolURL];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@",subdomainURL,saveProtocolURL];
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:60.0];
-    
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    
+    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
     [request setHTTPMethod:@"POST"];
+    
     NSData *postData = [NSJSONSerialization dataWithJSONObject:protocolDict options:0 error:&error];
     [request setHTTPBody:postData];
     
     
     NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         
-        if (data==Nil) {
-            
+        NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
+        
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+        if ([httpResponse statusCode] == 201)
+        {
+            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSLog(@"%@",json);
+            if ([self.mydelegate respondsToSelector:@selector(createResponse:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate createResponse:json];
+            }
+        }
+        else if ([httpResponse statusCode]==501)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                //[self.mydelegate showalerviewcontroller:@"Designation Title/ Abbreviation Already Exists"];
+            }
+        }
+        else if ([httpResponse statusCode]==500)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Server Error"];
+            }
+        }
+        else
+        {
             if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
             {
                 
                 [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
                 
             }
-            
         }
-        else
-        {
-            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            id mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSLog(@"%@",mystring);
-            
-            if ([self.mydelegate respondsToSelector:@selector(createResponse:)]&&(self.mydelegate!=NULL))
-            {
-                [self.mydelegate createResponse:json];
-            }
-        }
+        
     }];
-    
     [postDataTask resume];
 }
 -(void)updateIndividualProtocol:(id)protocolDict
 {
-    NSError *error;
+//    NSError *error;
+//    
+//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+//    NSString *urlString=[NSString stringWithFormat:@"%@",updateProtocolURL];
+//    NSURL *url = [NSURL URLWithString:urlString];
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+//                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+//                                                       timeoutInterval:60.0];
+//    
+//    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    
+//    [request setHTTPMethod:@"POST"];
+//    NSData *postData = [NSJSONSerialization dataWithJSONObject:protocolDict options:0 error:&error];
+//    [request setHTTPBody:postData];
+//    
+//    
+//    NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        
+//        
+//        if (data==Nil) {
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//            {
+//                
+//                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+//                
+//            }
+//            
+//        }
+//        else
+//        {
+//            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//            id mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//            NSLog(@"%@",mystring);
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(createResponse:)]&&(self.mydelegate!=NULL))
+//            {
+//                [self.mydelegate createResponse:json];
+//            }
+//        }
+//    }];
+//    
+//    [postDataTask resume];
     
+    
+    
+    
+    NSError *error;
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-    NSString *urlString=[NSString stringWithFormat:@"%@",updateProtocolURL];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@",subdomainURL,updateProtocolURL];
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:60.0];
-    
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    
+    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
     [request setHTTPMethod:@"POST"];
+    
     NSData *postData = [NSJSONSerialization dataWithJSONObject:protocolDict options:0 error:&error];
     [request setHTTPBody:postData];
     
     
     NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         
-        if (data==Nil) {
-            
+        NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
+        
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+        if ([httpResponse statusCode] == 201)
+        {
+            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSLog(@"%@",json);
+            if ([self.mydelegate respondsToSelector:@selector(createResponse:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate createResponse:json];
+            }
+        }
+        else if ([httpResponse statusCode]==501)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+               // [self.mydelegate showalerviewcontroller:@"Designation Title/ Abbreviation Already Exists"];
+            }
+        }
+        else if ([httpResponse statusCode]==500)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Server Error"];
+            }
+        }
+        else
+        {
             if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
             {
                 
                 [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
                 
             }
-            
         }
-        else
-        {
-            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            id mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSLog(@"%@",mystring);
-            
-            if ([self.mydelegate respondsToSelector:@selector(createResponse:)]&&(self.mydelegate!=NULL))
-            {
-                [self.mydelegate createResponse:json];
-            }
-        }
+        
     }];
-    
     [postDataTask resume];
 }
 -(void)savePaperworkRule:(NSString *)ruleID :(NSString *)ruleType :(id)declarationMsg
 {
-    NSError *error;
+//    NSError *error;
+//    
+//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+//    NSString *urlString=[NSString stringWithFormat:@"%@/%@/%@",savePaperworkRuleURL,ruleID,ruleType];
+//    NSURL *url = [NSURL URLWithString:urlString];
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+//                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+//                                                       timeoutInterval:60.0];
+//    
+//    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    
+//    [request setHTTPMethod:@"POST"];
+//    NSData *postData = [NSJSONSerialization dataWithJSONObject:declarationMsg options:0 error:&error];
+//    [request setHTTPBody:postData];
+//    
+//    
+//    NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        
+//        
+//        if (data==Nil) {
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//            {
+//                
+//                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+//                
+//            }
+//            
+//        }
+//        else
+//        {
+//            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//            id mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//            NSLog(@"%@",mystring);
+//            if ([mystring isEqualToString:@"1"]) {
+//                [self listingAllPaperworkRule: ruleType : [[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"]];
+//            }
+//            else
+//            {
+//                if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//                {
+//                    [self.mydelegate showalerviewcontroller:@"Failed to Update Leave Paperwork"];
+//                }
+//            }
+//            
+//            
+//            
+//        }
+//    }];
+//    
+//    [postDataTask resume];
     
+    
+    
+    
+    NSError *error;
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-    NSString *urlString=[NSString stringWithFormat:@"%@/%@/%@",savePaperworkRuleURL,ruleID,ruleType];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@",subdomainURL,savePaperworkRuleURL];
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:60.0];
-    
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    
+    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
     [request setHTTPMethod:@"POST"];
+    
     NSData *postData = [NSJSONSerialization dataWithJSONObject:declarationMsg options:0 error:&error];
     [request setHTTPBody:postData];
     
     
     NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         
-        if (data==Nil) {
-            
+        NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
+        
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+        if ([httpResponse statusCode] == 201)
+        {
+            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSLog(@"%@",json);
+            [self listingAllPaperworkRule: ruleType : [[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"]];
+        }
+        else if ([httpResponse statusCode]==501)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                //[self.mydelegate showalerviewcontroller:@"Designation Title/ Abbreviation Already Exists"];
+            }
+        }
+        else if ([httpResponse statusCode]==500)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Server Error"];
+            }
+        }
+        else
+        {
             if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
             {
                 
                 [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
                 
             }
-            
         }
-        else
-        {
-            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            id mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSLog(@"%@",mystring);
-            if ([mystring isEqualToString:@"1"]) {
-                [self listingAllPaperworkRule: ruleType : [[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"]];
-            }
-            else
-            {
-                if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
-                {
-                    [self.mydelegate showalerviewcontroller:@"Failed to Update Leave Paperwork"];
-                }
-            }
-            
-            
-            
-        }
+        
     }];
-    
     [postDataTask resume];
 }
 
 -(void)viewIndividualPaperworkProtocol:(NSString *)officeID :(NSString *)ruleID :(NSString *)tileID :(NSString *)type
 {
     
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSString *urlString=[NSString stringWithFormat:@"%@%@/%@/%@/%@",viewIndividualProtocolViewURL,officeID,ruleID,tileID,type];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    NSString *urlString=[NSString stringWithFormat:@"%@%@/%@/%@/%@",viewIndividualProtocolViewURL,officeID,ruleID,tileID,type];
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        
+//        if (data==Nil) {
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//            {
+//                
+//                
+//                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+//                
+//                
+//            }
+//            
+//        }
+//        
+//        else
+//        {
+//            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(serviceGotResponse:)]&&(self.mydelegate!=NULL))
+//            {
+//                [self.mydelegate serviceGotResponse:json];
+//            }
+//            
+//        }
+//        
+//    }];
+//    
+//    
+//    [dataTask resume];
+    
+    
+    
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@%@/%@/%@/%@",subdomainURL,viewIndividualProtocolViewURL,officeID,ruleID,tileID,type];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
+    
+    
+    
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         
-        if (data==Nil) {
-            
-            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
-            {
-                
-                
-                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
-                
-                
-            }
-            
-        }
+        NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
         
-        else
-        {
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+        
+        if ([httpResponse statusCode] == 200) {
             id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            
             if ([self.mydelegate respondsToSelector:@selector(serviceGotResponse:)]&&(self.mydelegate!=NULL))
             {
-                
                 [self.mydelegate serviceGotResponse:json];
-                
             }
-            
         }
-        
-    }];
-    
-    
-    [dataTask resume];
+        else if ([httpResponse statusCode]==500)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Server Error"];
+            }
+        }
+        else
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+            }
+        }
+    }] resume];
 }
 
 -(void)deletePaperworkProtocol:(NSString *)ruleID :(NSString *)tileID :(NSString *)ruleType
 {
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSString *urlString=[NSString stringWithFormat:@"%@rule_id=%@&&protocol_id=%@&&rule_type=%@",deletePaperworkProtocolURL,ruleID,tileID,ruleType];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    NSString *urlString=[NSString stringWithFormat:@"%@rule_id=%@&&protocol_id=%@&&rule_type=%@",deletePaperworkProtocolURL,ruleID,tileID,ruleType];
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        
+//        if (data==Nil) {
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//            {
+//                
+//                
+//                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+//                
+//                
+//            }
+//            
+//        }
+//        
+//        else
+//        {
+//            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//            id mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//            NSLog(@"%@",mystring);
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(serviceGotResponse:)]&&(self.mydelegate!=NULL))
+//            {
+//                [self.mydelegate serviceGotResponse:json];
+//            }
+//            
+//        }
+//        
+//    }];
+//    
+//    
+//    [dataTask resume];
+    
+    
+    
+    
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@%@/%@/%@",subdomainURL,deletePaperworkProtocolURL,ruleID,tileID,ruleType];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"DELETE"];
+    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
+    
+    
+    
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         
-        if (data==Nil) {
-            
-            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
-            {
-                
-                
-                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
-                
-                
-            }
-            
-        }
+        NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
         
-        else
-        {
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+        
+        if ([httpResponse statusCode] == 201) {
             id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            id mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSLog(@"%@",mystring);
-            
             if ([self.mydelegate respondsToSelector:@selector(serviceGotResponse:)]&&(self.mydelegate!=NULL))
             {
-                
                 [self.mydelegate serviceGotResponse:json];
-                
             }
-            
         }
-        
-    }];
-    
-    
-    [dataTask resume];
+        else if ([httpResponse statusCode]==500)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Server Error"];
+            }
+        }
+        else
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+            }
+        }
+    }] resume];
 }
 
 -(void)createCustomPaperworkRule:(id)ruleDict : (NSString *)rule_type
 {
-    NSError *error;
+//    NSError *error;
+//    
+//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+//    NSString *urlString=[NSString stringWithFormat:@"%@",saveCustomPaperworkURL];
+//    NSURL *url = [NSURL URLWithString:urlString];
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+//                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+//                                                       timeoutInterval:60.0];
+//    
+//    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    
+//    [request setHTTPMethod:@"POST"];
+//    NSData *postData = [NSJSONSerialization dataWithJSONObject:ruleDict options:0 error:&error];
+//    [request setHTTPBody:postData];
+//    
+//    
+//    NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        
+//        
+//        if (data==Nil) {
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//            {
+//                
+//                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+//                
+//            }
+//            
+//        }
+//        else
+//        {
+//            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//            id mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//            NSLog(@"%@",mystring);
+//            if ([[json objectForKey:@"status"]isEqualToString:@"200"]) {
+//                [self listingAllPaperworkRule: rule_type : [[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"]];
+//            }
+//            else if ([[json objectForKey:@"status"]isEqualToString:@"1"])
+//            {
+//                if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//                {
+//                    [self.mydelegate showalerviewcontroller:@"Rule Name Already Exists"];
+//                }
+//            }
+//            else if ([[json objectForKey:@"status"]isEqualToString:@"2"])
+//            {
+//                if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//                {
+//                    [self.mydelegate showalerviewcontroller:@"Abbreviation Already Exists"];
+//                }
+//            }
+//            else if ([[json objectForKey:@"status"]isEqualToString:@"500"])
+//            {
+//                if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//                {
+//                    [self.mydelegate showalerviewcontroller:@"Failed to Create Custom Rule"];
+//                }
+//            }
+//        }
+//    }];
+//    
+//    [postDataTask resume];
     
+    
+    
+    
+    NSError *error;
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-    NSString *urlString=[NSString stringWithFormat:@"%@",saveCustomPaperworkURL];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@",subdomainURL,saveCustomPaperworkURL];
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:60.0];
-    
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    
+    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
     [request setHTTPMethod:@"POST"];
+    
     NSData *postData = [NSJSONSerialization dataWithJSONObject:ruleDict options:0 error:&error];
     [request setHTTPBody:postData];
     
     
     NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         
-        if (data==Nil) {
-            
+        NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
+        
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+        if ([httpResponse statusCode] == 201)
+        {
+            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSLog(@"%@",json);
+            [self listingAllPaperworkRule: rule_type : [[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"]];
+        }
+        else if ([httpResponse statusCode]==501)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Custom Rule Name/ Abbreviation Already Exists"];
+            }
+        }
+        else if ([httpResponse statusCode]==500)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Server Error"];
+            }
+        }
+        else
+        {
             if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
             {
                 
                 [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
                 
             }
-            
         }
-        else
-        {
-            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            id mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSLog(@"%@",mystring);
-            if ([[json objectForKey:@"status"]isEqualToString:@"200"]) {
-                [self listingAllPaperworkRule: rule_type : [[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"]];
-            }
-            else if ([[json objectForKey:@"status"]isEqualToString:@"1"])
-            {
-                if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
-                {
-                    [self.mydelegate showalerviewcontroller:@"Rule Name Already Exists"];
-                }
-            }
-            else if ([[json objectForKey:@"status"]isEqualToString:@"2"])
-            {
-                if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
-                {
-                    [self.mydelegate showalerviewcontroller:@"Abbreviation Already Exists"];
-                }
-            }
-            else if ([[json objectForKey:@"status"]isEqualToString:@"500"])
-            {
-                if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
-                {
-                    [self.mydelegate showalerviewcontroller:@"Failed to Create Custom Rule"];
-                }
-            }
-        }
+        
     }];
-    
     [postDataTask resume];
+
 }
 
 -(void)individualCustomPaperworkRuleView:(NSString *)officeID :(NSString *)ruleID :(NSString *)ruleType
 {
     //
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSString *urlString=[NSString stringWithFormat:@"%@%@/%@/%@",viewCustomPaperworkURL,officeID,ruleID,ruleType];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    NSString *urlString=[NSString stringWithFormat:@"%@%@/%@/%@",viewCustomPaperworkURL,officeID,ruleID,ruleType];
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        
+//        if (data==Nil) {
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//            {
+//                
+//                
+//                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+//                
+//                
+//            }
+//            
+//        }
+//        
+//        else
+//        {
+//            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(serviceGotResponse:)]&&(self.mydelegate!=NULL))
+//            {
+//                [self.mydelegate serviceGotResponse:json];
+//            }
+//            
+//        }
+//        
+//    }];
+//    
+//    
+//    [dataTask resume];
+    
+    
+    
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@%@/%@/%@",subdomainURL,viewCustomPaperworkURL,officeID,ruleID,ruleType];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
+    
+    
+    
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         
-        if (data==Nil) {
-            
-            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
-            {
-                
-                
-                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
-                
-                
-            }
-            
-        }
+        NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
         
-        else
-        {
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+        
+        if ([httpResponse statusCode] == 200) {
             id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            
             if ([self.mydelegate respondsToSelector:@selector(serviceGotResponse:)]&&(self.mydelegate!=NULL))
             {
-                
                 [self.mydelegate serviceGotResponse:json];
-                
             }
-            
         }
-        
-    }];
-    
-    
-    [dataTask resume];
+        else if ([httpResponse statusCode]==500)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Server Error"];
+            }
+        }
+        else
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+            }
+        }
+    }] resume];
 }
 
 -(void)updateCustomPaperworkRule:(id)ruleDict : (NSString *)ruleType
 {
-    NSError *error;
+//    NSError *error;
+//    
+//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+//    NSString *urlString=[NSString stringWithFormat:@"%@",updateCustomPaperworkURL];
+//    NSURL *url = [NSURL URLWithString:urlString];
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+//                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+//                                                       timeoutInterval:60.0];
+//    
+//    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    
+//    [request setHTTPMethod:@"POST"];
+//    NSData *postData = [NSJSONSerialization dataWithJSONObject:ruleDict options:0 error:&error];
+//    [request setHTTPBody:postData];
+//    
+//    
+//    NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        
+//        
+//        if (data==Nil) {
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//            {
+//                
+//                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+//                
+//            }
+//            
+//        }
+//        else
+//        {
+//            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//            id mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//            NSLog(@"%@",mystring);
+//            if ([[json objectForKey:@"status"]isEqualToString:@"200"]) {
+//                [self listingAllPaperworkRule: ruleType : [[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"]];
+//            }
+//            else if ([[json objectForKey:@"status"]isEqualToString:@"1"])
+//            {
+//                if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//                {
+//                    [self.mydelegate showalerviewcontroller:@"Rule Name Already Exists"];
+//                }
+//            }
+//            else if ([[json objectForKey:@"status"]isEqualToString:@"2"])
+//            {
+//                if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//                {
+//                    [self.mydelegate showalerviewcontroller:@"Abbreviation Already Exists"];
+//                }
+//            }
+//            else if ([[json objectForKey:@"status"]isEqualToString:@"500"])
+//            {
+//                if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//                {
+//                    [self.mydelegate showalerviewcontroller:@"Failed to Create Custom Rule"];
+//                }
+//            }
+//        }
+//    }];
+//    
+//    [postDataTask resume];
     
+    
+    
+    NSError *error;
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-    NSString *urlString=[NSString stringWithFormat:@"%@",updateCustomPaperworkURL];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@",subdomainURL,updateCustomPaperworkURL];
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:60.0];
-    
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    
+    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
     [request setHTTPMethod:@"POST"];
+    
     NSData *postData = [NSJSONSerialization dataWithJSONObject:ruleDict options:0 error:&error];
     [request setHTTPBody:postData];
     
     
     NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         
-        if (data==Nil) {
-            
+        NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
+        
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+        if ([httpResponse statusCode] == 201)
+        {
+            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSLog(@"%@",json);
+            [self listingAllPaperworkRule: ruleType : [[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"]];
+        }
+        else if ([httpResponse statusCode]==501)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Custom Rule Name/ Abbreviation Already Exists"];
+            }
+        }
+        else if ([httpResponse statusCode]==500)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Server Error"];
+            }
+        }
+        else
+        {
             if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
             {
                 
                 [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
                 
             }
-            
         }
-        else
-        {
-            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            id mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSLog(@"%@",mystring);
-            if ([[json objectForKey:@"status"]isEqualToString:@"200"]) {
-                [self listingAllPaperworkRule: ruleType : [[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"]];
-            }
-            else if ([[json objectForKey:@"status"]isEqualToString:@"1"])
-            {
-                if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
-                {
-                    [self.mydelegate showalerviewcontroller:@"Rule Name Already Exists"];
-                }
-            }
-            else if ([[json objectForKey:@"status"]isEqualToString:@"2"])
-            {
-                if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
-                {
-                    [self.mydelegate showalerviewcontroller:@"Abbreviation Already Exists"];
-                }
-            }
-            else if ([[json objectForKey:@"status"]isEqualToString:@"500"])
-            {
-                if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
-                {
-                    [self.mydelegate showalerviewcontroller:@"Failed to Create Custom Rule"];
-                }
-            }
-        }
+        
     }];
-    
     [postDataTask resume];
 }
 
 -(void)deleteCustomPaperworkRule:(NSString *)ruleID
 {
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSString *urlString=[NSString stringWithFormat:@"%@%@",deleteCustomPaperworkRuleURL,ruleID];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    NSString *urlString=[NSString stringWithFormat:@"%@%@",deleteCustomPaperworkRuleURL,ruleID];
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        
+//        if (data==Nil) {
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//            {
+//                
+//                
+//                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+//                
+//                
+//            }
+//            
+//        }
+//        
+//        else
+//        {
+//            //id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//            id mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//            NSLog(@"%@",mystring);
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(serviceGotResponse:)]&&(self.mydelegate!=NULL))
+//            {
+//                [self.mydelegate serviceGotResponse:mystring];
+//            }
+//            
+//        }
+//        
+//    }];
+//    
+//    
+//    [dataTask resume];
+    
+    
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@%@",subdomainURL,deleteCustomPaperworkRuleURL,ruleID];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"DELETE"];
+    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
+    
+    
+    
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         
-        if (data==Nil) {
-            
-            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
-            {
-                
-                
-                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
-                
-                
-            }
-            
-        }
+        NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
         
-        else
-        {
-            //id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            id mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSLog(@"%@",mystring);
-            
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+        
+        if ([httpResponse statusCode] == 201) {
+            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             if ([self.mydelegate respondsToSelector:@selector(serviceGotResponse:)]&&(self.mydelegate!=NULL))
             {
-                
-                [self.mydelegate serviceGotResponse:mystring];
-                
+                [self.mydelegate serviceGotResponse:json];
             }
-            
         }
-        
-    }];
-    
-    
-    [dataTask resume];
+        else if ([httpResponse statusCode]==500)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Server Error"];
+            }
+        }
+        else
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+            }
+        }
+    }] resume];
 }
 
 #pragma mark Documentation Module

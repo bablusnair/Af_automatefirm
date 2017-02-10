@@ -1,4 +1,4 @@
-  //
+//
 //  includeDesignationViewClass.m
 //  Automate Firm
 
@@ -78,7 +78,7 @@
                 [self.myconnection includeDesignationforTileViewClass:@"leave" : app.ruleID : app.conditionID :[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"]];
                 
                 
-            
+                
             }
             
             else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"leaveAction"] isEqualToString:@"create"])
@@ -94,7 +94,7 @@
             [self localView];
         }
         
-
+        
     }
     else  if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"ruleType"] isEqualToString:@"advance"])
     {
@@ -132,7 +132,7 @@
             {
                 NSLog(@"%@",app.loan_idstring);
                 NSLog(@"%@",app.designation_tile);
-
+                
                 [self.myconnection includeDesignationforTileViewClass:@"loan" :app.loan_idstring :app.designation_tile :[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"]];
                 
                 
@@ -159,7 +159,7 @@
     }
     else  if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"ruleType"] isEqualToString:@"earnings"])
     {
-                if (app.designationFlag==0) {
+        if (app.designationFlag==0) {
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"earningsAction"] isEqualToString:@"create"])
             {
                 
@@ -172,7 +172,7 @@
             {
                 
                 
-               [self.myconnection includeDesignationforTileViewClass:@"earnings" :app.earningRuleId :app.earningConditionId :[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"]];
+                [self.myconnection includeDesignationforTileViewClass:@"earnings" :app.earningRuleId :app.earningConditionId :[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"]];
                 
             }
         }
@@ -276,9 +276,305 @@
         
         
     }
+    else if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"ruleType"]isEqualToString:@"advancePaperwork"])
+    {
+        if ([app.flowAction isEqualToString:@"1"]) {
+            if (app.designationFlag1==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"advance" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"2"]) {
+            if (app.designationFlag2==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"advance" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"3"]) {
+            if (app.designationFlag3==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"advance" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"4"]) {
+            if (app.designationFlag4==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"advance" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"5"]) {
+            if (app.designationFlag5==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"advance" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        
+        
+    }
+    else if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"ruleType"]isEqualToString:@"loanPaperwork"])
+    {
+        if ([app.flowAction isEqualToString:@"1"]) {
+            if (app.designationFlag1==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"loan" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"2"]) {
+            if (app.designationFlag2==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"loan" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"3"]) {
+            if (app.designationFlag3==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"loan" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"4"]) {
+            if (app.designationFlag4==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"loan" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"5"]) {
+            if (app.designationFlag5==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"loan" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        
+        
+    }
+    else if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"ruleType"]isEqualToString:@"finePaperwork"])
+    {
+        if ([app.flowAction isEqualToString:@"1"]) {
+            if (app.designationFlag1==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"fine" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"2"]) {
+            if (app.designationFlag2==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"fine" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"3"]) {
+            if (app.designationFlag3==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"fine" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"4"]) {
+            if (app.designationFlag4==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"fine" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"5"]) {
+            if (app.designationFlag5==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"fine" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        
+        
+    }
+    else if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"ruleType"]isEqualToString:@"expensePaperwork"])
+    {
+        if ([app.flowAction isEqualToString:@"1"]) {
+            if (app.designationFlag1==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"expense" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"2"]) {
+            if (app.designationFlag2==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"expense" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"3"]) {
+            if (app.designationFlag3==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"expense" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"4"]) {
+            if (app.designationFlag4==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"expense" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"5"]) {
+            if (app.designationFlag5==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"expense" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        
+        
+    }
     
-
-
+    else if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"ruleType"]isEqualToString:@"customPaperwork"])
+    {
+        if ([app.flowAction isEqualToString:@"1"]) {
+            if (app.designationFlag1==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"custom" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"2"]) {
+            if (app.designationFlag2==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"custom" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"3"]) {
+            if (app.designationFlag3==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"custom" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"4"]) {
+            if (app.designationFlag4==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"custom" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+        if ([app.flowAction isEqualToString:@"5"]) {
+            if (app.designationFlag5==0) {
+                
+                [self.myconnection includeDesignationForPaperworkAuthority:[[NSUserDefaults standardUserDefaults]objectForKey:@"selectedofficeId"] :@"custom" : app.ruleID : app.conditionID :app.flowAction ];
+                
+            }
+            else
+            {
+                [self localView];
+            }
+        }
+    }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -468,58 +764,64 @@
         app.designationFlag5=1;
     }
     
-    app.designationFlag=1;
-    
-    NSMutableArray *desig=[[NSMutableArray alloc]initWithObjects:self.officename.text, nil];
-    [desig addObjectsFromArray:self.storesArray];
-    
-    NSMutableArray *workingPremiseIDArray=[[NSMutableArray alloc] initWithObjects:self.officeID, nil];
-    [workingPremiseIDArray addObjectsFromArray:self.storesIDArray];
-    
-    for (int i=0; i<desig.count; i++) {
-        NSMutableDictionary *localDict=[self.finalDict objectForKey:[desig objectAtIndex:i]];
-        NSMutableArray *localArray=[localDict objectForKey:@"selected"];
+    if ([self.finalDict count] > 0) {
+        NSMutableArray *desig=[[NSMutableArray alloc]initWithObjects:self.officename.text, nil];
+        [desig addObjectsFromArray:self.storesArray];
         
-        NSMutableDictionary *selectedDict=[[NSMutableDictionary alloc]init];
-        [selectedDict setObject:localArray forKey:@"selected"];
-        [selectedDict setObject:[workingPremiseIDArray objectAtIndex:i] forKey:@"id"];
+        NSMutableArray *workingPremiseIDArray=[[NSMutableArray alloc] initWithObjects:self.officeID, nil];
+        [workingPremiseIDArray addObjectsFromArray:self.storesIDArray];
         
-        [self.finalSelectedDict setObject:selectedDict forKey:[desig objectAtIndex:i]];
-        
-        
-        for (int j=0; j<localArray.count; j++) {
-            NSMutableDictionary *localDict1=[localArray objectAtIndex:j];
-            NSString *myString=[NSString stringWithFormat:@"%@:%@",[desig objectAtIndex:i],[localDict1 objectForKey:@"designation_title"]];
-            [self.selectedDesignationArray addObject:myString];
-        }
-    }
-    
-    
-    //error porsion
-    if (desig.count>0) {
-        
-        NSMutableDictionary *desigDict=[[NSMutableDictionary alloc]init];
-        [desigDict setObject:[self.finalSelectedDict objectForKey:[desig objectAtIndex:0]] forKey:@"office"];
-        
-        NSMutableArray *storesSelected=[[NSMutableArray alloc]init];
-        for (int i=1; i<desig.count; i++) {
+        for (int i=0; i<desig.count; i++) {
+            NSMutableDictionary *localDict=[self.finalDict objectForKey:[desig objectAtIndex:i]];
+            NSMutableArray *localArray=[localDict objectForKey:@"selected"];
             
-            [storesSelected addObject:[self.finalSelectedDict objectForKey:[desig objectAtIndex:i]]];
+            NSMutableDictionary *selectedDict=[[NSMutableDictionary alloc]init];
+            [selectedDict setObject:localArray forKey:@"selected"];
+            [selectedDict setObject:[workingPremiseIDArray objectAtIndex:i] forKey:@"id"];
+            
+            [self.finalSelectedDict setObject:selectedDict forKey:[desig objectAtIndex:i]];
+            
+            
+            for (int j=0; j<localArray.count; j++) {
+                NSMutableDictionary *localDict1=[localArray objectAtIndex:j];
+                NSString *myString=[NSString stringWithFormat:@"%@:%@",[desig objectAtIndex:i],[localDict1 objectForKey:@"designation_title"]];
+                [self.selectedDesignationArray addObject:myString];
+            }
         }
-        [desigDict setObject:storesSelected forKey:@"stores"];
         
-        [[NSUserDefaults standardUserDefaults]setObject:self.selectedDesignationArray forKey:@"selectedDesig"];
         
-        [[NSUserDefaults standardUserDefaults]setObject:desigDict forKey:@"selectedDesignation"];
-        [[NSUserDefaults standardUserDefaults]setObject:self.finalDict forKey:@"officeDetails"];
+        //error porsion
+        if (desig.count>0) {
+            
+            NSMutableDictionary *desigDict=[[NSMutableDictionary alloc]init];
+            [desigDict setObject:[self.finalSelectedDict objectForKey:[desig objectAtIndex:0]] forKey:@"office"];
+            
+            NSMutableArray *storesSelected=[[NSMutableArray alloc]init];
+            for (int i=1; i<desig.count; i++) {
+                
+                [storesSelected addObject:[self.finalSelectedDict objectForKey:[desig objectAtIndex:i]]];
+            }
+            [desigDict setObject:storesSelected forKey:@"stores"];
+            
+            [[NSUserDefaults standardUserDefaults]setObject:self.selectedDesignationArray forKey:@"selectedDesig"];
+            
+            [[NSUserDefaults standardUserDefaults]setObject:desigDict forKey:@"selectedDesignation"];
+            [[NSUserDefaults standardUserDefaults]setObject:self.finalDict forKey:@"officeDetails"];
+            
+            [self removeFromSuperview];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"enableall" object:Nil];
+            
+        }
         
-        [self removeFromSuperview];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"enableall" object:Nil];
-
     }
+    [[NSUserDefaults standardUserDefaults]setObject:self.selectedDesignationArray forKey:@"selectedDesig"];
     
+    [[NSUserDefaults standardUserDefaults]setObject:self.finalDict forKey:@"officeDetails"];
     
+    [self removeFromSuperview];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"enableall" object:Nil];
 }
 
 
@@ -560,7 +862,7 @@
         NSMutableDictionary *tempDict=[[NSMutableDictionary alloc] initWithDictionary:responseData];
         [tempDict removeObjectForKey:@"store_details"];
         self.finalDict=tempDict;
-         
+        
         NSMutableArray *stores=[self.finalDict objectForKey:@"store"];
         for (int i=0; i<stores.count; i++) {
             NSMutableDictionary *storesDict=[stores objectAtIndex:i];
@@ -615,7 +917,7 @@
         [self.designationCollectionView reloadData];
         [self.storesCollectionView reloadData];
     });
-
+    
 }
 //-(void)service
 //{
