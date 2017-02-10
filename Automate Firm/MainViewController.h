@@ -49,5 +49,6 @@
 @property(nonatomic,retain)IBOutlet UITextField *colorText;
 @property(nonatomic,retain)NSMutableArray *colorArray;
 @property (weak, nonatomic) IBOutlet UIButton *cartButon;
+@property (weak, nonatomic) IBOutlet UIButton *logoutButton;
 @end
 

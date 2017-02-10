@@ -19,8 +19,14 @@
     // Do any additional setup after loading the view.
     
     
+    
+    [[NSUserDefaults standardUserDefaults]setObject:@"123456789" forKey:@"api_key"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+
     self.myconnection=[[connectionclass alloc]init];
     self.myconnection.mydelegate=self;
+    
     
     [self.myconnection displayAllCountries];
     [self.myconnection signupAgentlistingservice];
@@ -33,9 +39,11 @@
     self.sectordict=[[NSMutableDictionary alloc] init];
     self.agentdict=[[NSMutableDictionary alloc] init];
     
+    
      self.filterflag=0;
      self.filterflag1=0;
      self.filterflag2=0;
+    
     
     self.encodedString=@"";
     self.sectorTableview.hidden=true;
@@ -43,6 +51,7 @@
     self.livinginTableview.hidden=true;
     self.stateTableview.hidden=true;
     self.cityTableview.hidden=true;
+    self.estTableview.hidden=true;
     self.datebackgroundView.hidden=true;
     self.estdatebackgroundView.hidden=true;
     
@@ -59,6 +68,14 @@
     self.filtercountryArray=[[NSMutableArray alloc] init];
     self.filterstateArray=[[NSMutableArray alloc] init];
     self.filtercityArray=[[NSMutableArray alloc] init];
+    
+    self.estArray=[[NSMutableArray alloc] init];
+    
+    for (int i=2000; i<3000; i++) {
+        
+        [self.estArray addObject:[NSString stringWithFormat:@"%d",i]];
+    }
+
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardDidShow:)
@@ -77,7 +94,24 @@
     dateFormat.dateStyle=NSDateFormatterMediumStyle;
     [dateFormat setDateFormat:@"dd/MMM/yyyy"];
     self.subTextfield.text = [NSString stringWithFormat:@"%@",[dateFormat stringFromDate:date]];
+    
    
+    
+      self.sectorTableview.layer.borderWidth = 1.0;
+      self.sectorTableview.layer.borderColor = [UIColor grayColor].CGColor;
+      self.agentTableview.layer.borderWidth = 1.0;
+      self.agentTableview.layer.borderColor = [UIColor grayColor].CGColor;
+      self.livinginTableview.layer.borderWidth = 1.0;
+      self.livinginTableview.layer.borderColor = [UIColor grayColor].CGColor;
+      self.stateTableview.layer.borderWidth = 1.0;
+      self.stateTableview.layer.borderColor = [UIColor grayColor].CGColor;
+      self.cityTableview.layer.borderWidth = 1.0;
+      self.cityTableview.layer.borderColor = [UIColor grayColor].CGColor;
+      self.estTableview.layer.borderWidth = 1.0;
+      self.estTableview.layer.borderColor = [UIColor grayColor].CGColor;
+    
+    
+    
 }
 
 - (void) keyboardDidShow:(NSNotification *)notification
@@ -187,7 +221,7 @@
    }
    else if (textField==self.estTextfield) {
        
-       self.estdatebackgroundView.hidden=false;
+       self.estTableview.hidden=false;
        return NO;
        
    }
@@ -234,6 +268,11 @@
        // }
 
     }
+    else if (tableView==self.estTableview) {
+        
+        return [self.estArray count];
+    }
+
     else
     {
         
@@ -298,6 +337,12 @@
             cell.textLabel.text=[self.stateArray objectAtIndex:indexPath.row];
 //        }
 
+        return cell;
+    }
+    else  if (tableView==self.estTableview) {
+        
+        UITableViewCell *cell =[[UITableViewCell alloc] init];
+        cell.textLabel.text=[self.estArray objectAtIndex:indexPath.row];
         return cell;
     }
 
@@ -372,6 +417,11 @@
        self.cityTableview.hidden=true;
        self.cityString=[self.citydict objectForKey:self.cityTextfield.text];
    }
+   else  if (tableView==self.estTableview) {
+       
+       self.estTextfield.text=[self.estArray objectAtIndex:indexPath.row];
+       self.estTableview.hidden=true;
+   }
     
 }
 
@@ -379,27 +429,14 @@
 
 - (IBAction)datepickerDoneaction:(id)sender
 {
-        NSDateFormatter *dateFormat=[[NSDateFormatter alloc]init];
-        dateFormat.dateStyle=NSDateFormatterMediumStyle;
-        [dateFormat setDateFormat:@"yyyy"];
     
-        NSDateFormatter *dateFormat1=[[NSDateFormatter alloc]init];
+       NSDateFormatter *dateFormat1=[[NSDateFormatter alloc]init];
         dateFormat1.dateStyle=NSDateFormatterMediumStyle;
         [dateFormat1 setDateFormat:@"dd/MMM/yyyy"];
     
-        if ( [sender tag]==0) {
-    
-            NSString *str=[NSString stringWithFormat:@"%@",[dateFormat1  stringFromDate:self.DatesDatePicker.date]];
-            self.dateTextfield.text=str;
-            self.datebackgroundView.hidden=true;
-        }
-    
-        else{
-            
-            NSString *str=[NSString stringWithFormat:@"%@",[dateFormat  stringFromDate:self.estDatePicker.date]];
-            self.estTextfield.text=str;
-            self.estdatebackgroundView.hidden=true;
-        }
+        NSString *str=[NSString stringWithFormat:@"%@",[dateFormat1  stringFromDate:self.DatesDatePicker.date]];
+        self.dateTextfield.text=str;
+        self.datebackgroundView.hidden=true;
     
 }
 
@@ -407,7 +444,39 @@
 -(IBAction)signupbuttonAction:(id)sender
 {
     
-    [self.myconnection signupserviceForAdminModule:self.domainstring username:self.usernameTextfield.text firmname:self.firmnameTextfield.text sector:self.sectorString estdate:self.estTextfield.text sub:self.subTextfield.text agent:self.agentString firstname:self.firstnameTextfield.text lastname:self.lastnameTextfield.text dob:self.dateTextfield.text regcontact:self.regcontactTextfield.text regemail:self.regemailTextfield.text recoverymail:self.secondaryTextfield.text livingin:self.countryString state:self.stateString city:self.cityString imagedata:self.encodedString status:@"T"];
+    if (self.domainstring.length>0 && self.usernameTextfield.text.length>0 && self.firmnameTextfield.text.length>0 && self.sectorString.length>0 && self.estTextfield.text.length>0 && self.subTextfield.text.length>0 && self.agentString.length>0 && self.firmnameTextfield.text.length>0 && self.lastnameTextfield.text.length>0 && self.dateTextfield.text.length>0 && self.regcontactTextfield.text.length>0 && self.regemailTextfield.text.length>0 && self.secondaryTextfield.text.length>0 && self.countryString.length>0 && self.stateString.length>0 && self.cityString.length>0 && self.logoImageview.image!=Nil) {
+        
+        
+        [self.myconnection signupserviceForAdminModule:self.domainstring username:self.usernameTextfield.text firmname:self.firmnameTextfield.text sector:self.sectorString estdate:self.estTextfield.text sub:self.subTextfield.text agent:self.agentString firstname:self.firstnameTextfield.text lastname:self.lastnameTextfield.text dob:self.dateTextfield.text regcontact:self.regcontactTextfield.text regemail:self.regemailTextfield.text recoverymail:self.secondaryTextfield.text livingin:self.countryString state:self.stateString city:self.cityString imagedata:self.encodedString status:@"T"];
+
+
+    }
+    else
+    {
+        
+        UIAlertController *alert= [UIAlertController
+                                   alertControllerWithTitle:@"Error"
+                                   message:@"Please enter all required fields"
+                                   preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action){
+                                                       //Do Some action here
+                                                   }];
+        [alert addAction:ok];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            
+            [self presentViewController:alert animated:YES completion:nil];
+            
+            
+        });
+
+        
+    }
+    
+    
     
 }
 
@@ -611,11 +680,17 @@
 {
     NSLog(@"%@",details);
     
-    if ([[details objectForKey:@"result"]isEqualToString:@"success"]) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+    
+    if ([[details objectForKey:@"message"]isEqualToString:@"Added a resource!, Signup Success"]) {
         
         [self performSegueWithIdentifier:@"nextview" sender:Nil];
         
     }
+        
+    
+   });
     
 }
 
@@ -637,6 +712,13 @@
         [self presentViewController:alert animated:YES completion:nil];
     });
 
+}
+
+- (IBAction)backbuttonaction:(id)sender
+{
+    
+    [self dismissViewControllerAnimated:YES completion:Nil];
+    
 }
 
 

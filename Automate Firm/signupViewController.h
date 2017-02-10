@@ -36,6 +36,8 @@
 @property(nonatomic,retain)IBOutlet UITableView *livinginTableview;
 @property(nonatomic,retain)IBOutlet UITableView *stateTableview;
 @property(nonatomic,retain)IBOutlet UITableView *cityTableview;
+@property(nonatomic,retain)IBOutlet UITableView *estTableview;
+
 
 @property (retain, nonatomic) IBOutlet UIDatePicker *estDatePicker;
 @property (retain, nonatomic) IBOutlet UIDatePicker *DatesDatePicker;
@@ -45,6 +47,7 @@
 @property(nonatomic,retain)NSMutableArray *livingInArray;
 @property(nonatomic,retain)NSMutableArray *stateArray;
 @property(nonatomic,retain)NSMutableArray *cityArray;
+@property(nonatomic,retain)NSMutableArray *estArray;
 
 @property(nonatomic,retain)NSMutableArray *filtercountryArray;
 @property(nonatomic,retain)NSMutableArray *filterstateArray;
@@ -69,6 +72,9 @@
 -(IBAction)uploadLogoAction:(id)sender;
 -(IBAction)signupbuttonAction:(id)sender;
 - (IBAction)datepickerDoneaction:(id)sender;
+- (IBAction)backbuttonaction:(id)sender;
+
+
 
 
 @property(nonatomic,retain)NSMutableDictionary *countrydict;
@@ -76,4 +82,6 @@
 @property(nonatomic,retain)NSMutableDictionary *citydict;
 @property(nonatomic,retain)NSMutableDictionary *sectordict;
 @property(nonatomic,retain)NSMutableDictionary *agentdict;
+
+
 @end

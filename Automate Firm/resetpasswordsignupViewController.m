@@ -108,10 +108,10 @@
     return  YES;
 }
 
--(IBAction)resendbuttonaction:(id)sender
-{
-    [self.myconnection resendmailinsignUpScreen:[[NSUserDefaults standardUserDefaults] objectForKey:@"signeduserId"]];
-}
+//-(IBAction)resendbuttonaction:(id)sender
+//{
+//    [self.myconnection resendmailinsignUpScreen:[[NSUserDefaults standardUserDefaults] objectForKey:@"signeduserId"]];
+//}
 
 -(void)resetpasswordserviceResponse:(id)details
 {
@@ -249,7 +249,8 @@
     
 }
 
--(IBAction)skipbuttonaction:(id)sender
+
+-(IBAction)backbuttonaction:(id)sender
 {
     
     [self dismissViewControllerAnimated:YES completion:Nil];
