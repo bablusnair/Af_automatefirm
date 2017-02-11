@@ -60,9 +60,9 @@
         NSString * userString = [self.userNameField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
         NSString * pwdstring = [self.paswrdText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
         
-       // [self.myconnection LoginService:userString paswrd:pwdstring officeid:self.officeidString];
+        [self.myconnection LoginService:userString paswrd:pwdstring officeid:self.officeidString];
         
-        [self performSegueWithIdentifier:@"loggedUser" sender:nil];
+       // [self performSegueWithIdentifier:@"loggedUser" sender:nil];
     
     
 //    }
@@ -86,40 +86,25 @@
 }
 //Login Service Response
 
--(void)loginResponse:(NSString *)responseMessage
+-(void)loginResponse:(id)responseMessage
 {
     
     NSLog(@"%@",responseMessage);
-    if (!([responseMessage isEqualToString:@"1"])) {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSUserDefaults standardUserDefaults]setObject:[responseMessage objectForKey:@"userid"] forKey:@"user_id"];
         
-        UIAlertController *alert= [UIAlertController
-                                   alertControllerWithTitle:@"Login Failed"
-                                   message:@"Invalid Username or Password"
-                                   preferredStyle:UIAlertControllerStyleAlert];
+        [[NSUserDefaults standardUserDefaults]setObject:[responseMessage objectForKey:@"api_key"] forKey:@"api_key"];
+        NSLog(@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"]);
         
-        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                   handler:^(UIAlertAction * action){
-                                                       self.userNameField.text=@"";
-                                                       self.paswrdText.text=@"";
-                                                       self.officeDropdwnText.text=@"";
-                                                
-                                                   }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
-     }
-    else{
+        [[NSUserDefaults standardUserDefaults]setObject:[responseMessage objectForKey:@"company"] forKey:@"companyID"];
         
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSUserDefaults standardUserDefaults]setObject:self.userNameField.text forKey:@"user_id"];
-            
-        
-            //[[NSUserDefaults standardUserDefaults]setObject:@"Black" forKey:@"color"];
-            [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"selectedofficeId"];
-            
-                [self performSegueWithIdentifier:@"loggedUser" sender:nil];
-            });
-    }
+        //[[NSUserDefaults standardUserDefaults]setObject:@"Black" forKey:@"color"];
+        [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"selectedofficeId"];
+        [self performSegueWithIdentifier:@"loggedUser" sender:nil];
+    });
+    
 
 }
 

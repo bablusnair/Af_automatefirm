@@ -134,8 +134,8 @@
     
     
     
-    [[NSUserDefaults standardUserDefaults]setObject:@"123456789" forKey:@"api_key"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    //[[NSUserDefaults standardUserDefaults]setObject:@"123456789" forKey:@"api_key"];
+   // [[NSUserDefaults standardUserDefaults] synchronize];
     
     return YES;
 }

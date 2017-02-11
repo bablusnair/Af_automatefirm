@@ -867,7 +867,7 @@
         for (int i=0; i<stores.count; i++) {
             NSMutableDictionary *storesDict=[stores objectAtIndex:i];
             [self.storesArray addObject:[storesDict objectForKey:@"store_name"]];
-            [self.storesIDArray addObject:[storesDict objectForKey:@"store_id"]];
+            [self.storesIDArray addObject:[storesDict objectForKey:@"id"]];
         }
         NSMutableArray *officeArray=[self.finalDict objectForKey:@"office"];
         NSMutableDictionary *offDict=[officeArray objectAtIndex:0];
@@ -1150,7 +1150,7 @@
     for (int i=0; i<stores.count; i++) {
         NSMutableDictionary *storesDict=[stores objectAtIndex:i];
         [self.storesArray addObject:[storesDict objectForKey:@"store_name"]];
-        [self.storesIDArray addObject:[storesDict objectForKey:@"store_id"]];
+        [self.storesIDArray addObject:[storesDict objectForKey:@"id"]];
     }
     
     

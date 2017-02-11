@@ -14,7 +14,7 @@
 
 
 NSString *const subDomainMainURL = @"http://automatefirm.com/automate_new/";
-NSString *const subdomainURL = @"http://192.168.1.20/af/";
+NSString *const subdomainURL = @"http://192.168.1.35/af1.1/";
 
 
 //-----------------------------------Time--------------------------------------------------
@@ -329,12 +329,12 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
 
 //----------------------------------staffing employee listing----------------------------------
 
-#define staffingemployeeListing @"http://192.168.1.35/work/automate_new1/index.php/staffing/employee_attendance/get_employee_details/"
+#define staffingemployeeListing @"rest/employee_attendance_api/get_employee_details/"
 
 
-#define workingpremiseALLlisting @"http://192.168.1.35/work/automate_new1/index.php/staffing/employee_filter/get_details/"
+#define workingpremiseALLlisting @"rest/employee_filter_api/get_details/"
 
-#define filteringEmployeelistservice @"http://192.168.1.35/work/automate_new1/index.php/staffing/employee_filter/get_filter_data"
+#define filteringEmployeelistservice @"rest/employee_filter_api/get_filter_data"
 
 
 //<<<-----------------------------------PORTAL SETTINGS----------------------------------->>>
@@ -345,9 +345,9 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
 
 //<<<-------------------------------------Employeeidcard--------------------------------->>>
 
-#define employeesidcardUrl @"http://automatefirm.com/automate_new/index.php/staffing/employee_id/get_employee_details/"
+#define employeesidcardUrl @"rest/employeeid_api/get_employee_details/"
 
-
+//#define employeesidcardUrl @"http://192.168.1.35/af1.1/staffing/employee_id/get_employee_details/"
 
 //<<<---------------------------------Employeeindividualviewservice--------------------------->>>
 
@@ -429,7 +429,7 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
 //<<<-------------------paperwork Settings Urls--------------------->>>
 
 #define listingEmpAccordingtoTypeUrl @"rest/paperwork_api/emp_list/"
-#define filterEmpPopUrl @"http://192.168.1.35/af1.0/index.php/settings/pw_employee_filter/emp_filter_data"
+#define filterEmpPopUrl @"rest/paperwork_api/emp_filter_data"
 
 #define assigntoSpecificEmployeeURL @"rest/get_employee_details_api/whole_employee_list/"
 
@@ -687,7 +687,7 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
     
     NSString *deviceID = [[NSUserDefaults standardUserDefaults]objectForKey:@"device_id"];
     
-    NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys:@"kp",@"identity",@"password",@"password",deviceID,@"deviceid",nil];
+    NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys:@"administrator",@"identity",@"password",@"password",deviceID,@"deviceid",@"AF95-49-22-11",@"afcode",nil];
     
     NSData *postData = [NSJSONSerialization dataWithJSONObject:mapData options:0 error:&error];
     [request setHTTPBody:postData];
@@ -702,13 +702,11 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
         NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
         if ([httpResponse statusCode] == 201) {
             id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            NSLog(@"%@",json);
-            [[NSUserDefaults standardUserDefaults]setObject:[json objectForKey:@"api_key"] forKey:@"api_key"];
-            NSLog(@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"]);
+            
             
             if ([self.mydelegate respondsToSelector:@selector(loginResponse:)]&&(self.mydelegate!=NULL))
             {
-                [self.mydelegate loginResponse:@"1"];
+                [self.mydelegate loginResponse:json];
             }
             
         }
@@ -829,7 +827,6 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
     }] resume];
 }
     
-
 //}
 
 #pragma mark Logout
@@ -838,7 +835,7 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
     //  NSError *error;
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-    NSString *urlString=[NSString stringWithFormat:@"%@rest/logout_api?identity=kp",subdomainURL];
+    NSString *urlString=[NSString stringWithFormat:@"%@rest/logout_api?identity=%@",subdomainURL,[[NSUserDefaults standardUserDefaults]objectForKey:@"user_id"]];
     //  NSString *urlString=[NSString stringWithFormat:@"identity=""/password="];
     
     //   NSURL *url = [NSURL URLWithString:@"192.168.1.20/af1.1/rest/logout_api/identity=admin@leonine.in/deviceid=6E5C534-5D2D-4F3F-AE31-8E0B5EC8C38A"];
@@ -14509,7 +14506,7 @@ dispatch_async(dispatch_get_main_queue(), ^{
 
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-    NSString *urlString=[NSString stringWithFormat:@"%@%@",staffingemployeeListing,officeid];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@%@",subdomainURL,staffingemployeeListing,officeid];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
@@ -14588,7 +14585,7 @@ dispatch_async(dispatch_get_main_queue(), ^{
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-    NSString *urlString=[NSString stringWithFormat:@"%@%@",workingpremiseALLlisting,officeid];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@%@",subdomainURL,workingpremiseALLlisting,officeid];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
@@ -14700,7 +14697,7 @@ dispatch_async(dispatch_get_main_queue(), ^{
     NSError *error;
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-    NSString *urlString=[NSString stringWithFormat:@"%@",filteringEmployeelistservice];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@",subdomainURL,filteringEmployeelistservice];
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -14725,7 +14722,7 @@ dispatch_async(dispatch_get_main_queue(), ^{
         NSLog(@"%@",mystring);
         
         NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
-        if ([httpResponse statusCode] == 201)
+        if ([httpResponse statusCode] == 200)
         {
             id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             NSLog(@"%@",json);
@@ -14951,36 +14948,81 @@ dispatch_async(dispatch_get_main_queue(), ^{
 -(void)employeeIdcardListingservice:(NSString *)officeid
 {
     
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSString *urlString=[NSString stringWithFormat:@"%@%@",employeesidcardUrl,officeid];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    NSString *urlString=[NSString stringWithFormat:@"%@%@",employeesidcardUrl,officeid];
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        
+//        
+//        
+//        if (data==Nil) {
+//            
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+//            {
+//                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+//            }
+//        }
+//        
+//        else
+//        {
+//            NSMutableDictionary *mydict  = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//            //  NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//            //   NSLog(@"%@",mystring);
+//            
+//            if ([self.mydelegate respondsToSelector:@selector(employeeidcardlisting:)]&&(self.mydelegate!=NULL))
+//            {
+//                [self.mydelegate employeeidcardlisting:mydict];
+//            }
+//        }
+//    }];
+//   
+//    
+//    [dataTask resume];
+    
+    
+    
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@%@",subdomainURL,employeesidcardUrl,officeid];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
+    
+    
+    
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         
+        NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
         
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
         
-        if (data==Nil) {
-            
-            
+        if ([httpResponse statusCode] == 200) {
+            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            if ([self.mydelegate respondsToSelector:@selector(employeeidcardlisting:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate employeeidcardlisting:json];
+            }
+        }
+        else if ([httpResponse statusCode]==500)
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                [self.mydelegate showalerviewcontroller:@"Server Error"];
+            }
+        }
+        else
+        {
             if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
             {
                 [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
             }
         }
-        
-        else
-        {
-            NSMutableDictionary *mydict  = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            //  NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            //   NSLog(@"%@",mystring);
-            
-            if ([self.mydelegate respondsToSelector:@selector(employeeidcardlisting:)]&&(self.mydelegate!=NULL))
-            {
-                [self.mydelegate employeeidcardlisting:mydict];
-            }
-        }
-    }];
-   
-    
-    [dataTask resume];
+    }] resume];
     
     
 }

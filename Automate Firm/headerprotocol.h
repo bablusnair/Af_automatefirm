@@ -10,7 +10,7 @@
 
 @protocol headerprotocol <NSObject>
 @optional
--(void)loginResponse:(NSString *)responseMessage;
+-(void)loginResponse:(id)responseMessage;
 -(void)officeListingResponse:(NSMutableDictionary *)officeListDict;
 -(void)settingsSavedresponse:(NSMutableArray *)Savedarrayresponse;
 

@@ -34,7 +34,7 @@
     
     [self.myconnection employeeIdcardListingservice:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"]];
     
-     [self.myconnection filterlistingaction:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"]];
+    
     
     
     
@@ -898,13 +898,9 @@
                 
                 [storeingdictionary setObject:dict forKey:[NSString stringWithFormat:@"%@%@",[dict objectForKey:@"emp_name"],[dict objectForKey:@"emp_id"]]];
                 
-               // [storeingdictionary setObject:dict forKey:[NSString stringWithFormat:@"%@_%@",[dict objectForKey:@"emp_name"],[dict objectForKey:@"emp_id"]]];
-                
             }
             
-            
             [self.maincreativedictionary setObject:storeingdictionary forKey:[NSString stringWithFormat:@"Office:%@",[dictioarray objectAtIndex:i]]];
-            
         }
         
         NSMutableDictionary *storedict = [idresponsedict objectForKey:@"store"];
@@ -931,7 +927,7 @@
                     
                     NSMutableDictionary *dict = [myarrays objectAtIndex:k];
                     [storeingdictionary setObject:dict forKey:[NSString stringWithFormat:@"%@%@",[dict objectForKey:@"emp_name"],[dict objectForKey:@"emp_id"]]];
-                    //  [storeingdictionary setObject:dict forKey:[NSString stringWithFormat:@"%@_%@",[dict objectForKey:@"emp_name"],[dict objectForKey:@"emp_id"]]];
+                    
                     
                 }
                 
@@ -940,37 +936,20 @@
             }
             
         }
+       
         
-        
-        //        NSSortDescriptor *sortingforfilterOrder = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
-        //        NSArray *karray  = [[self.maincreativedictionary allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortingforfilterOrder]];
-        //
-        //
-        //        for (int k=0; k<karray.count; k++) {
-        //
-        //
-        //        NSMutableArray *sarray=[self.maincreativedictionary objectForKey:[karray objectAtIndex:k]];
-        //
-        //        if (!(sarray.count>0)) {
-        //
-        //            [self.maincreativedictionary removeObjectForKey:[karray objectAtIndex:k]];
-        //                
-        //           
-        //        }
-        //            
-        //            
-        //    }
-        
-          NSLog(@"%@",self.maincreativedictionary);
+        NSLog(@"%@",self.maincreativedictionary);
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
             [self.tableView reloadData];
             
+            
+            
         });
         
     }
-
+    [self.myconnection filterlistingaction:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"]];
     
 }
 
@@ -1140,7 +1119,7 @@
             
             NSMutableDictionary *dict = [category_array objectAtIndex:i];
             [self.categoryarray addObject:[dict objectForKey:@"cat_name"]];
-            [self.categoryfilterdictionary setObject:[dict objectForKey:@"id"] forKey:[dict objectForKey:@"cat_name"]];
+            [self.categoryfilterdictionary setObject:[dict objectForKey:@"cat_id"] forKey:[dict objectForKey:@"cat_name"]];
             
         }
         

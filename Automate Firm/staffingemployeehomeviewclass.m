@@ -35,7 +35,7 @@
     
     [self.myconnection employeeListingservice:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"]];
     
-    [self.myconnection filterlistingaction:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"]];
+    
 
 
     self.flagvalue=0;
@@ -1150,66 +1150,67 @@
 
 -(void)employeelistingService:(NSMutableDictionary *)listingResponse
 {
+    dispatch_async(dispatch_get_main_queue(), ^{
   
-  if (listingResponse.count>0) {
+        if (listingResponse.count>0) {
         
-   [self.maincreativedictionary removeAllObjects];
-    
-    NSMutableDictionary *officedict = [listingResponse objectForKey:@"office"];
-    NSSortDescriptor *sortOrder = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
-    NSArray *dictioarray  = [[officedict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrder]];
-    
-    for (int i=0; i<dictioarray.count; i++) {
-        
-        
-        NSMutableArray *myarrays = [officedict objectForKey:[dictioarray objectAtIndex:i]];
-        
-        NSMutableDictionary *storeingdictionary=[[NSMutableDictionary alloc] init];
-        
-        for (int j=0; j<myarrays.count; j++) {
+            [self.maincreativedictionary removeAllObjects];
             
-            NSMutableDictionary *dict = [myarrays objectAtIndex:j];
-            [storeingdictionary setObject:dict forKey:[NSString stringWithFormat:@"%@%@",[dict objectForKey:@"emp_name"],[dict objectForKey:@"emp_id"]]];
-        
-        }
-        
-        
-        [self.maincreativedictionary setObject:storeingdictionary forKey:[NSString stringWithFormat:@"Office:%@",[dictioarray objectAtIndex:i]]];
-        
-    }
+            NSMutableDictionary *officedict = [listingResponse objectForKey:@"office"];
+            NSSortDescriptor *sortOrder = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+            NSArray *dictioarray  = [[officedict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrder]];
     
-     NSMutableDictionary *storedict = [listingResponse objectForKey:@"store"];
-    
-     NSSortDescriptor *sortOrder2 = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
-     NSArray *dictioarray2  = [[storedict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrder2]];
-    
-    
-    
-    for (int i=0; i<dictioarray2.count; i++) {
+            for (int i=0; i<dictioarray.count; i++) {
         
-        NSMutableDictionary *mydict = [storedict objectForKey:[dictioarray2 objectAtIndex:i]];
-        NSSortDescriptor *sortOrder = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
-        NSArray *array  = [[mydict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrder]];
-     
-        for (int j=0; j<array.count; j++) {
-            
-            
-            NSMutableArray *myarrays = [mydict objectForKey:[array objectAtIndex:j]];
-            
-            NSMutableDictionary *storeingdictionary=[[NSMutableDictionary alloc] init];
-            
-            for (int k=0; k<myarrays.count; k++) {
+        
+                NSMutableArray *myarrays = [officedict objectForKey:[dictioarray objectAtIndex:i]];
                 
-                NSMutableDictionary *dict = [myarrays objectAtIndex:k];
-                [storeingdictionary setObject:dict forKey:[NSString stringWithFormat:@"%@%@",[dict objectForKey:@"emp_name"],[dict objectForKey:@"emp_id"]]];
-                
+                NSMutableDictionary *storeingdictionary=[[NSMutableDictionary alloc] init];
+        
+                for (int j=0; j<myarrays.count; j++) {
+            
+                    NSMutableDictionary *dict = [myarrays objectAtIndex:j];
+                    [storeingdictionary setObject:dict forKey:[NSString stringWithFormat:@"%@%@",[dict objectForKey:@"emp_name"],[dict objectForKey:@"emp_id"]]];
+        
+                }
+        
+        
+                [self.maincreativedictionary setObject:storeingdictionary forKey:[NSString stringWithFormat:@"Office:%@",[dictioarray objectAtIndex:i]]];
+        
             }
-            
-            [self.maincreativedictionary setObject:storeingdictionary forKey:[NSString stringWithFormat:@"%@:%@",[dictioarray2 objectAtIndex:i],[array objectAtIndex:j]]];
-            
-        }
+    
+            NSMutableDictionary *storedict = [listingResponse objectForKey:@"store"];
+    
+            NSSortDescriptor *sortOrder2 = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+            NSArray *dictioarray2  = [[storedict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrder2]];
+    
+    
+    
+            for (int i=0; i<dictioarray2.count; i++) {
         
-    }
+                NSMutableDictionary *mydict = [storedict objectForKey:[dictioarray2 objectAtIndex:i]];
+                NSSortDescriptor *sortOrder = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+                NSArray *array  = [[mydict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrder]];
+     
+                for (int j=0; j<array.count; j++) {
+            
+            
+                    NSMutableArray *myarrays = [mydict objectForKey:[array objectAtIndex:j]];
+            
+                    NSMutableDictionary *storeingdictionary=[[NSMutableDictionary alloc] init];
+            
+                    for (int k=0; k<myarrays.count; k++) {
+                
+                        NSMutableDictionary *dict = [myarrays objectAtIndex:k];
+                        [storeingdictionary setObject:dict forKey:[NSString stringWithFormat:@"%@%@",[dict objectForKey:@"emp_name"],[dict objectForKey:@"emp_id"]]];
+                
+                    }
+            
+                    [self.maincreativedictionary setObject:storeingdictionary forKey:[NSString stringWithFormat:@"%@:%@",[dictioarray2 objectAtIndex:i],[array objectAtIndex:j]]];
+            
+                }
+        
+            }
         
     
 //        NSSortDescriptor *sortingforfilterOrder = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
@@ -1233,15 +1234,12 @@
       
   //  NSLog(@"%@",self.maincreativedictionary);
         
-    dispatch_async(dispatch_get_main_queue(), ^{
     
-    [self.tableView reloadData];
-        
+            [self.tableView reloadData];
+        }
     });
-
-  }
     
-    
+    [self.myconnection filterlistingaction:[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedofficeId"]];
 }
 
 -(IBAction)donebuttonaction:(id)sender
@@ -1288,148 +1286,119 @@
 
 -(void)allEmployeeFilterResponse:(NSMutableDictionary *)responsedict
 {
-   
-    if (responsedict.count>0) {
-        
-        
-        [self.officearray removeAllObjects];
-        [self.departmentarray removeAllObjects];
-        [self.categoryarray removeAllObjects];
-        [self.designationarray removeAllObjects];
-
-        
-        NSMutableArray *office_array = [responsedict objectForKey:@"office"];
-        
-        for (int i=0; i<office_array.count; i++) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (responsedict.count>0) {
             
-            NSMutableDictionary *dict = [office_array objectAtIndex:i];
-            [self.officearray addObject:[dict objectForKey:@"office_name"]];
-            [self.officefilterdictionary setObject:[dict objectForKey:@"id"] forKey:[dict objectForKey:@"office_name"]];
+            [self.officearray removeAllObjects];
+            [self.departmentarray removeAllObjects];
+            [self.categoryarray removeAllObjects];
+            [self.designationarray removeAllObjects];
+            
+            NSMutableArray *office_array = [responsedict objectForKey:@"office"];
+            
+            for (int i=0; i<office_array.count; i++) {
+                
+                NSMutableDictionary *dict = [office_array objectAtIndex:i];
+                [self.officearray addObject:[dict objectForKey:@"office_name"]];
+                [self.officefilterdictionary setObject:[dict objectForKey:@"id"] forKey:[dict objectForKey:@"office_name"]];
+            }
+            
+            NSMutableArray *store_array = [responsedict objectForKey:@"store"];
+            
+            for (int i=0; i<store_array.count; i++) {
+                
+                NSMutableDictionary *dict = [store_array objectAtIndex:i];
+                [self.officearray addObject:[dict objectForKey:@"store_name"]];
+                [self.storefilterdictionary setObject:[dict objectForKey:@"store_id"] forKey:[dict objectForKey:@"store_name"]];
+            }
+            
+            NSMutableArray *depart_array = [responsedict objectForKey:@"dept"];
+            
+            for (int i=0; i<depart_array.count; i++) {
+                
+                NSMutableDictionary *dict = [depart_array objectAtIndex:i];
+                [self.departmentarray addObject:[dict objectForKey:@"department_name"]];
+                [self.departmentfilterdictionary setObject:[dict objectForKey:@"dept_id"] forKey:[dict objectForKey:@"department_name"]];
+                
+            }
+            
+            NSMutableArray *category_array = [responsedict objectForKey:@"category"];
+            
+            for (int i=0; i<category_array.count; i++) {
+                
+                NSMutableDictionary *dict = [category_array objectAtIndex:i];
+                [self.categoryarray addObject:[dict objectForKey:@"cat_name"]];
+                [self.categoryfilterdictionary setObject:[dict objectForKey:@"cat_id"] forKey:[dict objectForKey:@"cat_name"]];
+            }
+            
+            NSMutableArray *designatn_array = [responsedict objectForKey:@"designation"];
+            
+            for (int i=0; i<designatn_array.count; i++) {
+                
+                NSMutableDictionary *dict = [designatn_array objectAtIndex:i];
+                [self.designationarray addObject:[dict objectForKey:@"designation_title"]];
+                [self.designationfilterdictionary setObject:[dict objectForKey:@"id"] forKey:[dict objectForKey:@"designation_title"]];
+            }
+            
+            if (self.officearray.count>0) {
+                [self.officearray insertObject:@"All" atIndex:0];
+            }
+            
+            if (self.departmentarray.count>0) {
+                [self.departmentarray insertObject:@"All" atIndex:0];
+            }
+            
+            if (self.categoryarray.count>0) {
+                [self.categoryarray insertObject:@"All" atIndex:0];
+            }
+            
+            if (self.designationarray.count>0) {
+                [self.designationarray insertObject:@"All" atIndex:0];
+            }
+            
+            
+            [self.workingpremisetableview reloadData];
+            [self.departmenttableview reloadData];
+            [self.categorytableview reloadData];
+            [self.filtertableView1 reloadData];
+            
+            
+            NSLog(@"%@",self.officefilterdictionary);
+            NSLog(@"%@",self.storefilterdictionary);
+            NSLog(@"%@",self.departmentfilterdictionary);
+            NSLog(@"%@",self.categoryfilterdictionary);
+            NSLog(@"%@",self.designationfilterdictionary);
+            
+            
+            NSSortDescriptor *sortOrderee = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+            NSArray *arrayee  = [[self.departmentfilterdictionary allValues] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrderee]];
+            
+            [self.department_servicesendarray addObjectsFromArray:[arrayee mutableCopy]];
+            
+            NSSortDescriptor *sortOrderee2 = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+            NSArray *arrayee2  = [[self.categoryfilterdictionary allValues] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrderee2]];
+            
+            [self.category_servicesendarray addObjectsFromArray:[arrayee2 mutableCopy]];
+            
+            
+            NSSortDescriptor *sortOrderee3 = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+            NSArray *arrayee3  = [[self.designationfilterdictionary allValues] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrderee3]];
+            
+            [self.designation_servicesendarray addObjectsFromArray:[arrayee3 mutableCopy]];
+            
+            
+            NSSortDescriptor *sortOrderee4 = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+            NSArray *arrayee4  = [[self.officefilterdictionary allValues] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrderee4]];
+            
+            [self.office_servicesendarray addObjectsFromArray:[arrayee4 mutableCopy]];
+            
+            
+            NSSortDescriptor *sortOrderee5 = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+            NSArray *arrayee5  = [[self.storefilterdictionary allValues] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrderee5]];
+            
+            [self.store_servicesendarray addObjectsFromArray:[arrayee5 mutableCopy]];
         }
-        
-        
-        NSMutableArray *store_array = [responsedict objectForKey:@"store"];
-        
-        for (int i=0; i<store_array.count; i++) {
-            
-            NSMutableDictionary *dict = [store_array objectAtIndex:i];
-            [self.officearray addObject:[dict objectForKey:@"store_name"]];
-            [self.storefilterdictionary setObject:[dict objectForKey:@"store_id"] forKey:[dict objectForKey:@"store_name"]];
-            
-        }
-        
-        NSMutableArray *depart_array = [responsedict objectForKey:@"dept"];
-        
-        for (int i=0; i<depart_array.count; i++) {
-            
-            NSMutableDictionary *dict = [depart_array objectAtIndex:i];
-            [self.departmentarray addObject:[dict objectForKey:@"department_name"]];
-            [self.departmentfilterdictionary setObject:[dict objectForKey:@"dept_id"] forKey:[dict objectForKey:@"department_name"]];
-            
-        }
-        
-        NSMutableArray *category_array = [responsedict objectForKey:@"category"];
-        
-        
-        for (int i=0; i<category_array.count; i++) {
-            
-            NSMutableDictionary *dict = [category_array objectAtIndex:i];
-            [self.categoryarray addObject:[dict objectForKey:@"cat_name"]];
-            [self.categoryfilterdictionary setObject:[dict objectForKey:@"id"] forKey:[dict objectForKey:@"cat_name"]];
-            
-        }
-        
-        
-        NSMutableArray *designatn_array = [responsedict objectForKey:@"designation"];
-        
-        for (int i=0; i<designatn_array.count; i++) {
-            
-            NSMutableDictionary *dict = [designatn_array objectAtIndex:i];
-            [self.designationarray addObject:[dict objectForKey:@"designation_title"]];
-            [self.designationfilterdictionary setObject:[dict objectForKey:@"id"] forKey:[dict objectForKey:@"designation_title"]];
-            
-        }
-        
-        if (self.officearray.count>0) {
-            
-            [self.officearray insertObject:@"All" atIndex:0];
-        
-        }
-        
-        if (self.departmentarray.count>0) {
-            
-            [self.departmentarray insertObject:@"All" atIndex:0];
-            
-            
-        }
-        
-        if (self.categoryarray.count>0) {
-            
-            [self.categoryarray insertObject:@"All" atIndex:0];
-            
-        }
-        
-
-        if (self.designationarray.count>0) {
-            
-            [self.designationarray insertObject:@"All" atIndex:0];
-            
-            
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-              
-            
-             [self.workingpremisetableview reloadData];
-             [self.departmenttableview reloadData];
-             [self.categorytableview reloadData];
-             [self.filtertableView1 reloadData];
-              
-        });
-        
-    
-        
-           NSLog(@"%@",self.officefilterdictionary);
-           NSLog(@"%@",self.storefilterdictionary);
-           NSLog(@"%@",self.departmentfilterdictionary);
-           NSLog(@"%@",self.categoryfilterdictionary);
-           NSLog(@"%@",self.designationfilterdictionary);
-        
-        
-        
-        NSSortDescriptor *sortOrderee = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
-        NSArray *arrayee  = [[self.departmentfilterdictionary allValues] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrderee]];
-        
-        [self.department_servicesendarray addObjectsFromArray:[arrayee mutableCopy]];
-        
-        
-        NSSortDescriptor *sortOrderee2 = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
-        NSArray *arrayee2  = [[self.categoryfilterdictionary allValues] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrderee2]];
-        
-        [self.category_servicesendarray addObjectsFromArray:[arrayee2 mutableCopy]];
-        
-        
-        
-        NSSortDescriptor *sortOrderee3 = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
-        NSArray *arrayee3  = [[self.designationfilterdictionary allValues] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrderee3]];
-        
-        [self.designation_servicesendarray addObjectsFromArray:[arrayee3 mutableCopy]];
-        
-        
-        
-        NSSortDescriptor *sortOrderee4 = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
-        NSArray *arrayee4  = [[self.officefilterdictionary allValues] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrderee4]];
-        
-        [self.office_servicesendarray addObjectsFromArray:[arrayee4 mutableCopy]];
-        
-        
-
-        NSSortDescriptor *sortOrderee5 = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
-        NSArray *arrayee5  = [[self.storefilterdictionary allValues] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrderee5]];
-        
-        [self.store_servicesendarray addObjectsFromArray:[arrayee5 mutableCopy]];
-        
-    }
+    });
     
 }
 
@@ -1445,109 +1414,93 @@
 
 -(void)filterigemployeelistingService:(NSMutableDictionary *)filterlistingResponse
 {
-    self.flagvalue=0;
-    
-    if (filterlistingResponse.count>0) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.flagvalue=0;
         
-        [self.maincreativedictionary removeAllObjects];
-        
-        NSMutableDictionary *officedict = [filterlistingResponse objectForKey:@"office"];
-        NSSortDescriptor *sortOrder = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
-        NSArray *dictioarray  = [[officedict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrder]];
-        
-        for (int i=0; i<dictioarray.count; i++) {
+        if (filterlistingResponse.count>0) {
             
+            [self.maincreativedictionary removeAllObjects];
             
-            NSMutableArray *myarrays = [officedict objectForKey:[dictioarray objectAtIndex:i]];
-            
-            NSMutableDictionary *storeingdictionary=[[NSMutableDictionary alloc] init];
-            
-            for (int j=0; j<myarrays.count; j++) {
-                
-                NSMutableDictionary *dict = [myarrays objectAtIndex:j];
-                [storeingdictionary setObject:dict forKey:[NSString stringWithFormat:@"%@%@",[dict objectForKey:@"emp_name"],[dict objectForKey:@"emp_id"]]];
-                
-            }
-            
-            [self.maincreativedictionary setObject:storeingdictionary forKey:[NSString stringWithFormat:@"Office:%@",[dictioarray objectAtIndex:i]]];
-            
-            
-        }
-        
-        
-        NSMutableDictionary *storedict = [filterlistingResponse objectForKey:@"store_list"];
-        
-        NSSortDescriptor *sortOrder2 = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
-        NSArray *dictioarray2  = [[storedict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrder2]];
-        
-        
-        
-        for (int i=0; i<dictioarray2.count; i++) {
-            
-            NSMutableDictionary *mydict = [storedict objectForKey:[dictioarray2 objectAtIndex:i]];
+            NSMutableDictionary *officedict = [[filterlistingResponse objectForKey:@"office"]objectAtIndex:0];
             NSSortDescriptor *sortOrder = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
-            NSArray *array  = [[mydict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrder]];
+            NSArray *sortedArray = [officedict allKeys];
+            NSArray *dictioarray  = [sortedArray sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrder]];
             
-            for (int j=0; j<array.count; j++) {
+            for (int i=0; i<dictioarray.count; i++) {
                 
                 
-                NSMutableArray *myarrays = [mydict objectForKey:[array objectAtIndex:j]];
+                NSMutableArray *myarrays = [officedict objectForKey:[dictioarray objectAtIndex:i]];
                 
                 NSMutableDictionary *storeingdictionary=[[NSMutableDictionary alloc] init];
                 
-                for (int k=0; k<myarrays.count; k++) {
+                for (int j=0; j<myarrays.count; j++) {
                     
-                    NSMutableDictionary *dict = [myarrays objectAtIndex:k];
+                    NSMutableDictionary *dict = [myarrays objectAtIndex:j];
                     [storeingdictionary setObject:dict forKey:[NSString stringWithFormat:@"%@%@",[dict objectForKey:@"emp_name"],[dict objectForKey:@"emp_id"]]];
                     
                 }
                 
-                [self.maincreativedictionary setObject:storeingdictionary forKey:[NSString stringWithFormat:@"%@:%@",[dictioarray2 objectAtIndex:i],[array objectAtIndex:j]]];
-                
+                [self.maincreativedictionary setObject:storeingdictionary forKey:[NSString stringWithFormat:@"Office:%@",[dictioarray objectAtIndex:i]]];
             }
             
-        }
-        
-               NSLog(@"%@",self.selectedarray);
-   
-        
-                NSSortDescriptor *sortingforfilterOrder = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
-                NSArray *karray  = [[self.maincreativedictionary allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortingforfilterOrder]];
-                NSLog(@"%@",karray);
+            NSMutableDictionary *storedict = [[filterlistingResponse objectForKey:@"store_list"]objectAtIndex:0];
+            
+            NSSortDescriptor *sortOrder2 = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+            NSArray *dictioarray2  = [[storedict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrder2]];
+            
+            
+            for (int i=0; i<dictioarray2.count; i++) {
                 
+                NSMutableDictionary *mydict = [storedict objectForKey:[dictioarray2 objectAtIndex:i]];
+                NSSortDescriptor *sortOrder = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+                NSArray *array  = [[mydict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortOrder]];
                 
-                for (int k=0; k<karray.count; k++) {
+                for (int j=0; j<array.count; j++) {
                     
                     
-                    NSMutableDictionary *sdictionary=[self.maincreativedictionary objectForKey:[karray objectAtIndex:k]];
+                    NSMutableArray *myarrays = [mydict objectForKey:[array objectAtIndex:j]];
                     
-                    if (!(sdictionary.count>0)) {
+                    NSMutableDictionary *storeingdictionary=[[NSMutableDictionary alloc] init];
+                    
+                    for (int k=0; k<myarrays.count; k++) {
                         
-                        [self.maincreativedictionary removeObjectForKey:[karray objectAtIndex:k]];
+                        NSMutableDictionary *dict = [myarrays objectAtIndex:k];
+                        [storeingdictionary setObject:dict forKey:[NSString stringWithFormat:@"%@%@",[dict objectForKey:@"emp_name"],[dict objectForKey:@"emp_id"]]];
                         
                     }
+                    
+                    [self.maincreativedictionary setObject:storeingdictionary forKey:[NSString stringWithFormat:@"%@:%@",[dictioarray2 objectAtIndex:i],[array objectAtIndex:j]]];
                 }
-
-        
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
+            }
+            
+            NSLog(@"%@",self.selectedarray);
+            
+            
+            NSSortDescriptor *sortingforfilterOrder = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+            NSArray *karray  = [[self.maincreativedictionary allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortingforfilterOrder]];
+            NSLog(@"%@",karray);
+            
+            for (int k=0; k<karray.count; k++) {
+                
+                NSMutableDictionary *sdictionary=[self.maincreativedictionary objectForKey:[karray objectAtIndex:k]];
+                if (!(sdictionary.count>0)) {
+                    
+                    [self.maincreativedictionary removeObjectForKey:[karray objectAtIndex:k]];
+                }
+            }
             
             [self.tableView reloadData];
             
-        });
-    }
-    else
-    {
-       
-        [self.maincreativedictionary removeAllObjects];
-        dispatch_async(dispatch_get_main_queue(), ^{
+        }
+        else
+        {
+            [self.maincreativedictionary removeAllObjects];
             
             [self.tableView reloadData];
             
-        });
-
-        
-    }
+        }
+    });
+    
 
 }
 
