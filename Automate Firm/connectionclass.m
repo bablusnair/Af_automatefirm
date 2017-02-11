@@ -14705,7 +14705,7 @@ dispatch_async(dispatch_get_main_queue(), ^{
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
-    [request setHTTPMethod:@"GET"];
+    [request setHTTPMethod:@"POST"];
     
     NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys:officeArray,@"office_list",storeArray,@"store_list",departmentArray,@"department_list",categoryArray,@"category_list",designationArray,@"designation_list",office_id,@"office_id",nil];
     
