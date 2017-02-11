@@ -335,7 +335,7 @@ NSString *const subdomainURL = @"http://192.168.1.35/af1.1/";
 #define workingpremiseALLlisting @"rest/employee_filter_api/get_details/"
 
 #define filteringEmployeelistservice @"rest/employee_filter_api/get_filter_data"
-
+//#define filteringEmployeelistservice @"http://192.168.1.35/af1.1/staffing/employee_filter/get_filter_data"
 
 //<<<-----------------------------------PORTAL SETTINGS----------------------------------->>>
 #define createPortalURL @"rest/portal_api"
@@ -14635,7 +14635,7 @@ dispatch_async(dispatch_get_main_queue(), ^{
 //    NSError *error;
 //    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
 //    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-//    NSString *urlString=[NSString stringWithFormat:@"%@",filteringEmployeelistservice];
+//    NSString *urlString=[NSString stringWithFormat:@"%@", filteringEmployeelistservice];
 //    NSURL *url = [NSURL URLWithString:urlString];
 //    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
 //                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -14735,7 +14735,7 @@ dispatch_async(dispatch_get_main_queue(), ^{
         {
             if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
             {
-                [self.mydelegate showalerviewcontroller:@"Designation Title/ Abbreviation Already Exists"];
+                //[self.mydelegate showalerviewcontroller:@"Designation Title/ Abbreviation Already Exists"];
             }
         }
         else if ([httpResponse statusCode]==500)
