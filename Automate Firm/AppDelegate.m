@@ -95,6 +95,7 @@
     NSString* Identifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString]; // IOS 6+
     NSLog(@"output is : %@", Identifier);
     [[NSUserDefaults standardUserDefaults]setObject:Identifier forKey:@"device_id"];
+    //bablu
     
     
     return YES;
