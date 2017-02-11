@@ -47,7 +47,7 @@
 @property(nonatomic,retain)IBOutlet UITableView *estdateTableview;
 
 
-@property(nonatomic,retain)IBOutlet UITextField *agentTextfield;
+
 @property(nonatomic,retain)IBOutlet UITextField *livinginTextfield;
 @property(nonatomic,retain)IBOutlet UITextField *stateTextfield;
 @property(nonatomic,retain)IBOutlet UITextField *cityTextfield;
@@ -70,4 +70,22 @@
 @property (retain, nonatomic) IBOutlet UIView *datebackgroundView;
 @property (weak, nonatomic) IBOutlet UIDatePicker *dobPicker;
 - (IBAction)datepickerDoneaction:(id)sender;
+
+@property(nonatomic,retain)IBOutlet UIImageView *logoImageview;
+@property(nonatomic,retain)IBOutlet UILabel *afcode;
+@property(nonatomic,retain)IBOutlet UILabel *status;
+@property(nonatomic,retain)IBOutlet UILabel *urlname;
+@property(nonatomic,retain)IBOutlet UITextField *agentTextfield;
+@property(nonatomic,retain)IBOutlet UITextField *estTextfield;
+@property(nonatomic,retain)IBOutlet UITextField *firmnameTextfield;
+@property(nonatomic,retain)IBOutlet UITextField *urlTextfield;
+@property(nonatomic,retain)IBOutlet UITextField *subTextfield;
+@property(nonatomic,retain)IBOutlet UITextField *dateTextfield;
+@property(nonatomic,retain)IBOutlet UITextField *regcontactTextfield;
+@property(nonatomic,retain)IBOutlet UITextField *regemailTextfield;
+@property(nonatomic,retain)IBOutlet UITextField *secondaryTextfield;
+@property(nonatomic,retain)IBOutlet UITextField *firstnameTextfield;
+@property(nonatomic,retain)IBOutlet UITextField *lastnameTextfield;
+@property(nonatomic,retain)IBOutlet UITextField *usernameTextfield;
+
 @end

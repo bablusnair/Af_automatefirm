@@ -52,14 +52,11 @@
                                     <segue destination="H5R-IQ-yX4" kind="modal" id="lvD-CQ-Ht7"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="DomainUrl" textAlignment="center" minimumFontSize="17" background="loginText.png" id="rVC-gr-d58">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="AFcode" textAlignment="center" minimumFontSize="17" background="loginText.png" id="rVC-gr-d58">
                                 <rect key="frame" x="337" y="297" width="375" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="aVU-a5-PEQ" id="jL6-d7-JHQ"/>
-                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="center" minimumFontSize="17" background="loginText.png" id="eU0-SL-K2F">
                                 <rect key="frame" x="337" y="345" width="375" height="37"/>
@@ -68,15 +65,6 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="aVU-a5-PEQ" id="kJx-Df-d1N"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="&lt;....Select Office....&gt;" textAlignment="center" minimumFontSize="17" id="4bu-TJ-1Fx">
-                                <rect key="frame" x="755" y="353" width="167" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="aVU-a5-PEQ" id="uGQ-u6-7pX"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8cP-kK-uHZ">
@@ -90,15 +78,6 @@
                                     <action selector="login:" destination="aVU-a5-PEQ" eventType="touchUpInside" id="Egi-fz-Stx"/>
                                 </connections>
                             </button>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="40" sectionHeaderHeight="28" sectionFooterHeight="28" id="7jb-26-jeT">
-                                <rect key="frame" x="755" y="377" width="167" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="aVU-a5-PEQ" id="QMg-HV-QwL"/>
-                                    <outlet property="delegate" destination="aVU-a5-PEQ" id="16a-rd-3Wc"/>
-                                </connections>
-                            </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mV6-Ud-a9Y">
                                 <rect key="frame" x="664" y="540" width="48" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -141,16 +120,15 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1024" height="768"/>
                     <connections>
-                        <outlet property="officeDropDwnList" destination="7jb-26-jeT" id="Sti-vu-sqo"/>
-                        <outlet property="officeDropdwnText" destination="4bu-TJ-1Fx" id="3RZ-Ao-gjw"/>
-                        <outlet property="paswrdText" destination="eU0-SL-K2F" id="lkK-Ji-2IV"/>
-                        <outlet property="userNameField" destination="rVC-gr-d58" id="6Di-LG-hGl"/>
+                        <outlet property="afcode" destination="rVC-gr-d58" id="3NG-7Y-OOA"/>
+                        <outlet property="paswrdText" destination="RXE-Za-90V" id="CE6-XF-zz1"/>
+                        <outlet property="userNameField" destination="eU0-SL-K2F" id="bUA-5J-prH"/>
                         <segue destination="aHS-yn-K1k" kind="modal" identifier="loggedUser" id="4AU-uS-Lyp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iv2-Na-2qN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3578" y="-3601"/>
+            <point key="canvasLocation" x="-3578" y="-3688"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -3558,6 +3536,8 @@
                     <size key="freeformSize" width="1024" height="768"/>
                     <connections>
                         <outlet property="addnewPaymentmethodview" destination="a1F-Lo-Cks" id="6bK-FF-VYc"/>
+                        <outlet property="afcode" destination="c6x-Vj-E2L" id="u20-Qi-lrB"/>
+                        <outlet property="agentTextfield" destination="rCp-nN-tUS" id="010-Rd-W5U"/>
                         <outlet property="broswecollectionview" destination="SWs-0q-i5V" id="7ab-Pg-Png"/>
                         <outlet property="cartHistroytable" destination="I8G-RM-tL4" id="6ZT-yN-sMc"/>
                         <outlet property="cityTableview" destination="RXS-zK-j32" id="5Vv-kr-KGr"/>
@@ -3567,15 +3547,25 @@
                         <outlet property="dobPicker" destination="oXK-bW-vCw" id="NRj-OJ-zmU"/>
                         <outlet property="estdateTableview" destination="Tom-Nz-H6U" id="wRR-I5-fJJ"/>
                         <outlet property="estmatedDatetext" destination="Be9-Qf-s0b" id="tQZ-Wh-csl"/>
+                        <outlet property="firmnameTextfield" destination="gsL-E8-CRF" id="Ac9-zP-Xpb"/>
+                        <outlet property="firstnameTextfield" destination="mM6-pn-umX" id="BGw-1s-Gt6"/>
+                        <outlet property="lastnameTextfield" destination="Nwh-bg-wjO" id="GkP-Un-VQV"/>
                         <outlet property="livinginTableview" destination="Urh-VQ-xwJ" id="9c0-Sg-zyt"/>
                         <outlet property="livinginTextfield" destination="u6f-wA-H60" id="h9p-jo-qaA"/>
+                        <outlet property="logoImageview" destination="Jl9-mO-GuX" id="yBq-gd-jpR"/>
                         <outlet property="paymentHistroytable" destination="yYe-SP-kES" id="dOa-ts-Uo1"/>
                         <outlet property="paymentMethodtableview" destination="nqY-X0-PFC" id="MZD-AY-rrT"/>
+                        <outlet property="regcontactTextfield" destination="SxC-8i-F7o" id="bYb-hZ-w1p"/>
+                        <outlet property="regemailTextfield" destination="LJe-2e-29R" id="yqc-0b-q5a"/>
                         <outlet property="scrollView" destination="NWj-ce-Tve" id="Vjx-Fm-SMU"/>
+                        <outlet property="secondaryTextfield" destination="z53-VO-2s8" id="OCS-ZX-fft"/>
                         <outlet property="sectorTableview" destination="wF5-MW-T84" id="fjZ-Ln-Ula"/>
                         <outlet property="sectorTextfield" destination="oXY-86-Pnv" id="tzN-Kw-42N"/>
                         <outlet property="stateTableview" destination="esf-GD-nEj" id="6GY-IH-rv0"/>
                         <outlet property="stateTextfield" destination="X65-Td-tHa" id="gsr-HA-0u3"/>
+                        <outlet property="status" destination="tmJ-Hz-k8O" id="WIX-As-MmE"/>
+                        <outlet property="subTextfield" destination="Na2-Rq-1Sy" id="jc2-OZ-ESN"/>
+                        <outlet property="urlname" destination="8OB-x7-Q3a" id="KVf-jM-Ez5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LPU-AU-23K" userLabel="First Responder" sceneMemberID="firstResponder"/>

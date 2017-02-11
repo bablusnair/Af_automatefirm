@@ -19,7 +19,7 @@
 @property(nonatomic,retain)NSMutableArray *officeListAray;
 @property(nonatomic,retain)NSMutableDictionary *officeListDictionary;
 @property(nonatomic,retain)NSString *officeidString;
-
+@property (weak, nonatomic) IBOutlet UITextField *afcode;
 
 
 - (IBAction)login:(id)sender;

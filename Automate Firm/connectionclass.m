@@ -456,6 +456,10 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
 #define resetpasswordforsignup @"rest/checkpoint_api/create_newpwd"
 #define resendmailUrl @"settings/paperwork_leave/insert_protocol"
 
+//adminmyprofileservice
+
+#define adminMyprofileurl @"rest/profile_api/get_firm/"
+
 
 @implementation connectionclass
 //Registration
@@ -482,15 +486,12 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
     [request setHTTPBody:postData];
     NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
-        
         if (data==Nil) {
-            
             
             if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:mainMsg:)]&&(self.mydelegate!=NULL))
             {
                 
                 // [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
-                
             }
             
         }
@@ -505,8 +506,7 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
             NSString *newLoginUrl=[NSString stringWithFormat:@"%@index.php/staffing/employee_login/get_employee_login",mystring];
             
             [self registerResponseservice:pasWrd AuthCode:cmpnyId urlString:newLoginUrl officeDomainString:mystring];
-            
-            
+    
         }
         
     }];
@@ -514,6 +514,7 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
     [postDataTask resume];
     
 }
+
 -(void)registerResponseservice:(NSString *)empId AuthCode:(NSString *)authCode urlString:(NSString *)urlString officeDomainString:(NSString *)officedomainString
 {
     NSError *error;
@@ -668,7 +669,7 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
 
 
 
--(void)LoginService:(NSString *)username paswrd:(NSString *)pasword officeid:(NSString *)officeid
+-(void)LoginService:(NSString *)username paswrd:(NSString *)pasword afcode:(NSString *)afcode
 {
     
     
@@ -681,13 +682,14 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:60.0];
+    
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setHTTPMethod:@"POST"];
     
     NSString *deviceID = [[NSUserDefaults standardUserDefaults]objectForKey:@"device_id"];
     
-    NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys:@"kp",@"identity",@"password",@"password",deviceID,@"deviceid",nil];
+    NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys:@"airtects",@"identity",@"password",@"password",@"AF95-49-22-11",@"afcode",deviceID,@"deviceid",nil];
     
     NSData *postData = [NSJSONSerialization dataWithJSONObject:mapData options:0 error:&error];
     [request setHTTPBody:postData];
@@ -701,6 +703,7 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
         
         NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
         if ([httpResponse statusCode] == 201) {
+            
             id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             NSLog(@"%@",json);
             [[NSUserDefaults standardUserDefaults]setObject:[json objectForKey:@"api_key"] forKey:@"api_key"];
@@ -708,7 +711,7 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
             
             if ([self.mydelegate respondsToSelector:@selector(loginResponse:)]&&(self.mydelegate!=NULL))
             {
-                [self.mydelegate loginResponse:@"1"];
+                [self.mydelegate loginResponse:json];
             }
             
         }
@@ -828,7 +831,6 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
         }
     }] resume];
 }
-    
 
 //}
 
@@ -838,7 +840,8 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
     //  NSError *error;
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-    NSString *urlString=[NSString stringWithFormat:@"%@rest/logout_api?identity=kp",subdomainURL];
+    NSString *urlString=[NSString stringWithFormat:@"%@rest/logout_api?identity=airtects",subdomainURL];
+    
     //  NSString *urlString=[NSString stringWithFormat:@"identity=""/password="];
     
     //   NSURL *url = [NSURL URLWithString:@"192.168.1.20/af1.1/rest/logout_api/identity=admin@leonine.in/deviceid=6E5C534-5D2D-4F3F-AE31-8E0B5EC8C38A"];
@@ -847,11 +850,9 @@ NSString *const subdomainURL = @"http://192.168.1.20/af/";
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"GET"];
     
-     NSLog(@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"]);
+    NSLog(@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"]);
     NSString *apikey=[[NSUserDefaults standardUserDefaults]objectForKey:@"api_key"];
     [request setValue:apikey forHTTPHeaderField:@"apikey"];
-    
-    
     
     //    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     //
@@ -17408,4 +17409,69 @@ dispatch_async(dispatch_get_main_queue(), ^{
         }
     }];
     [dataTask resume];
-}@end
+}
+
+
+-(void)myprofileServiceFunctionality:(NSString *)companyId
+{
+   
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    NSString *urlString=[NSString stringWithFormat:@"%@%@%@",subdomainURL,adminMyprofileurl,companyId];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+    
+    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"api_key"]);
+    
+    [request setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"api_key"] forHTTPHeaderField:@"apikey"];
+    
+   
+
+    
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+        NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+        
+        
+        id json  = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        NSLog(@"%@",json);
+        
+        id mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",mystring);
+        
+        if ([httpResponse statusCode] == 200) {
+            
+            // NSString *mystring=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            
+            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSLog(@"%@",json);
+            
+            if ([self.mydelegate respondsToSelector:@selector(myprofileServiceResponse:)]&&(self.mydelegate!=NULL))
+            {
+                
+                [self.mydelegate myprofileServiceResponse:json];
+                
+            }
+            
+        }
+        else
+        {
+            if ([self.mydelegate respondsToSelector:@selector(showalerviewcontroller:)]&&(self.mydelegate!=NULL))
+            {
+                
+                [self.mydelegate showalerviewcontroller:@"No Internet Connection"];
+                
+            }
+            
+        }
+        
+        
+    }] resume];
+
+    
+}
+
+
+@end

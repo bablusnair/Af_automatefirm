@@ -135,7 +135,7 @@
 
 
 //Login
--(void)LoginService:(NSString *)username paswrd:(NSString *)pasword officeid:(NSString *)officeid ;
+-(void)LoginService:(NSString *)username paswrd:(NSString *)pasword afcode:(NSString *)afcode;
 -(void)officeListingService;
 -(void)includeDesignation:(NSString *)officeId :(NSString *)ruleType :(NSString *)ruleID;
 //Logout
@@ -458,4 +458,7 @@
 -(void)ResetpasswordSubmissionscreenUsername:(NSString *)username oldpassword:(NSString *)oldpassword  newpassword:(NSString *)newpassword userid:(NSString *)userId;
 
 -(void)resendmailinsignUpScreen:(NSString *)userId;
+
+-(void)myprofileServiceFunctionality:(NSString *)companyId;
+
 @end

@@ -43,9 +43,12 @@
     self.myconnection=[[connectionclass alloc]init];
     self.myconnection.mydelegate=self;
     
+    
+    [self.myconnection myprofileServiceFunctionality:[[NSUserDefaults standardUserDefaults] objectForKey:@"companyId"]];
     [self.myconnection displayAllCountries];
-    [self.myconnection signupAgentlistingservice];
+   // [self.myconnection signupAgentlistingservice];
     [self.myconnection signupsectorlistingservice];
+    
     
     self.countrydict=[[NSMutableDictionary alloc] init];
     self.statedict=[[NSMutableDictionary alloc] init];
@@ -690,6 +693,60 @@
    self.dateofbirthTextfield.text=str;
    self.datebackgroundView.hidden=true;
  
+}
+
+-(void)myprofileServiceResponse:(id)profileDetails
+{
+    
+   
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        
+         NSMutableDictionary *detailsdict = [profileDetails objectForKey:@"firm_details"];
+        if (detailsdict.count>0) {
+            
+        
+            self.firmnameTextfield.text=[detailsdict objectForKey:@"firm_name"];
+            self.firstnameTextfield.text=[detailsdict objectForKey:@"owner_first_name"];
+            self.lastnameTextfield.text=[detailsdict objectForKey:@"owner_last_name"];
+            self.subTextfield.text=[detailsdict objectForKey:@"sub_date"];
+            self.estmatedDatetext.text=[detailsdict objectForKey:@"established_date"];
+            self.dateofbirthTextfield.text=[detailsdict objectForKey:@"owner_dob"];
+            self.regemailTextfield.text=[detailsdict objectForKey:@"reg_email"];
+            self.regcontactTextfield.text=[detailsdict objectForKey:@"reg_mob"];
+            self.secondaryTextfield.text=[detailsdict objectForKey:@"recovery_email"];
+            self.urlname.text=[detailsdict objectForKey:@"url"];
+            self.status.text=[detailsdict objectForKey:@"status"];
+            self.afcode.text=[detailsdict objectForKey:@"af_code"];
+            self.urlname.text=[detailsdict objectForKey:@"url"];
+            
+            
+            //need service data for updation;
+            
+            self.livinginTextfield.text=@"India";
+            self.stateTextfield.text=@"Kerala";
+            self.cityTextfield.text=@"Trivandrum";
+            self.agentTextfield.text=@"Agent3";
+            self.sectorTextfield.text=@"Software";
+            
+            
+            NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:[profileDetails objectForKey:@"firm_logo"] options:0];
+            
+            self.logoImageview.image=[UIImage imageWithData:decodedData];
+            
+            
+            // cell.myimg.image=[UIImage imageWithData:decodedData];
+            
+        }
+        
+        
+        
+        
+    });
+
+   
+
 }
 
 @end

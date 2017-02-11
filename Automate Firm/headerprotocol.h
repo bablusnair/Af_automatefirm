@@ -10,7 +10,8 @@
 
 @protocol headerprotocol <NSObject>
 @optional
--(void)loginResponse:(NSString *)responseMessage;
+
+-(void)loginResponse:(id)logindetails;
 -(void)officeListingResponse:(NSMutableDictionary *)officeListDict;
 -(void)settingsSavedresponse:(NSMutableArray *)Savedarrayresponse;
 
@@ -130,5 +131,9 @@
 
 -(void)resetpasswordserviceResponse:(id)details;
 -(void)resendmail:(id)details;
+
+//myprofileservicefunctionality
+
+-(void)myprofileServiceResponse:(id)profileDetails;
 
 @end

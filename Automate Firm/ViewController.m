@@ -17,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.myconnection=[[connectionclass alloc]init];
     self.myconnection.mydelegate=self;
     
@@ -39,9 +40,14 @@
 -(IBAction)back:(UIStoryboardSegue *)sender
 {
     
+    
 }
 
+
+
 //OfficeListing In Dropdown Table
+
+
 
 -(void)officeListingResponse:(NSMutableDictionary *)officeListDict
 {
@@ -51,6 +57,8 @@
     });
     
 }
+
+
 //Login Button Function
 
 - (IBAction)login:(id)sender {
@@ -59,10 +67,13 @@
       
         NSString * userString = [self.userNameField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
         NSString * pwdstring = [self.paswrdText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSString * afcode = [self.paswrdText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
         
-       // [self.myconnection LoginService:userString paswrd:pwdstring officeid:self.officeidString];
-        
-        [self performSegueWithIdentifier:@"loggedUser" sender:nil];
+    // [self.myconnection LoginService:userString paswrd:pwdstring officeid:self.officeidString];
+    
+       [self.myconnection LoginService:userString paswrd:pwdstring afcode:afcode];
+    
+       // [self performSegueWithIdentifier:@"loggedUser" sender:nil];
     
     
 //    }
@@ -86,41 +97,24 @@
 }
 //Login Service Response
 
--(void)loginResponse:(NSString *)responseMessage
+-(void)loginResponse:(id)logindetails
 {
     
-    NSLog(@"%@",responseMessage);
-    if (!([responseMessage isEqualToString:@"1"])) {
-        
-        UIAlertController *alert= [UIAlertController
-                                   alertControllerWithTitle:@"Login Failed"
-                                   message:@"Invalid Username or Password"
-                                   preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                   handler:^(UIAlertAction * action){
-                                                       self.userNameField.text=@"";
-                                                       self.paswrdText.text=@"";
-                                                       self.officeDropdwnText.text=@"";
-                                                
-                                                   }];
-        [alert addAction:ok];
-        [self presentViewController:alert animated:YES completion:nil];
-     }
-    else{
-        
-        
+    //NSLog(@"%@",responseMessage);
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSUserDefaults standardUserDefaults]setObject:self.userNameField.text forKey:@"user_id"];
             
         
-            //[[NSUserDefaults standardUserDefaults]setObject:@"Black" forKey:@"color"];
-            [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"selectedofficeId"];
+            [[NSUserDefaults standardUserDefaults]setObject:[logindetails objectForKey:@"userid"] forKey:@"user_Id"];
+        
+            [[NSUserDefaults standardUserDefaults]setObject:[logindetails objectForKey:@"api_key"] forKey:@"api_key"];
             
-                [self performSegueWithIdentifier:@"loggedUser" sender:nil];
-            });
-    }
-
+            [[NSUserDefaults standardUserDefaults]setObject:[logindetails objectForKey:@"company"] forKey:@"companyId"];
+            
+            [self performSegueWithIdentifier:@"loggedUser" sender:nil];
+            
+            
+    });
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
